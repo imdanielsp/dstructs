@@ -28,55 +28,93 @@
 
 namespace DStructs {
 
-template <typename T>
+/**
+ *  \brief This is the implementation of the Node class
+ * */
+template <class T>
 Node<T>::Node() {
   this->next_ = nullptr;  //< Init empty next
   this->data_ = nullptr;    //< Allocate memory for T
 }
 
-template <typename T>
+template <class T>
 Node<T>::Node(T& data) {
   this->data_ = &data;
   this->next_ = nullptr;
 }
 
-template<typename T>
+template<class T>
 Node<T>::Node(T& data, Node<T> *next) {
   this->data_ = &data;
   this->next_ = next;
 }
 
-template <typename T>
+template <class T>
 Node<T>::~Node() {
   if (this->data_ != nullptr) delete this->data_;
   if (this->next_ != nullptr) delete this->next_;
 }
 
-template <typename T>
+template <class T>
 T& Node<T>::get_data() {
   if (!data_) throw std::out_of_range("Null found");
   return *data_;
 }
 
-template <typename T>
+template <class T>
 void Node<T>::set_data(T& data) {
   this->data_ = &data;
 }
 
-template <typename T>
+template <class T>
 void Node<T>::set_next(Node<T> *next) {
   if (!next) throw std::invalid_argument("The Node is null");
   this->next_ = next;
 }
 
-template <typename T>
+template <class T>
 Node<T>* Node<T>::next() {
   if (!next_) throw std::out_of_range("Null found");
   return next_;
 }
 
-template <typename T>
+template <class T>
 bool Node<T>::is_next() {
   return this->next_ != nullptr;
+}
+
+/**
+ *  \brief This is the implementation of BiNode class
+ * */
+
+template <class T>
+BiNode<T>::BiNode() : Node<T>() {
+  this->previous_ = nullptr;
+}
+
+template <class T>
+BiNode<T>::BiNode(T &data, Node<T> *previous, Node<T> *next) : Node<T>(data, next) {
+  this->previous_ = previous;
+}
+
+template <class T>
+BiNode<T>::~BiNode() {
+  if (this->previous_ != nullptr) delete this->previous_;
+}
+
+template <class T>
+void BiNode<T>::set_previous(Node<T> *previous) {
+  if (!previous) throw std::invalid_argument("The Node is null");
+  this->previous_ = previous;
+}
+
+template <class T>
+Node<T>* BiNode<T>::previous() {
+  return this->previous_;
+}
+
+template <class T>
+bool BiNode<T>::is_previous() {
+  return this->previous_ != nullptr;
 }
 }  // NAMESPACE DStructs

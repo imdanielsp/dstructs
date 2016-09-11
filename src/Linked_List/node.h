@@ -27,7 +27,7 @@
 
 namespace DStructs {
 
-template<typename T>
+template<class T>
 class Node {
  public:
   Node();
@@ -43,10 +43,10 @@ class Node {
  private:
   T *data_;
   Node<T> *next_;
-};
+};  // Node
 
-template <typename T>
-class BiNode : public Node {
+template <class T>
+class BiNode : public Node<T> {
  public:
   BiNode();
   BiNode(T& data, Node<T> *previous, Node<T> *next);
@@ -57,7 +57,7 @@ class BiNode : public Node {
 
  private:
   Node<T> *previous_;
-};
+};  // BiNode
 }  // NAMESPACE DStructs
 
 #include "node.cc"
