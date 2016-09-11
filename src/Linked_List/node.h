@@ -44,6 +44,20 @@ class Node {
   T *data_;
   Node<T> *next_;
 };
+
+template <typename T>
+class BiNode : public Node {
+ public:
+  BiNode();
+  BiNode(T& data, Node<T> *previous, Node<T> *next);
+  ~BiNode();
+  void set_previous(Node<T> *previous);
+  Node<T>* previous();
+  bool is_previous();
+
+ private:
+  Node<T> *previous_;
+};
 }  // NAMESPACE DStructs
 
 #include "node.cc"

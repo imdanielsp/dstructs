@@ -25,7 +25,7 @@
 #define DSTRUCTS_LINKED_LIST_H
 
 
-class linked_list {
+class LinkedList {
 
 };
 
