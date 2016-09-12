@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 echo "Compiling unit tests..."
-ls
-#! Current folder test/
-cmake -B../build/ -H../
 
-make -C ../build/
+#! Current folder test/
+cmake -B/home/travis/build/dsantosp12/build/ -H/home/travis/build/dsantosp12/
+
+make -C /home/travis/build/dsantosp12/build/
 
 echo "Running uni tests..."
-../build/dstructs-test
+/home/travis/build/dsantosp12/build/dstructs-test
 result=$?
 
 echo "Unit tests exit code: $result"
