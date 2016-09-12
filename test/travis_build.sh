@@ -2,9 +2,9 @@
 echo "Compiling unit tests..."
 
 #! Current folder test/
-cmake -B../build/ -H../
+cmake -Bbuild/ -H.
 
-make -C ../build/
+make -C build/
 
 echo "Running uni tests..."
 ../build/dstructs-test
@@ -15,7 +15,7 @@ if [ $1 ]
 then
     if [ $1 == "--delete-build" ]
     then
-        rm -r ../build/*
+        rm -r build/*
     fi
 fi
 

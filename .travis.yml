@@ -13,10 +13,10 @@ before_install:
   - "cd /usr/src/gtest && sudo cmake . && sudo cmake --build . && sudo mv libg* /usr/local/lib/ ; cd -"
 
 script:
-   - "cmake -B../build/ -H../"
-   - "make -C ../build/"
-   - "../build/dstructs-test"
-   - "Unit tests exxit code: $?"
-
+  - "sh test/travis_build.sh"
+#  - "cmake -B../build/ -H../"
+#  - "make -C ../build/"
+#  - "../build/dstructs-test"
+#  - "Unit tests exxit code: $?"
 notifications:
   email: false
