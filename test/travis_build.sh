@@ -2,14 +2,13 @@
 echo "Compiling unit tests..."
 
 #! Current folder test/
-cmake -B/home/travis/build/dsantosp12/build/ -H/home/travis/build/dsantosp12/
+cmake -B../build/ -H../
 
-make -C /home/travis/build/dsantosp12/build/
+make -C ../build/
 
 echo "Running uni tests..."
-/home/travis/build/dsantosp12/build/dstructs-test
+../build/dstructs-test
 result=$?
-
 echo "Unit tests exit code: $result"
 
 if [ $1 ]

@@ -12,7 +12,11 @@ before_install:
   - sudo apt-get install -y libgtest-dev
   - "cd /usr/src/gtest && sudo cmake . && sudo cmake --build . && sudo mv libg* /usr/local/lib/ ; cd -"
 
-script: "sh test/travis_build.sh"
+script:
+   - "cmake -B../build/ -H../"
+   - "make -C ../build/"
+   - "../build/dstructs-test"
+   - "Unit tests exxit code: $?"
 
 notifications:
   email: false
