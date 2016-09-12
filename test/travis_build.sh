@@ -7,7 +7,7 @@ cmake -Bbuild/ -H.
 make -C build/
 
 echo "Running uni tests..."
-../build/dstructs-test
+build/dstructs-test
 result=$?
 echo "Unit tests exit code: $result"
 
