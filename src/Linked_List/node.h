@@ -31,12 +31,12 @@ template<class T>
 class Node {
  public:
   Node();
-  Node(T& data);
-  Node(T& data, Node<T> *next);
+  Node(T &data);
+  Node(T &data, Node<T> *next);
   ~Node();
   T& get_data();
-  void set_data(T& data);
-  void set_next(Node<T>* next);
+  void set_data(T &data);
+  void set_next(Node<T> *next);
   Node<T>* next();
   bool is_next();
 
@@ -49,7 +49,8 @@ template <class T>
 class BiNode : public Node<T> {
  public:
   BiNode();
-  BiNode(T& data, Node<T> *previous, Node<T> *next);
+  BiNode(T &data);
+  BiNode(T &data, Node<T> *previous, Node<T> *next);
   ~BiNode();
   void set_previous(Node<T> *previous);
   Node<T>* previous();

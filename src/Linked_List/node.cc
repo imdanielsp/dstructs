@@ -93,6 +93,11 @@ BiNode<T>::BiNode() : Node<T>() {
 }
 
 template <class T>
+BiNode<T>::BiNode(T &data) : Node<T>(data) {
+  this->previous_ = nullptr;
+}
+
+template <class T>
 BiNode<T>::BiNode(T &data, Node<T> *previous, Node<T> *next) : Node<T>(data, next) {
   this->previous_ = previous;
 }
@@ -110,6 +115,7 @@ void BiNode<T>::set_previous(Node<T> *previous) {
 
 template <class T>
 Node<T>* BiNode<T>::previous() {
+  if (!previous_) throw std::out_of_range("Null found");
   return this->previous_;
 }
 
