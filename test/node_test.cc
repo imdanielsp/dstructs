@@ -52,7 +52,7 @@ TEST_F(NodeTest, Constructors) {
   EXPECT_TRUE(node_2_->is_next());
   EXPECT_FALSE(node_3_->is_next());
   EXPECT_THROW(no_data_node_->get_data(), std::out_of_range);
-  EXPECT_EQ(node_2_->get_data(), kIntForTest_);
+  EXPECT_EQ(node_2_->get_data(), this->kIntForTest_);
 }
 
 TEST_F(NodeTest, Data) {

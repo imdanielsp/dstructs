@@ -9,4 +9,4 @@ link_libraries(gtest)
 
 set(SOURCE_FILES src/Linked_List/node.h test/node_test.cc test/test_main.cc src/Linked_List/linked_list.cc src/Linked_List/linked_list.h)
 
-add_executable(DStructs ${SOURCE_FILES})
+add_executable(dstructs-test ${SOURCE_FILES})
