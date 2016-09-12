@@ -23,7 +23,7 @@
  * */
 
 #include <iostream>
-#include <exception>
+#include <stdexcept>
 #include <gtest/gtest.h>
 
 #include "../src/Linked_List/node.h"

@@ -22,10 +22,10 @@
  * SOFTWARE.
  * */
 
+#include <stdexcept>
 
 #include "node.h"
 
-#include <exception>
 
 namespace DStructs {
 
