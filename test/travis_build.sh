@@ -9,6 +9,7 @@ make -C ../build/
 echo "Running uni tests..."
 ../build/dstructs-test
 result=$?
+ls
 echo "Unit tests exit code: $result"
 
 if [ $1 ]
