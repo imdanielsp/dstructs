@@ -1,22 +1,25 @@
-sudo: true
+sudo: required
 language: cpp
+dist: trusty
 
 os:
   - linux
 
 compiler:
-  - gcc
+  - g++
 
 before_install:
+  - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
   - sudo apt-get -qq update
   - sudo apt-get install -y libgtest-dev
   - "cd /usr/src/gtest && sudo cmake . && sudo cmake --build . && sudo mv libg* /usr/local/lib/ ; cd -"
 
+install:
+  - sudo apt-get install -qq g++-4.8
+  - export CXX="g++-4.8"
+
 script:
   - "sh test/travis_build.sh"
-#  - "cmake -B../build/ -H../"
-#  - "make -C ../build/"
-#  - "../build/dstructs-test"
-#  - "Unit tests exxit code: $?"
+
 notifications:
   email: false
