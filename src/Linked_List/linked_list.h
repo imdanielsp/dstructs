@@ -39,13 +39,13 @@ class LinkedList {
    * Brief:   Initialize the LinkedList with a length of size.
    * Param:   unsigned int size
    * */
-  explicit LinkedList<T>(size_t size);
+  explicit LinkedList<T>(std::size_t size);
   /*
    * Brief:   Initialize the LinkedList with length = size
    *          and assign the values of T to the each of the nodes.
    * Param:   unsigned int size, T* value
    * */
-  LinkedList<T>(size_t size, T* data);
+  LinkedList<T>(std::size_t size, T* data);
   /*
    * Brief:   De constructor
    * */
@@ -66,26 +66,25 @@ class LinkedList {
    * Brief:   put_at will insert passed data to the index provided if the following
    *          condition is met:
    *                index < size_ - 1
-   * Param:   size_t index, T* data
+   * Param:   std::size_t index, T* data
    * */
-  void put_at(size_t index, T* data);
+  void put_at(std::size_t index, T* data);
   /*
    * Brief:   Return the data in the list at index position if the following condition
    *          is met:
    *                index < size_ - 1
-   * Param:   size_t index
+   * Param:   std::size_t index
    * */
-  T* at(size_t index);
+  T* at(std::size_t index);
   /*
    * Brief:   Returns and delete the last value of the list.
-   * Returns: T*
    * */
-  T* pop_back();
+  void pop_back();
   /*
    * Brief:   Returns the size of the list.
-   * Returns: size_t
+   * Returns: std::size_t
    * */
-  size_t size();
+  std::size_t size();
   /*
    * Brief:   Returns true if the size of the list is 0.
    * Returns: bool
@@ -100,6 +99,14 @@ class LinkedList {
    * Brief:   Destroy the list and its values.
    * */
   void erase();
+  /*
+   * Brief:   Assignment operator.
+   * */
+  T& operator=(T arg);
+  /*
+   * Brief:   Subscript operator.
+   * */
+  T& operator[](std::size_t index);
  private:
   /*
    * Brief:   Returns the front node of the list.
@@ -112,7 +119,7 @@ class LinkedList {
    * */
   Node<T>* get_last();
   Node<T>* front_;  //< front of the linked list
-  size_t size_;     //< size of the linked list
+  std::size_t size_;     //< size of the linked list
 };
 
 } // NAMESPACE DStructs
