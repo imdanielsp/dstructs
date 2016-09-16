@@ -65,25 +65,22 @@ class LinkedList {
   /*
    * Brief:   put_at will insert passed data to the index provided if the following
    *          condition is met:
-   *                index < size - 1
+   *                index < size_ - 1
    * Param:   size_t index, T* data
    * */
   void put_at(size_t index, T* data);
+  /*
+   * Brief:   Return the data in the list at index position if the following condition
+   *          is met:
+   *                index < size_ - 1
+   * Param:   size_t index
+   * */
+  T* at(size_t index);
   /*
    * Brief:   Returns and delete the last value of the list.
    * Returns: T*
    * */
   T* pop_back();
-  /*
-   * Brief:   Returns the front node of the list.
-   * Returns: Node<T>*
-   * */
-  Node<T>* get_front();
-  /*
-   * Brief:   Returns the last node of the list.
-   * Returns: Node<T>*
-   * */
-  Node<T>* get_last();
   /*
    * Brief:   Returns the size of the list.
    * Returns: size_t
@@ -104,6 +101,16 @@ class LinkedList {
    * */
   void erase();
  private:
+  /*
+   * Brief:   Returns the front node of the list.
+   * Returns: Node<T>*
+   * */
+  Node<T>* get_front();
+  /*
+   * Brief:   Returns the last node of the list.
+   * Returns: Node<T>*
+   * */
+  Node<T>* get_last();
   Node<T>* front_;  //< front of the linked list
   size_t size_;     //< size of the linked list
 };
