@@ -22,6 +22,85 @@
  * SOFTWARE.
  * */
 
-#include "linked_list.h"
+#include <gtest/gtest.h>
+
+#include "../src/Linked_List/linked_list.h"
+
+class LinkedListTest : public testing::Test {
+ protected:
+  virtual void SetUp() override {
+    linked_list_1 = new DStructs::LinkedList<int>();
+    linked_list_2 = new DStructs::LinkedList<int>(10);
+    linked_list_3 = new DStructs::LinkedList<int>(10, kTestNum);
+  }
+ private:
+  DStructs::LinkedList* linked_list_1;
+  DStructs::LinkedList* linked_list_2;
+  DStructs::LinkedList* linked_list_3;
+  int kTestNum = 32;
+};
+
+TEST_F(LinkedListTest, Constructors) {
+
+}
+
+TEST_F(LinkedListTest, PutFront) {
+
+}
+
+TEST_F(LinkedListTest, PushBack) {
+
+}
+
+TEST_F(LinkedListTest, PutAt) {
+
+}
+
+TEST_F(LinkedListTest, At) {
+
+}
+
+TEST_F(LinkedListTest, PopBack) {
+
+}
+
+TEST_F(LinkedListTest, Size) {
+
+}
+
+TEST_F(LinkedListTest, Empty) {
+
+}
+
+TEST_F(LinkedListTest, Clear) {
+
+}
+
+TEST_F(LinkedListTest, Erase) {
+
+}
+
+TEST_F(LinkedListTest, AssingmentOperator) {
+
+}
+
+TEST_F(LinkedListTest, SubcriptOperator) {
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

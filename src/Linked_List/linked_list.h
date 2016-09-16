@@ -45,7 +45,7 @@ class LinkedList {
    *          and assign the values of T to the each of the nodes.
    * Param:   unsigned int size, T* value
    * */
-  LinkedList<T>(std::size_t size, T* data);
+  LinkedList<T>(std::size_t size, T& data);
   /*
    * Brief:   De constructor
    * */
