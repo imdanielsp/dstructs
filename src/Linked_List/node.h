@@ -30,8 +30,8 @@ namespace DStructs {
 template<class T>
 class Node {
  public:
-  Node();
-  Node(T &data);
+  Node() = default;
+  explicit Node(T &data);
   Node(T &data, Node<T> *next);
   ~Node();
   T& get_data();

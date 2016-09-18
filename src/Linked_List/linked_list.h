@@ -143,4 +143,5 @@ class LinkedList final {
 
 } // NAMESPACE DStructs
 
+#include "linked_list.cc"
 #endif //DSTRUCTS_LINKED_LIST_H
