@@ -118,10 +118,6 @@ class LinkedList final {
    * */
   void erase();
   /*
-   * Brief:   Assignment operator.
-   * */
-  T& operator=(T arg);
-  /*
    * Brief:   Subscript operator.
    * */
   T& operator[](std::size_t index);

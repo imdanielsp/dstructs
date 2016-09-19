@@ -167,11 +167,6 @@ void LinkedList<T>::erase() {
 }
 
 template <class T>
-T& LinkedList<T>::operator=(T arg) {
-  return nullptr;
-}
-
-template <class T>
 T& LinkedList<T>::operator[](std::size_t index) {
   Node<T> *next = this->front_;
   if (index <= this->size_ - 1 && next != nullptr)
