@@ -34,12 +34,7 @@ class LinkedList final {
   /*
    * Brief:   Default constructor.
    * */
-  LinkedList<T>() = default;
-  /*
-   * Brief:   Initialize the LinkedList with a length of size.
-   * Param:   std::size_t size
-   * */
-  explicit LinkedList<T>(std::size_t size);
+  LinkedList<T>();
   /*
    * Brief:   Initialize the LinkedList with length = size
    *          and assign the values of T to the each of the nodes.
@@ -65,13 +60,7 @@ class LinkedList final {
    *          the list by append the node to the front.
    * Param:   T& data
    * */
-  void put_front(T* data);
-  /*
-   * Brief:   Put front will insert the provided data to the front of
-   *          the list by append the node to the front.
-   * Param:   T data
-   * */
-  void put_front(T data);
+  void put_front(T& data);
   /*
    * Brief:   Similar to put_front, push_back will insert the provided data,
    *          but in this case, to the back of the list.
@@ -137,9 +126,9 @@ class LinkedList final {
    * */
   T& operator[](std::size_t index);
  private:
-  Node<T>* front_;  //< front of the linked list
+  Node<T>* front_;       //< front of the linked list
   std::size_t size_;     //< size of the linked list
-};
+};  // LinkedList
 
 } // NAMESPACE DStructs
 

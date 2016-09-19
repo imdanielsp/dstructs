@@ -65,7 +65,7 @@ TEST_F(NodeTest, Data) {
 TEST_F(NodeTest, Next) {
   EXPECT_NO_THROW(node_1_->set_next(node_2_));
   EXPECT_NO_THROW(node_1_->next());
-  EXPECT_THROW(node_1_->next()->set_next(node_null_), std::invalid_argument);
+  EXPECT_NO_THROW(node_1_->next()->set_next(node_null_));
   EXPECT_TRUE(node_1_->is_next());
   EXPECT_FALSE(node_3_->is_next());
 }

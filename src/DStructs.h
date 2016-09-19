@@ -22,47 +22,5 @@
  * SOFTWARE.
  * */
 
-#ifndef DSTRUCTS_NODE_H
-#define DSTRUCTS_NODE_H
-
-namespace DStructs {
-
-template<class T>
-class Node {
- public:
-  Node();
-  explicit Node(T& data);
-  Node(T &data, Node<T>* next);
-  ~Node();
-  T& get_data();
-  T* get_pData();
-  void set_data(T data);
-  void set_data(T* data);
-  void set_next(Node<T>* next);
-  Node<T>* next();
-  bool is_next();
-  Node<T>& operator=(const T& arg);
-  Node<T> *next_;
-
- private:
-  T *data_;
-};  // Node
-
-template <class T>
-class BiNode : public Node<T> {
- public:
-  BiNode();
-  BiNode(T &data);
-  BiNode(T &data, Node<T> *previous, Node<T> *next);
-  ~BiNode();
-  void set_previous(Node<T> *previous);
-  Node<T>* previous();
-  bool is_previous();
-
- private:
-  Node<T> *previous_;
-};  // BiNode
-}  // NAMESPACE DStructs
-
-#include "node.cc"
-#endif //DSTRUCTS_NODE_H
+#include "Linked_List/node.h"
+#include "Linked_List/linked_list.h"

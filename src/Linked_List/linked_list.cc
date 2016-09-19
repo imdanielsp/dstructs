@@ -25,38 +25,19 @@
 #include <stdexcept>
 
 #include "linked_list.h"
-#include "node.h"
 
 namespace DStructs {
 
 template <class T>
-LinkedList<T>::LinkedList() {
-  this->front_ = nullptr;
-  this->size_ = 0;
+LinkedList<T>::LinkedList() : size_(0), front_(nullptr) {
+
 }
 
 template <class T>
-LinkedList<T>::LinkedList(std::size_t size) {
-  this->size_ = size;
-  Node<T> *next = this->front_;
+LinkedList<T>::LinkedList(std::size_t size, T& data) : size_(0), front_(nullptr) {
   for (int i = 0; i < size; i++) {
-    next = new Node<T>();
-    next->set_data(nullptr);
-    next = next->next();
+    this->put_front(data);
   }
-  next->set_next(nullptr);
-}
-
-template <class T>
-LinkedList<T>::LinkedList(std::size_t size, T &data) {
-  this->size_ = size;
-  Node<T> *next = this->front_;
-  for (int i = 0; i < size; i++) {
-    next = new Node<T>();
-    next->set_data(data);
-    next = next->next();
-  }
-  next->set_next(nullptr);
 }
 
 template <class T>
@@ -66,7 +47,7 @@ LinkedList<T>::~LinkedList() {
   while (next->is_next()) {
     temp = next->next();
 
-    delete next->get_data();
+    delete next->get_pData();
     delete next;
     this->size_--;
 
@@ -83,26 +64,25 @@ T& LinkedList<T>::front() {
 
 template <class T>
 T& LinkedList<T>::back() {
-  Node<T> *next = this->front_;
-  while (next->is_next())
-    next = next->next();
-  return next->get_data();
+  if (this->front_) {
+    Node<T> *next = this->front_;
+    while (next->next_)
+      next = next->next_;
+    return next->get_data();
+  } else throw std::out_of_range("No back data");
 }
 
 template <class T>
-void LinkedList<T>::put_front(T *data) {
-  this->size_++;
-  Node<T> *new_node = new Node<T>(*data);
-  new_node->set_next(this->front_->next());
-  this->front_ = new_node;
-}
-
-template <class T>
-void LinkedList<T>::put_front(T data) {
-  this->size_++;
+void LinkedList<T>::put_front(T& data) {
   Node<T> *new_node = new Node<T>(data);
-  new_node->set_next(this->front_->next());
-  this->front_ = new_node;
+  if (this->front_ == nullptr) {
+    this->front_ = new_node;
+    new_node->set_next(nullptr);
+  } else {
+    new_node->next_ = this->front_;
+    this->front_ = new_node;
+  }
+  this->size_++;
 }
 
 template <class T>
@@ -115,10 +95,17 @@ void LinkedList<T>::push_back(T* data) {
 
 template <class T>
 void LinkedList<T>::push_back(T data) {
+  if (!this->front_)  // Check if front is null
+    this->front_ = new Node<T>();
+
   Node<T> *next = this->front_;
+
   while (next->is_next())
     next = next->next();
-  next->set_next(new Node<T>(data, nullptr));
+
+  next->set_data(data);
+//  next->set_next(nullptr);
+  this->size_++;
 }
 
 template <class T>
@@ -130,7 +117,7 @@ void LinkedList<T>::put_at(std::size_t index, T data) {}
 template <class T>
 T& LinkedList<T>::at(std::size_t index) {
   if (index <= this->size_ - 1) {
-    Node<T> *next = this->front();
+    Node<T> *next = this->front_;
     for (int i = 0; i < index; i++) next = next->next();
     return next->get_data();
   } else {
@@ -144,14 +131,13 @@ void LinkedList<T>::pop_back() {
   Node<T> *prev = nullptr;
 
   if (next) {
-    while (next->is_next()) {
-      prev = next;
-      next = next->next();
-    }
-    delete next->get_data();
-    delete next;
-    prev->set_next(nullptr);
-  } else return;
+    while (next->next_) next = next->next_;
+    next->set_data(nullptr);
+    next->next_ = nullptr;
+    delete next->next_;
+    this->size_--;
+  } else throw std::out_of_range("Nothing to pop");
+
 }
 
 template <class T>
@@ -161,8 +147,41 @@ std::size_t LinkedList<T>::size() {
 
 template <class T>
 bool LinkedList<T>::empty() {
-  return size_ == 0;
+  return this->size_ == 0;
 }
 
+template <class T>
+void LinkedList<T>::clear() {
+  Node<T> *next = front_;
+  if (next) {
+    while (next->is_next()) {
+      delete next->get_pData();
+      next = next->next();
+    }
+    delete next->get_pData();
+  }
 }
 
+template <class T>
+void LinkedList<T>::erase() {
+  for (int i = 0; i <= this->size_+1; i++)
+    this->pop_back();
+}
+
+template <class T>
+T& LinkedList<T>::operator=(T arg) {
+  return nullptr;
+}
+
+template <class T>
+T& LinkedList<T>::operator[](std::size_t index) {
+  Node<T> *next = this->front_;
+
+  if (index <= this->size_ - 1 && next != nullptr)
+    for (int i = 0; i < index; i++)
+      next = next->next_;
+  else
+    throw std::out_of_range("Index is out of range");
+  return next->get_data();
+}
+}  // NAMESPACE DStructs

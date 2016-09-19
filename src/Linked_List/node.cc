@@ -26,7 +26,6 @@
 
 #include "node.h"
 
-
 namespace DStructs {
 
 /**
@@ -58,24 +57,38 @@ Node<T>::~Node() {
 
 template <class T>
 T& Node<T>::get_data() {
-  if (!data_) throw std::out_of_range("Null found");
+  if (!this->data_) throw std::out_of_range("Null found in call get_data");
   return *data_;
 }
 
 template <class T>
-void Node<T>::set_data(T& data) {
+T* Node<T>::get_pData() {
+  return this->data_;
+}
+
+template <class T>
+void Node<T>::set_data(T data) {
   this->data_ = &data;
 }
 
 template <class T>
+void Node<T>::set_data(T* data) {
+  this->data_ = data;
+}
+
+template <class T>
 void Node<T>::set_next(Node<T> *next) {
-  if (!next) throw std::invalid_argument("The Node is null");
   this->next_ = next;
 }
 
 template <class T>
+Node<T>& Node<T>::operator=(const T &arg) {
+  std::cout << "Test 123";
+  return *this;
+}
+
+template <class T>
 Node<T>* Node<T>::next() {
-  if (!next_) throw std::out_of_range("Null found");
   return next_;
 }
 
@@ -116,7 +129,7 @@ void BiNode<T>::set_previous(Node<T> *previous) {
 
 template <class T>
 Node<T>* BiNode<T>::previous() {
-  if (!previous_) throw std::out_of_range("Null found");
+  if (!previous_) throw std::out_of_range("Null found in call previous");
   return this->previous_;
 }
 
