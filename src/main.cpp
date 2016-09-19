@@ -20,7 +20,7 @@ int main() {
     std::cout << (*linkedList)[i] << std::endl;
   }
 
-  linkedList->erase();
+  linkedList->clear();
 
   for (int i = 0; i < linkedList->size(); i++) {
     std::cout << (*linkedList)[i] << std::endl;

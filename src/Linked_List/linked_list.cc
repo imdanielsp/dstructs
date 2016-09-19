@@ -152,14 +152,12 @@ bool LinkedList<T>::empty() {
 
 template <class T>
 void LinkedList<T>::clear() {
-  Node<T> *next = front_;
-  if (next) {
-    while (next->is_next()) {
-      delete next->get_pData();
-      next = next->next();
+  Node<T> *next = this->front_;
+  if (next)
+    while (next->next_) {
+      next->set_data(nullptr);
+      next = next->next_;
     }
-    delete next->get_pData();
-  }
 }
 
 template <class T>
@@ -176,7 +174,6 @@ T& LinkedList<T>::operator=(T arg) {
 template <class T>
 T& LinkedList<T>::operator[](std::size_t index) {
   Node<T> *next = this->front_;
-
   if (index <= this->size_ - 1 && next != nullptr)
     for (int i = 0; i < index; i++)
       next = next->next_;
