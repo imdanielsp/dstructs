@@ -12,19 +12,12 @@ int main() {
 
   LinkedList<int> *linkedList = new LinkedList<int>();
 
-  linkedList->put_front(num);
-  linkedList->put_front(num_2);
-  linkedList->put_front(num_3);
+  linkedList->push_back(num);
+  linkedList->push_back(num_2);
+  linkedList->push_back(num_3);
 
-  for (int i = 0; i < linkedList->size(); i++) {
-    std::cout << (*linkedList)[i] << std::endl;
-  }
-
-  linkedList->clear();
-
-  for (int i = 0; i < linkedList->size(); i++) {
-    std::cout << (*linkedList)[i] << std::endl;
-  }
+  for (int i = 0; i < linkedList->size(); i++)
+    cout << (*linkedList)[i] << endl;
 
   return 0;
 }

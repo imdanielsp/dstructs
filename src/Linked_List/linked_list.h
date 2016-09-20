@@ -64,15 +64,9 @@ class LinkedList final {
   /*
    * Brief:   Similar to put_front, push_back will insert the provided data,
    *          but in this case, to the back of the list.
-   * Param:   T* data
-   * */
-  void push_back(T* data);
-  /*
-   * Brief:   Similar to put_front, push_back will insert the provided data,
-   *          but in this case, to the back of the list.
    * Param:   T data
    * */
-  void push_back(T data);
+  void push_back(T& data);
   /*
    * Brief:   put_at will insert passed data to the index provided if the following
    *          condition is met:

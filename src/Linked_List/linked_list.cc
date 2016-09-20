@@ -86,25 +86,16 @@ void LinkedList<T>::put_front(T& data) {
 }
 
 template <class T>
-void LinkedList<T>::push_back(T* data) {
-  Node<T> *next = this->front_;
-  while (next->is_next())
-    next = next->next();
-  next->set_next(new Node<T>(*data, nullptr));
-}
-
-template <class T>
-void LinkedList<T>::push_back(T data) {
-  if (!this->front_)  // Check if front is null
-    this->front_ = new Node<T>();
-
-  Node<T> *next = this->front_;
-
-  while (next->is_next())
-    next = next->next();
-
-  next->set_data(data);
-//  next->set_next(nullptr);
+void LinkedList<T>::push_back(T& data) {
+  Node<T> *new_node = new Node<T>(data);
+  new_node->next_ = nullptr;
+  if (this->front_ == nullptr) {
+    this->front_ = new_node;
+  } else {
+    Node<T> *next = this->front_;
+    while (next->next_) next = next->next_;
+    next->next_ = new_node;
+  }
   this->size_++;
 }
 
