@@ -6,7 +6,7 @@ for efficient insertion or removal of elements from any position in the sequence
 add additional links, allowing efficient insertion or removal from arbitrary element references.
 
 ### Planing to implement:
-#### - Singly Linked List
+#### - Single Linked List
     Singly linked lists contain nodes which have a data field as well as a 'next' field, which points to the next node 
     in line of nodes. Operations that can be performed on singly linked lists include insertion, deletion and traversal.
 #### - Double Linked List
