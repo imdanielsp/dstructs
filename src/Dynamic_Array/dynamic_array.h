@@ -25,8 +25,23 @@
 #define DSTRUCTS_DYNAMIC_ARRAY_H
 
 
-class DynamicArray {
+#include <cstdio>
 
+template <class T>
+class DynamicArray {
+ public:
+  DynamicArray();
+  explicit DynamicArray(std::size_t size);
+  DynamicArray(std::size_t, const T& data);
+  ~DynamicArray();
+  void push_back(const T& data);
+  T& at(std::size_t) const;
+  T& operator[](std::size_t index);
+
+ private:
+  T* buffer_;
+  std::size_t capacity_;
+  std::size_t size_;
 };
 
 
