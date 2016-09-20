@@ -27,22 +27,29 @@
 
 #include <cstdio>
 
+namespace DStructs {
+
 template <class T>
 class DynamicArray {
  public:
   DynamicArray();
-  explicit DynamicArray(std::size_t size);
   DynamicArray(std::size_t, const T& data);
   ~DynamicArray();
   void push_back(const T& data);
-  T& at(std::size_t) const;
-  T& operator[](std::size_t index);
+  T& at(std::size_t idx) const;
+  std::size_t size() const;
+  std::size_t capacity() const;
+  T& operator[](std::size_t idx);
 
  private:
   T* buffer_;
   std::size_t capacity_;
   std::size_t size_;
-};
+  void increase_capacity(const std::size_t new_capacity);
 
+};  // DYNAMIC ARRAY
 
+} // NAMESPACE DSTRUCTS
+
+#include "dynamic_array.cc"
 #endif //DSTRUCTS_DYNAMIC_ARRAY_H

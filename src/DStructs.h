@@ -24,3 +24,4 @@
 
 #include "Linked_List/node.h"
 #include "Linked_List/linked_list.h"
+#include "Dynamic_Array/dynamic_array.h"
