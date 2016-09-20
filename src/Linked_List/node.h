@@ -25,6 +25,8 @@
 #ifndef DSTRUCTS_NODE_H
 #define DSTRUCTS_NODE_H
 
+#include "linked_list.h"
+
 namespace DStructs {
 
 template<class T>
@@ -41,10 +43,9 @@ class Node {
   void set_next(Node<T>* next);
   Node<T>* next();
   bool is_next();
-  Node<T>& operator=(const T& arg);
-  Node<T> *next_;
 
  private:
+  Node<T> *next_;
   T *data_;
 };  // Node
 

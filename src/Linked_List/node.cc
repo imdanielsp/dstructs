@@ -82,12 +82,6 @@ void Node<T>::set_next(Node<T> *next) {
 }
 
 template <class T>
-Node<T>& Node<T>::operator=(const T &arg) {
-  std::cout << "Test 123";
-  return *this;
-}
-
-template <class T>
 Node<T>* Node<T>::next() {
   return next_;
 }
