@@ -71,16 +71,9 @@ class LinkedList final {
    * Brief:   put_at will insert passed data to the index provided if the following
    *          condition is met:
    *                index < size_ - 1
-   * Param:   std::size_t index, T& data
-   * */
-  void put_at(std::size_t index, T* data);
-  /*
-   * Brief:   put_at will insert passed data to the index provided if the following
-   *          condition is met:
-   *                index < size_ - 1
    * Param:   std::size_t index, T data
    * */
-  void put_at(std::size_t index, T data);
+  void put_at(std::size_t index, T& data);
   /*
    * Brief:   Return the data in the list at index position if the following condition
    *          is met:

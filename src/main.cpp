@@ -9,15 +9,17 @@ int main() {
   int num = 4;
   int num_2 = 6;
   int num_3 = 19;
+  int test = 9;
 
   LinkedList<int> *linkedList = new LinkedList<int>();
 
-  linkedList->push_back(num);
-  linkedList->push_back(num_2);
-  linkedList->push_back(num_3);
+  linkedList->put_front(num);
+  linkedList->put_front(num_2);
+  linkedList->put_front(num_3);
+  linkedList->put_at(2, test);
 
-  for (int i = 0; i < linkedList->size(); i++)
-    cout << (*linkedList)[i] << endl;
+  cout << linkedList->back() << endl;
+  cout << linkedList->at(3) << endl;
 
   return 0;
 }

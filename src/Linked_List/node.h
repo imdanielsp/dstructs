@@ -25,8 +25,6 @@
 #ifndef DSTRUCTS_NODE_H
 #define DSTRUCTS_NODE_H
 
-#include "linked_list.h"
-
 namespace DStructs {
 
 template<class T>

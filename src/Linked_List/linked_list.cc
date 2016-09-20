@@ -66,8 +66,8 @@ template <class T>
 T& LinkedList<T>::back() {
   if (this->front_) {
     Node<T> *next = this->front_;
-    while (next->next_)
-      next = next->next_;
+    while (next->is_next())
+      next = next->next();
     return next->get_data();
   } else throw std::out_of_range("No back data");
 }
@@ -79,7 +79,7 @@ void LinkedList<T>::put_front(T& data) {
     this->front_ = new_node;
     new_node->set_next(nullptr);
   } else {
-    new_node->next_ = this->front_;
+    new_node->set_next(this->front_);
     this->front_ = new_node;
   }
   this->size_++;
@@ -88,22 +88,36 @@ void LinkedList<T>::put_front(T& data) {
 template <class T>
 void LinkedList<T>::push_back(T& data) {
   Node<T> *new_node = new Node<T>(data);
-  new_node->next_ = nullptr;
+  new_node->set_next(nullptr);
   if (this->front_ == nullptr) {
     this->front_ = new_node;
   } else {
     Node<T> *next = this->front_;
-    while (next->next_) next = next->next_;
-    next->next_ = new_node;
+    while (next->is_next()) next = next->next();
+    next->set_next(new_node);
   }
   this->size_++;
 }
 
 template <class T>
-void LinkedList<T>::put_at(std::size_t index, T* data) {}
-
-template <class T>
-void LinkedList<T>::put_at(std::size_t index, T data) {}
+void LinkedList<T>::put_at(std::size_t index, T& data) {
+  if (index == 0) {
+    this->put_front(data);
+  } else {
+    Node<T> *new_node = new Node<T>(data);
+    if (index <= this->size_) {
+      Node<T> *next = this->front_;
+      Node<T> *prev = this->front_;
+      for (int i = 0; i < index; i++) {
+        prev = next;
+        next = next->next();
+      }
+      new_node->set_next(next);
+      prev->set_next(new_node);
+      this->size_++;
+    } else throw std::out_of_range("Trying to put data out of bond");
+  }
+}
 
 template <class T>
 T& LinkedList<T>::at(std::size_t index) {
@@ -111,9 +125,7 @@ T& LinkedList<T>::at(std::size_t index) {
     Node<T> *next = this->front_;
     for (int i = 0; i < index; i++) next = next->next();
     return next->get_data();
-  } else {
-    throw std::out_of_range("This index is out of bound");
-  }
+  } else throw std::out_of_range("This index is out of bound");
 }
 
 template <class T>
@@ -122,10 +134,10 @@ void LinkedList<T>::pop_back() {
   Node<T> *prev = nullptr;
 
   if (next) {
-    while (next->next_) next = next->next_;
+    while (next->next()) next = next->next();
     next->set_data(nullptr);
-    next->next_ = nullptr;
-    delete next->next_;
+    next->set_next(nullptr);
+    delete next->next();
     this->size_--;
   } else throw std::out_of_range("Nothing to pop");
 
@@ -145,9 +157,9 @@ template <class T>
 void LinkedList<T>::clear() {
   Node<T> *next = this->front_;
   if (next)
-    while (next->next_) {
+    while (next->next()) {
       next->set_data(nullptr);
-      next = next->next_;
+      next = next->next();
     }
 }
 
@@ -162,7 +174,7 @@ T& LinkedList<T>::operator[](std::size_t index) {
   Node<T> *next = this->front_;
   if (index <= this->size_ - 1 && next != nullptr)
     for (int i = 0; i < index; i++)
-      next = next->next_;
+      next = next->next();
   else
     throw std::out_of_range("Index is out of range");
   return next->get_data();
