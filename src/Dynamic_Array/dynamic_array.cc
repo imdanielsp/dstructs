@@ -26,7 +26,7 @@
 namespace DStructs {
 
 const unsigned int INITIAL_CAPACITY = 4;
-const float INCREASE_FACTOR = 2.0;
+const float GROWTH_RATE = 1.7;
 
 template <class T>
 DynamicArray<T>::DynamicArray() : capacity_(INITIAL_CAPACITY),
@@ -37,17 +37,21 @@ DynamicArray<T>::DynamicArray() : capacity_(INITIAL_CAPACITY),
 template <class T>
 void DynamicArray<T>::push_back(const T &data) {
   this->size_++;
-  if (this->size_ >= this->capacity_)
-    this->increase_capacity(this->size_ * INCREASE_FACTOR);
+  if (this->size_ > this->capacity_/2)
+    this->increase_capacity(this->size_ * GROWTH_RATE);
   this->buffer_[this->size_-1] = data;
 }
 
 template <class T>
 void DynamicArray<T>::increase_capacity(std::size_t new_capacity) {
   T* new_buffer = new T[new_capacity];
+
   for (int i = 0; i < this->size_; i++)
     new_buffer[i] = this->buffer_[i];
-  delete [] this->buffer_;
+
+  if (this->buffer_)
+    delete [] this->buffer_;
+
   this->buffer_ = new_buffer;
   this->capacity_ = new_capacity;
 }

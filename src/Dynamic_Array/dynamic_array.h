@@ -33,7 +33,6 @@ template <class T>
 class DynamicArray {
  public:
   DynamicArray();
-  DynamicArray(std::size_t, const T& data);
   ~DynamicArray();
   void push_back(const T& data);
   T& at(std::size_t idx) const;
