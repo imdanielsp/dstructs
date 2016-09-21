@@ -24,10 +24,30 @@
 #ifndef DSTRUCTS_QUEUE_H
 #define DSTRUCTS_QUEUE_H
 
+#include <cstdio>
+#include "../Dynamic_Array/dynamic_array.h"
+
+namespace DStructs {
+
 template <class T>
 class Queue {
+ public:
+  Queue();
+  ~Queue();
+  virtual T& front() const;
+  virtual T& back() const;
+  virtual void push(const T& data);
+  virtual void pop();
+  bool empty() const;
+  std::size_t size() const;
+
+ private:
+  DynamicArray<T> buffer_;
+  std::size_t size_;
+  std::size_t head_;
 
 };
+}
 
 #include "queue.cc"
 #endif //DSTRUCTS_QUEUE_H

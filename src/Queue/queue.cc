@@ -21,4 +21,59 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  * */
+
 #include "queue.h"
+
+namespace DStructs {
+
+template <class T>
+Queue<T>::Queue() : size_(0), head_(-1) {
+}
+
+template <class T>
+Queue<T>::~Queue() {
+
+}
+
+template <class T>
+T& Queue<T>::front() const {
+  if (this->head_ != -1)
+    return this->buffer_.at(this->head_);
+  else
+    throw std::out_of_range("Nothing in front");
+}
+
+template <class T>
+T& Queue<T>::back() const {
+  if (this->head_ != -1)
+    return this->buffer_.at(0);
+  else
+    throw std::out_of_range("Nothing in back");
+}
+
+template <class T>
+void Queue<T>::push(const T &data) {
+  this->buffer_.push_back(data);
+  this->size_++;
+  this->head_++;
+}
+
+template <class T>
+void Queue<T>::pop() {
+  if (this->head_ >= 0) {
+    this->head_--;
+    this->size_--;
+  }
+}
+
+template <class T>
+bool Queue<T>::empty() const {
+  return this->size_ == 0;
+}
+
+template <class T>
+std::size_t Queue<T>::size() const {
+  return this->size_;
+}
+
+} // NAMESPACE DSTRUCTS

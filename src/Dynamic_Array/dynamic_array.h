@@ -30,7 +30,7 @@
 namespace DStructs {
 
 template <class T>
-class DynamicArray {
+class DynamicArray final {
  public:
   DynamicArray();
   ~DynamicArray();

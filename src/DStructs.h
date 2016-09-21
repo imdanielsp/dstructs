@@ -22,6 +22,17 @@
  * SOFTWARE.
  * */
 
-#include "Linked_List/node.h"
+
+/*
+ *  Linked List
+ * */
 #include "Linked_List/linked_list.h"
+/*
+ *  Dynamic Array
+ * */
 #include "Dynamic_Array/dynamic_array.h"
+
+/*
+ *  Queue
+ * */
+#include "Queue/queue.h"

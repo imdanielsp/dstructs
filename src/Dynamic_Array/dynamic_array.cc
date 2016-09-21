@@ -39,7 +39,6 @@ DynamicArray<T>::~DynamicArray() {
   for (int i = 0; i < this->size_; i++)
     this->buffer_ = nullptr;
   delete [] this->buffer_;
-  std::cout << "Destroying!" << std::endl;
 }
 
 template <class T>
