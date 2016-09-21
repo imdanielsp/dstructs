@@ -35,6 +35,14 @@ DynamicArray<T>::DynamicArray() : capacity_(INITIAL_CAPACITY),
 }
 
 template <class T>
+DynamicArray<T>::~DynamicArray() {
+  for (int i = 0; i < this->size_; i++)
+    this->buffer_ = nullptr;
+  delete [] this->buffer_;
+  std::cout << "Destroying!" << std::endl;
+}
+
+template <class T>
 void DynamicArray<T>::push_back(const T &data) {
   this->size_++;
   if (this->size_ > this->capacity_/2)

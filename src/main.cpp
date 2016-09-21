@@ -6,6 +6,5 @@ using namespace DStructs;
 
 int main() {
 
-
   return 0;
 }
