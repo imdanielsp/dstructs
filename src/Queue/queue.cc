@@ -44,14 +44,6 @@ T& Queue<T>::front() const {
 }
 
 template <class T>
-T& Queue<T>::back() const {
-  if (this->head_ != -1)
-    return this->buffer_.at(0);
-  else
-    throw std::out_of_range("Nothing in back");
-}
-
-template <class T>
 void Queue<T>::push(const T &data) {
   this->buffer_.push_back(data);
   this->size_++;

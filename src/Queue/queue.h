@@ -35,14 +35,15 @@ class Queue {
   Queue();
   ~Queue();
   virtual T& front() const;
-  virtual T& back() const;
   virtual void push(const T& data);
   virtual void pop();
   bool empty() const;
   std::size_t size() const;
 
- private:
+ protected:
   DynamicArray<T> buffer_;
+
+ private:
   std::size_t size_;
   std::size_t head_;
 
