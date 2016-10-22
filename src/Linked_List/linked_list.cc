@@ -34,7 +34,7 @@ LinkedList<T>::LinkedList() : size_(0), front_(nullptr) {
 }
 
 template <class T>
-LinkedList<T>::LinkedList(std::size_t size, T& data) : size_(0), front_(nullptr) {
+LinkedList<T>::LinkedList(const size_t size, const T &data) : size_(0), front_(nullptr) {
   for (int i = 0; i < size; i++) {
     this->put_front(data);
   }
@@ -73,7 +73,7 @@ T& LinkedList<T>::back() {
 }
 
 template <class T>
-void LinkedList<T>::put_front(T& data) {
+void LinkedList<T>::put_front(const T &data) {
   Node<T> *new_node = new Node<T>(data);
   if (this->front_ == nullptr) {
     this->front_ = new_node;
@@ -86,7 +86,7 @@ void LinkedList<T>::put_front(T& data) {
 }
 
 template <class T>
-void LinkedList<T>::push_back(T& data) {
+void LinkedList<T>::push_back(const T &data) {
   Node<T> *new_node = new Node<T>(data);
   new_node->set_next(nullptr);
   if (this->front_ == nullptr) {
@@ -100,7 +100,7 @@ void LinkedList<T>::push_back(T& data) {
 }
 
 template <class T>
-void LinkedList<T>::put_at(std::size_t index, T& data) {
+void LinkedList<T>::put_at(const size_t index, const T &data) {
   if (index == 0) {
     this->put_front(data);
   } else {
@@ -120,7 +120,7 @@ void LinkedList<T>::put_at(std::size_t index, T& data) {
 }
 
 template <class T>
-T& LinkedList<T>::at(std::size_t index) {
+T& LinkedList<T>::at(const size_t index) {
   if (index <= this->size_ - 1) {
     Node<T> *next = this->front_;
     for (int i = 0; i < index; i++) next = next->next();
@@ -144,12 +144,12 @@ void LinkedList<T>::pop_back() {
 }
 
 template <class T>
-std::size_t LinkedList<T>::size() {
+std::size_t LinkedList<T>::size() const {
   return this->size_;
 }
 
 template <class T>
-bool LinkedList<T>::empty() {
+bool LinkedList<T>::empty() const {
   return this->size_ == 0;
 }
 

@@ -10,6 +10,6 @@ link_libraries(gtest)
 set(SOURCE_FILES src/Linked_List/node.h  src/Linked_List/linked_list.h
         test/linked_list_test.cc src/DStructs.h
         src/Dynamic_Array/dynamic_array.h src/Queue/queue.h src/Queue/deque.cc
-        src/Queue/deque.h test/node_test.cc src/main.cpp)
+        src/Queue/deque.h test/node_test.cc src/main.cpp test/queue_test.cc)
 
 add_executable(dstructs-test ${SOURCE_FILES})

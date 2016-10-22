@@ -40,7 +40,7 @@ class LinkedList final {
    *          and assign the values of T to the each of the nodes.
    * Param:   std::size_t size, T& value
    * */
-  LinkedList<T>(std::size_t size, T& data);
+  LinkedList<T>(const size_t size, const T &data);
   /*
    * Brief:   De constructor
    * */
@@ -60,27 +60,27 @@ class LinkedList final {
    *          the list by append the node to the front.
    * Param:   T& data
    * */
-  void put_front(T& data);
+  void put_front(const T &data);
   /*
    * Brief:   Similar to put_front, push_back will insert the provided data,
    *          but in this case, to the back of the list.
    * Param:   T data
    * */
-  void push_back(T& data);
+  void push_back(const T &data);
   /*
    * Brief:   put_at will insert passed data to the index provided if the following
    *          condition is met:
    *                index < size_ - 1
    * Param:   std::size_t index, T data
    * */
-  void put_at(std::size_t index, T& data);
+  void put_at(const size_t index, const T &data);
   /*
    * Brief:   Return the data in the list at index position if the following condition
    *          is met:
    *                index < size_ - 1
    * Param:   std::size_t index
    * */
-  T& at(std::size_t index);
+  T& at(const size_t index);
   /*
    * Brief:   Returns and delete the last value of the list.
    * */
@@ -89,12 +89,12 @@ class LinkedList final {
    * Brief:   Returns the size of the list.
    * Returns: std::size_t
    * */
-  std::size_t size();
+  std::size_t size() const;
   /*
    * Brief:   Returns true if the size of the list is 0.
    * Returns: bool
    * */
-  bool empty();
+  bool empty() const;
   /*
    * Brief:   Clear all the values of the list, assigning it to
    *          a null pointer.
