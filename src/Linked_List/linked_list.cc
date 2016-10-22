@@ -57,13 +57,13 @@ LinkedList<T>::~LinkedList() {
 }
 
 template <class T>
-T& LinkedList<T>::front() {
+T& LinkedList<T>::front() const {
   if (this->front_) return this->front_->get_data();
   else throw std::out_of_range("There is not front data");
 }
 
 template <class T>
-T& LinkedList<T>::back() {
+T& LinkedList<T>::back() const {
   if (this->front_) {
     Node<T> *next = this->front_;
     while (next->is_next())

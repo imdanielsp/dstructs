@@ -49,12 +49,12 @@ class LinkedList final {
   * Brief:   Returns the front node of the list.
   * Returns: Node<T>*
   * */
-  T& front();
+  T& front() const;
   /*
    * Brief:   Returns the last node of the list.
    * Returns: Node<T>*
    * */
-  T& back();
+  T& back() const;
   /*
    * Brief:   Put front will insert the provided data to the front of
    *          the list by append the node to the front.
