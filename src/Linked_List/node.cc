@@ -67,7 +67,7 @@ T* Node<T>::get_pData() {
 }
 
 template <class T>
-void Node<T>::set_data(T data) {
+void Node<T>::set_data(T& data) {
   this->data_ = &data;
 }
 

@@ -57,7 +57,6 @@ TEST_F(NodeTest, Constructors) {
 }
 
 TEST_F(NodeTest, Data) {
-  node_3_->set_data(kIntForTest_);
   EXPECT_EQ(node_3_->get_data(), kIntForTest_);
   EXPECT_THROW(no_data_node_->get_data(), std::out_of_range);
 }

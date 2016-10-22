@@ -33,10 +33,10 @@ class Node {
   Node();
   explicit Node(T& data);
   Node(T &data, Node<T>* next);
-  ~Node();
+  virtual ~Node();
   T& get_data();
   T* get_pData();
-  void set_data(T data);
+  void set_data(T& data);
   void set_data(T* data);
   void set_next(Node<T>* next);
   Node<T>* next();

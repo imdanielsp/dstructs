@@ -24,8 +24,7 @@
 #ifndef DSTRUCTS_DYNAMIC_ARRAY_H
 #define DSTRUCTS_DYNAMIC_ARRAY_H
 
-
-#include <cstdio>
+#include <stdexcept>
 
 namespace DStructs {
 

@@ -21,51 +21,42 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  * */
-
-#include "queue.h"
+#include "deque.h"
 
 namespace DStructs {
 
 template <class T>
-Queue<T>::Queue() : size_(0), head_(0) {
-  this->buffer_ = new DynamicArray<T>();
+Deque<T>::Deque() : Queue<T>(){
 }
 
 template <class T>
-Queue<T>::~Queue() {
-  delete this->buffer_;
-}
-
-template <class T>
-T& Queue<T>::front() const {
-  if (this->size_ > 0 && this->head_ >= 0)
-    return this->buffer_->at(this->head_);
+T& Deque<T>::back() const {
+  if (this->head_ != -1)
+    return this->buffer_->at(0);
   else
     throw std::out_of_range("Nothing in front");
 }
 
 template <class T>
-void Queue<T>::push(const T &data) {
-  this->buffer_->push_back(data);
-  this->size_++;
-}
+void Deque<T>::push_front(const T& data) {
+  DynamicArray<T> *old_buffer = this->buffer_;
+  this->buffer_ = new DynamicArray<T>();
 
-template <class T>
-void Queue<T>::pop() {
-  if (this->size_ >= 0) {
-    this->head_++;
-    this->size_--;
+  this->buffer_->push_back(data);  // Put new data in front
+
+  // Copy old buffer to new buffer
+  for (int i = 0; i < old_buffer->size(); ++i) {
+    this->buffer_->push_back((*this->buffer_)[i]);
   }
+  delete old_buffer;  // Deallocate old buffer
+
+  this->size_++;
+  this->head_--;
 }
 
 template <class T>
-bool Queue<T>::empty() const {
-  return this->size_ == 0;
+void Deque<T>::pop_back() {
+  this->size_--;
 }
 
-template <class T>
-std::size_t Queue<T>::size() const {
-  return this->size_;
 }
-
-} // NAMESPACE DSTRUCTS

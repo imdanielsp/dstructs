@@ -21,51 +21,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  * */
+#ifndef DSTRUCTS_DEQUE_H
+#define DSTRUCTS_DEQUE_H
 
 #include "queue.h"
 
 namespace DStructs {
 
 template <class T>
-Queue<T>::Queue() : size_(0), head_(0) {
-  this->buffer_ = new DynamicArray<T>();
-}
+class Deque : public Queue<T> {
+ public:
+  Deque();
+  T& back() const;
+  void push_front(const T& data);
+  void pop_back();
+};
 
-template <class T>
-Queue<T>::~Queue() {
-  delete this->buffer_;
-}
+}  // NAMESPACE DSTRUCTS
 
-template <class T>
-T& Queue<T>::front() const {
-  if (this->size_ > 0 && this->head_ >= 0)
-    return this->buffer_->at(this->head_);
-  else
-    throw std::out_of_range("Nothing in front");
-}
 
-template <class T>
-void Queue<T>::push(const T &data) {
-  this->buffer_->push_back(data);
-  this->size_++;
-}
-
-template <class T>
-void Queue<T>::pop() {
-  if (this->size_ >= 0) {
-    this->head_++;
-    this->size_--;
-  }
-}
-
-template <class T>
-bool Queue<T>::empty() const {
-  return this->size_ == 0;
-}
-
-template <class T>
-std::size_t Queue<T>::size() const {
-  return this->size_;
-}
-
-} // NAMESPACE DSTRUCTS
+#endif //DSTRUCTS_DEQUE_H

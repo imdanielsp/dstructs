@@ -41,11 +41,9 @@ class Queue {
   std::size_t size() const;
 
  protected:
-  DynamicArray<T> buffer_;
-
- private:
-  std::size_t size_;
+  DynamicArray<T> *buffer_;
   std::size_t head_;
+  std::size_t size_;
 
 };
 }
