@@ -30,33 +30,76 @@ namespace DStructs {
 template<class T>
 class Node {
  public:
+  /**
+   * \brief     This is the default constructor of a Node. This constructor
+   *            doesn't allocate the buffer, it is allocate through mutattors. And other
+   *            constructors. The buffer and next is set to nullptr.
+   * */
   Node();
-  explicit Node(T& data);
-  Node(T &data, Node<T>* next);
+  /**
+   * \brief     This is an explicit constructor that takes a T& data, allocates
+   * the buffer and sets next to nullptr.
+   *
+   * \param     const T&
+   * */
+  explicit Node(const T &data);
+  /**
+   * \brief     This constructor takes a T& data and a next node to like with
+   * this node.
+   *
+   * \param     const T&, Node<T>
+   * */
+  Node(const T &data, Node<T> *next);
+  /**
+   * \brief     Destructor of the object. Destroy the allocated buffer.
+   * */
   virtual ~Node();
-  T& get_data();
-  T* get_pData();
-  void set_data(T& data);
-  void set_data(T* data);
+  /**
+   * \brief     Get the data in the current buffer and returns it.
+   *
+   * \returns   T&
+   * */
+  T& get_data() const;
+  /**
+   * \brief     Sets the data to the current buffer.
+   *
+   * \param     const T&
+   * */
+  void set_data(const T &data);
+  /**
+   * \brief     Sets the next pointer to the passed Node<T>
+   *
+   * \param     Node<T>*
+   * */
   void set_next(Node<T>* next);
-  Node<T>* next();
-  bool is_next();
+  /**
+   * \brief     Returns next that is linked to this node.
+   *
+   * \returns   Node<T>*
+   * */
+  Node<T>* next() const;
+  /**
+   * \brief     Returns true if there is a node connected to this current node.
+   *
+   * \returns   bool
+   * */
+  bool is_next() const;
 
  private:
-  Node<T> *next_;
-  T *data_;
+  Node<T> *next_;   //< A link to another node
+  T *data_;         //< Buffer
 };  // Node
 
 template <class T>
 class BiNode : public Node<T> {
  public:
   BiNode();
-  BiNode(T &data);
-  BiNode(T &data, Node<T> *previous, Node<T> *next);
-  ~BiNode();
+  explicit BiNode(const T &data);
+  BiNode(const T &data, Node<T> *previous, Node<T> *next);
+  virtual ~BiNode();
   void set_previous(Node<T> *previous);
-  Node<T>* previous();
-  bool is_previous();
+  Node<T>* previous() const;
+  bool is_previous() const;
 
  private:
   Node<T> *previous_;

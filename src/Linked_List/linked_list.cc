@@ -47,7 +47,6 @@ LinkedList<T>::~LinkedList() {
   while (next->is_next()) {
     temp = next->next();
 
-    delete next->get_pData();
     delete next;
     this->size_--;
 

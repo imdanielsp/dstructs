@@ -23,6 +23,7 @@
  * */
 
 #include <stdexcept>
+#include <iostream>
 
 #include "node.h"
 
@@ -33,47 +34,46 @@ namespace DStructs {
  * */
 template <class T>
 Node<T>::Node() {
-  this->next_ = nullptr;  //< Init empty next
+  this->next_ = nullptr;    //< Init empty next
   this->data_ = nullptr;    //< Allocate memory for T
 }
 
 template <class T>
-Node<T>::Node(T& data) {
-  this->data_ = &data;
+Node<T>::Node(const T &data) {
+  this->data_ = new T;
+  *this->data_ = data;
+
   this->next_ = nullptr;
 }
 
 template<class T>
-Node<T>::Node(T& data, Node<T> *next) {
-  this->data_ = &data;
+Node<T>::Node(const T &data, Node<T> *next) {
+  this->data_ = new T;
+  *this->data_ = data;
+
   this->next_ = next;
 }
 
 template <class T>
 Node<T>::~Node() {
-  if (this->data_ != nullptr) delete this->data_;
-  if (this->next_ != nullptr) delete this->next_;
+  if (this->data_)
+    delete this->data_;
 }
 
 template <class T>
-T& Node<T>::get_data() {
+T& Node<T>::get_data() const {
   if (!this->data_) throw std::out_of_range("Null found in call get_data");
   return *data_;
 }
 
 template <class T>
-T* Node<T>::get_pData() {
-  return this->data_;
-}
-
-template <class T>
-void Node<T>::set_data(T& data) {
-  this->data_ = &data;
-}
-
-template <class T>
-void Node<T>::set_data(T* data) {
-  this->data_ = data;
+void Node<T>::set_data(const T &data) {
+  if (!this->data_) {
+    this->data_ = new T;
+    *this->data_ = data;
+  } else {
+    *this->data_ = data;
+  }
 }
 
 template <class T>
@@ -82,12 +82,12 @@ void Node<T>::set_next(Node<T> *next) {
 }
 
 template <class T>
-Node<T>* Node<T>::next() {
+Node<T>* Node<T>::next() const {
   return next_;
 }
 
 template <class T>
-bool Node<T>::is_next() {
+bool Node<T>::is_next() const {
   return this->next_ != nullptr;
 }
 
@@ -101,12 +101,12 @@ BiNode<T>::BiNode() : Node<T>() {
 }
 
 template <class T>
-BiNode<T>::BiNode(T &data) : Node<T>(data) {
+BiNode<T>::BiNode(const T &data) : Node<T>(data) {
   this->previous_ = nullptr;
 }
 
 template <class T>
-BiNode<T>::BiNode(T &data, Node<T> *previous, Node<T> *next) : Node<T>(data, next) {
+BiNode<T>::BiNode(const T &data, Node<T> *previous, Node<T> *next) : Node<T>(data, next) {
   this->previous_ = previous;
 }
 
@@ -122,13 +122,13 @@ void BiNode<T>::set_previous(Node<T> *previous) {
 }
 
 template <class T>
-Node<T>* BiNode<T>::previous() {
+Node<T>* BiNode<T>::previous() const {
   if (!previous_) throw std::out_of_range("Null found in call previous");
   return this->previous_;
 }
 
 template <class T>
-bool BiNode<T>::is_previous() {
+bool BiNode<T>::is_previous() const {
   return this->previous_ != nullptr;
 }
 }  // NAMESPACE DStructs

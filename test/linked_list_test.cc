@@ -15,7 +15,7 @@
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
@@ -29,13 +29,15 @@
 class LinkedListTest : public testing::Test {
  protected:
   virtual void SetUp() override {
-    linked_list_1 = new DStructs::LinkedList<int>();
-    linked_list_2 = nullptr;
-    linked_list_3 = new DStructs::LinkedList<int>(10, kTestNum);
+    this->linked_list = new DStructs::LinkedList<int>();
+  }
+  virtual void TearDown() override {
+    delete this->linked_list;
   }
 
-  DStructs::LinkedList<int>* linked_list_1;
-  DStructs::LinkedList<int>* linked_list_2;
-  DStructs::LinkedList<int>* linked_list_3;
-  int kTestNum = 32;
+  DStructs::LinkedList<int>* linked_list;
 };
+
+TEST_F(LinkedListTest, Constructor) {
+  linked_list->push_back(7);
+}

@@ -31,42 +31,93 @@
 class NodeTest : public testing::Test {
  protected:
   virtual void SetUp() override {
-    this->node_1_ = new DStructs::Node<int>(this->kIntForTest_);
-    this->node_2_ = new DStructs::Node<int>(this->kIntForTest_, this->node_1_);
-    this->node_3_ = new DStructs::Node<int>();
-    this->node_3_->set_data(kIntForTest_);
-    this->no_data_node_ = new DStructs::Node<int>();
-    this->node_null_ = nullptr;
+    pNode = new DStructs::Node<int>();
+    pNode2 = new DStructs::Node<int>(4);
+    pNode3 = new DStructs::Node<int>(kIntForTest_);
+    pNode4 = new DStructs::Node<int>(8, pNode3);
+    pNode5 = new DStructs::Node<int>(kIntForTest_, pNode3);
   }
 
-  DStructs::Node<int> *node_1_;
-  DStructs::Node<int> *node_2_;
-  DStructs::Node<int> *node_3_;
-  DStructs::Node<int> *no_data_node_;
-  DStructs::Node<int> *node_null_;
-  int kIntForTest_ = 5;
+  virtual void TearDown() override {
+    delete pNode;
+    delete pNode2;
+    delete pNode3;
+    delete pNode4;
+    delete pNode5;
+  }
 
+  DStructs::Node<int> *pNode;
+  DStructs::Node<int> *pNode2;
+  DStructs::Node<int> *pNode3;
+  DStructs::Node<int> *pNode4;
+  DStructs::Node<int> *pNode5;
+
+  int kIntForTest_ = 5;
 };
 
-TEST_F(NodeTest, Constructors) {
-  EXPECT_FALSE(node_1_->is_next());
-  EXPECT_TRUE(node_2_->is_next());
-  EXPECT_FALSE(node_3_->is_next());
-  EXPECT_THROW(no_data_node_->get_data(), std::out_of_range);
-  EXPECT_EQ(node_2_->get_data(), this->kIntForTest_);
+TEST_F(NodeTest, EmptyConstructorTest) {
+  EXPECT_EQ(pNode->next(), nullptr);
+  EXPECT_THROW(pNode->get_data(), std::out_of_range);
+  EXPECT_FALSE(pNode->is_next());
 }
 
-TEST_F(NodeTest, Data) {
-  EXPECT_EQ(node_3_->get_data(), kIntForTest_);
-  EXPECT_THROW(no_data_node_->get_data(), std::out_of_range);
+TEST_F(NodeTest, ConstructorWithDataTest) {
+  EXPECT_EQ(pNode2->next(), nullptr);
+  EXPECT_EQ(pNode2->get_data(), 4);
+  EXPECT_FALSE(pNode2->is_next());
+
+  EXPECT_EQ(pNode3->next(), nullptr);
+  EXPECT_EQ(pNode3->get_data(), this->kIntForTest_);
+  EXPECT_FALSE(pNode3->is_next());
 }
 
-TEST_F(NodeTest, Next) {
-  EXPECT_NO_THROW(node_1_->set_next(node_2_));
-  EXPECT_NO_THROW(node_1_->next());
-  EXPECT_NO_THROW(node_1_->next()->set_next(node_null_));
-  EXPECT_TRUE(node_1_->is_next());
-  EXPECT_FALSE(node_3_->is_next());
+TEST_F(NodeTest, ConstructorWithDataAndNextTest) {
+  EXPECT_EQ(pNode4->next(), this->pNode3);
+  EXPECT_EQ(pNode4->get_data(), 8);
+  EXPECT_TRUE(pNode4->is_next());
+
+  EXPECT_EQ(pNode5->next(), this->pNode3);
+  EXPECT_EQ(pNode5->get_data(), this->kIntForTest_);
+  EXPECT_TRUE(pNode5->is_next());
+}
+
+TEST_F(NodeTest, SetDataTest) {
+  int n = 19;
+  pNode->set_data(5);
+
+  EXPECT_EQ(pNode->get_data(), 5);
+
+  pNode->set_data(n);
+
+  EXPECT_EQ(pNode->get_data(), 19);
+}
+
+TEST_F(NodeTest, GetDataTest) {
+  EXPECT_THROW(pNode->get_data(), std::out_of_range);
+  EXPECT_EQ(pNode2->get_data(), 4);
+  EXPECT_EQ(pNode3->get_data(), kIntForTest_);
+}
+
+TEST_F(NodeTest, SetNextTest) {
+  EXPECT_EQ(pNode2->get_data(), 4);
+
+  pNode->set_next(this->pNode2);
+
+  EXPECT_EQ(pNode->next(), pNode2);
+
+  pNode->set_next(nullptr);
+
+  EXPECT_EQ(pNode->next(), nullptr);
+}
+
+TEST_F(NodeTest, NextTest) {
+  EXPECT_EQ(pNode->next(), nullptr);
+  EXPECT_EQ(pNode4->next(), pNode3);
+}
+
+TEST_F(NodeTest, IsNextTest) {
+  EXPECT_FALSE(pNode->is_next());
+  EXPECT_TRUE(pNode4->is_next());
 }
 
 class BiNodeTest : public testing::Test {
@@ -74,7 +125,7 @@ class BiNodeTest : public testing::Test {
   virtual void SetUp() override {
     this->biNode_1_ = new DStructs::BiNode<int>();
     this->biNode_2_ = new DStructs::BiNode<int>(different_value_);
-    this->biNode_3_ = new DStructs::BiNode<int>(different_value_, biNode_2_, nullptr);
+    this->biNode_3_ = new DStructs::BiNode<int>(9, biNode_2_, nullptr);
   }
 
   int different_value_ = 9;
@@ -82,7 +133,6 @@ class BiNodeTest : public testing::Test {
   DStructs::BiNode<int> *biNode_2_;
   DStructs::BiNode<int> *biNode_3_;
 };
-
 
 TEST_F(BiNodeTest, Constructor) {
   EXPECT_THROW(biNode_1_->previous(), std::out_of_range);

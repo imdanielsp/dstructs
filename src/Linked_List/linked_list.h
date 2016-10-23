@@ -1,6 +1,4 @@
 /* *
- * MIT License
- *
  * Copyright (c) 2016 Daniel Santos
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -31,81 +29,93 @@ namespace DStructs {
 template <class T>
 class LinkedList final {
  public:
-  /*
-   * Brief:   Default constructor.
+  /**
+   * \brief   Default constructor.
    * */
   LinkedList<T>();
-  /*
-   * Brief:   Initialize the LinkedList with length = size
-   *          and assign the values of T to the each of the nodes.
-   * Param:   std::size_t size, T& value
+  /**
+   * \brief     Initialize the LinkedList with length = size
+   * and assign the values of T to the each of the nodes.
+   *
+   * \param     std::size_t size, T& value
    * */
-  LinkedList<T>(const size_t size, const T &data);
-  /*
-   * Brief:   De constructor
+  LinkedList<T>(const std::size_t size, const T &data);
+  /**
+   * \brief     Deconstructor
    * */
   ~LinkedList<T>();
-  /*
-  * Brief:   Returns the front node of the list.
-  * Returns: Node<T>*
-  * */
+  /**
+   * \brief      Returns the front node of the list.
+   *
+   * \returns    Node<T>*
+   * */
   T& front() const;
-  /*
-   * Brief:   Returns the last node of the list.
-   * Returns: Node<T>*
+  /**
+   * \brief     Returns the last node of the list.
+   *
+   * \returns   Node<T>*
    * */
   T& back() const;
-  /*
-   * Brief:   Put front will insert the provided data to the front of
-   *          the list by append the node to the front.
-   * Param:   T& data
+  /**
+   * \brief     Put front will insert the provided data to the front of
+   * the list by append the node to the front.
+   *
+   * \param     T& data
    * */
   void put_front(const T &data);
-  /*
-   * Brief:   Similar to put_front, push_back will insert the provided data,
-   *          but in this case, to the back of the list.
-   * Param:   T data
+  /**
+   * \brief     Similar to put_front, push_back will insert the provided data,
+   * but in this case, to the back of the list.
+   *
+   * \param     const T& data
    * */
   void push_back(const T &data);
-  /*
-   * Brief:   put_at will insert passed data to the index provided if the following
-   *          condition is met:
-   *                index < size_ - 1
-   * Param:   std::size_t index, T data
+  /**
+   * \brief     put_at will insert passed data to the index provided if the
+   * following condition is met:
+   *    index < size_ - 1
+   *
+   * \param     const size_t, const T& data
    * */
-  void put_at(const size_t index, const T &data);
-  /*
-   * Brief:   Return the data in the list at index position if the following condition
-   *          is met:
-   *                index < size_ - 1
-   * Param:   std::size_t index
+  void put_at(const std::size_t index, const T &data);
+  /**
+   * \brief     Return the data in the list at index position if the following
+   * condition is met:
+   *    index < size_ - 1
+   *
+   * \param     std::size_t index
    * */
-  T& at(const size_t index);
-  /*
-   * Brief:   Returns and delete the last value of the list.
+  T& at(const std::size_t index);
+  /**
+   * \brief     Returns and delete the last value of the list.
    * */
   void pop_back();
-  /*
-   * Brief:   Returns the size of the list.
-   * Returns: std::size_t
+  /**
+   * \brief     Returns the size of the list.
+   *
+   * \returns   std::size_t
    * */
   std::size_t size() const;
-  /*
-   * Brief:   Returns true if the size of the list is 0.
-   * Returns: bool
+  /**
+   * \brief     Returns true if the size of the list is 0.
+   *
+   * \returns   bool
    * */
   bool empty() const;
-  /*
-   * Brief:   Clear all the values of the list, assigning it to
-   *          a null pointer.
+  /**
+   * \brief     Clear all the values of the list, assigning it to
+   *            a null pointer.
    * */
   void clear();
-  /*
-   * Brief:   Destroy the list and its values.
+  /**
+   * \brief     Destroy the list and its values.
    * */
   void erase();
-  /*
-   * Brief:   Subscript operator.
+  /**
+   * \brief     Overlodaded script operator.
+   *
+   * \param     std::size_t
+   * \returns   T&
    * */
   T& operator[](std::size_t index);
  private:

@@ -32,21 +32,51 @@ class QueueTest : public testing::Test {
  protected:
   virtual void SetUp() override {
 
-    complex_queue.push(new DStructs::LinkedList<int>());
-    complex_queue.push(new DStructs::LinkedList<int>());
-
+    // Push 50 objects to the queue
     for (int i = 0; i < 50; ++i) {
       queue.push(i);
     }
 
+    /*
+     * This data structure should be something like:
+      Queue< LinkedList<int> >
+      __________________________________________
+       ++++++++++++  |  ++++++++++++++++++++
+      + 7 -> 6 -> 5+ | + 11 -> 10 ->10 -> 11  +
+       ++++++++++++  |  ++++++++++++++++++++
+      _______________|__________________________
+
+     * */
+
+    complex_queue.push(new DStructs::LinkedList<int>());
     complex_queue.front()->push_back(5);
+    complex_queue.front()->push_back(6);
+    complex_queue.front()->push_back(7);
+
+    complex_queue.push(new DStructs::LinkedList<int>());
+    complex_queue.front()->push_back(8);
+    complex_queue.front()->push_back(9);
+    complex_queue.front()->push_back(10);
+    complex_queue.front()->push_back(11);
+
   }
 
   DStructs::Queue<int> queue;
   DStructs::Queue< DStructs::LinkedList<int>* > complex_queue;
 };
 
-
+//TEST_F(QueueTest, Front) {
+//  for (int i = 0; queue.size() != 0; i++) {
+//    EXPECT_EQ(queue.front(), i);
+//    queue.pop();
+//  }
+//
+//  EXPECT_EQ(complex_queue.front()->front(), 5);
+//  EXPECT_EQ(complex_queue.front()->at(1), 6);
+//  complex_queue.pop();
+//  EXPECT_EQ(complex_queue.front()->front(), 8);
+//  EXPECT_EQ(complex_queue.front()->at(3), 11);
+//}
 
 
 
