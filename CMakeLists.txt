@@ -18,6 +18,6 @@ set(SOURCE_FILES    #src/main.cpp
                     test/node_test.cc
                     test/linked_list_test.cc
                     test/queue_test.cc
-    )
+        test/dynamic_array_test.cc)
 
 add_executable(dstructs-test ${SOURCE_FILES})

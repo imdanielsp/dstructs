@@ -2,14 +2,13 @@
  * Copyright (c) 2016 Daniel Santos
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
+ * of this software and associated documentation files (the "Software"), to
+ * deal in the Software without restriction, including without limitation
+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -26,11 +25,17 @@
 
 namespace DStructs {
 
+/**
+ * \brief       Singly linked lists contain nodes which have a data field as
+ * well as a 'next' field, which points to the next node in line of nodes.
+ * Operations that can be performed on singly linked lists include insertion,
+ * deletion and traversal.
+ * */
 template <class T>
 class LinkedList final {
  public:
   /**
-   * \brief   Default constructor.
+   * \brief     Default constructor.
    * */
   LinkedList<T>();
   /**
@@ -45,9 +50,9 @@ class LinkedList final {
    * */
   ~LinkedList<T>();
   /**
-   * \brief      Returns the front node of the list.
+   * \brief     Returns the front node of the list.
    *
-   * \returns    Node<T>*
+   * \returns   Node<T>*
    * */
   T& front() const;
   /**

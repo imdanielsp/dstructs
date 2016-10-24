@@ -26,14 +26,17 @@
 #define DSTRUCTS_NODE_H
 
 namespace DStructs {
-
+/**
+ * \brief       A node is a data structure that store information and a
+ * pointer to a nother node.
+ * */
 template<class T>
 class Node {
  public:
   /**
    * \brief     This is the default constructor of a Node. This constructor
-   *            doesn't allocate the buffer, it is allocate through mutattors. And other
-   *            constructors. The buffer and next is set to nullptr.
+   * doesn't allocate the buffer, it is allocate through mutattors. And other
+   * constructors. The buffer and next is set to nullptr.
    * */
   Node();
   /**

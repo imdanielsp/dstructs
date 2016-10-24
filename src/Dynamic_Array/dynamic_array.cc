@@ -45,7 +45,7 @@ template <class T>
 void DynamicArray<T>::push_back(const T &data) {
   this->size_++;
   if (this->size_ > this->capacity_/2)
-    this->increase_capacity(this->size_ * GROWTH_RATE);
+    this->increase_capacity(this->capacity_ * GROWTH_RATE + 1);
   this->buffer_[this->size_-1] = data;
 }
 
