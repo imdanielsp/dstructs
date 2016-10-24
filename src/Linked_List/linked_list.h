@@ -1,4 +1,4 @@
-/* *
+/*
  * Copyright (c) 2016 Daniel Santos
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -85,7 +85,7 @@ class LinkedList final {
    *
    * \param     std::size_t index
    * */
-  T& at(const std::size_t index);
+  T& at(const std::size_t index) const;
   /**
    * \brief     Returns and delete the last value of the list.
    * */
@@ -102,11 +102,6 @@ class LinkedList final {
    * \returns   bool
    * */
   bool empty() const;
-  /**
-   * \brief     Clear all the values of the list, assigning it to
-   *            a null pointer.
-   * */
-  void clear();
   /**
    * \brief     Destroy the list and its values.
    * */

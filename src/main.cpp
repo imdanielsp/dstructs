@@ -1,19 +1,19 @@
 #include <iostream>
 #include "DStructs.h"
 
+#define DEBUG
 
 using namespace DStructs;
 
 int main() {
 
-  int num = 20;
-  Node<int> *node = new Node<int>(num);
-  Node<int> node2(4);
+  LinkedList<int> *linkedList = new LinkedList<int>();
 
+  linkedList->push_back(4);
+  linkedList->push_back(5);
+  linkedList->push_back(6);
 
-  std::cout << node->get_data() << std::endl;
-  std::cout << node2.get_data() << std::endl;
-
-  delete node;
+  delete linkedList;
+//  std::cout << linkedList->front() << std::endl;
   return 0;
 }

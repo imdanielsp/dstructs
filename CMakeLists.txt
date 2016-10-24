@@ -15,8 +15,9 @@ set(SOURCE_FILES    #src/main.cpp
                     src/Queue/queue.h
                     src/Queue/deque.h
                     test/test_main.cc
+                    test/node_test.cc
                     test/linked_list_test.cc
                     test/queue_test.cc
-                    test/node_test.cc)
+    )
 
 add_executable(dstructs-test ${SOURCE_FILES})

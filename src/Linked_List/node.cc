@@ -56,8 +56,10 @@ Node<T>::Node(const T &data, Node<T> *next) {
 
 template <class T>
 Node<T>::~Node() {
-  if (this->data_)
+  if (this->data_) {
     delete this->data_;
+    this->data_ = nullptr;
+  }
 }
 
 template <class T>

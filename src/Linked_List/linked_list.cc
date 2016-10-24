@@ -44,15 +44,18 @@ template <class T>
 LinkedList<T>::~LinkedList() {
   Node<T> *next = this->front_;
   Node<T> *temp;
-  while (next->is_next()) {
-    temp = next->next();
 
+  if (next) {
+    while (next->is_next()) {
+      temp = next->next();
+
+      delete next;
+      this->size_--;
+
+      next = temp;
+    }
     delete next;
-    this->size_--;
-
-    next = temp;
   }
-  delete next;
 }
 
 template <class T>
@@ -63,12 +66,11 @@ T& LinkedList<T>::front() const {
 
 template <class T>
 T& LinkedList<T>::back() const {
-  if (this->front_) {
-    Node<T> *next = this->front_;
-    while (next->is_next())
-      next = next->next();
-    return next->get_data();
-  } else throw std::out_of_range("No back data");
+  if (this->size() > 0) {
+    return this->at(this->size()-1);
+  } else {
+    throw std::out_of_range("The is not back node");
+  }
 }
 
 template <class T>
@@ -119,7 +121,7 @@ void LinkedList<T>::put_at(const size_t index, const T &data) {
 }
 
 template <class T>
-T& LinkedList<T>::at(const size_t index) {
+T& LinkedList<T>::at(const std::size_t index) const {
   if (index <= this->size_ - 1) {
     Node<T> *next = this->front_;
     for (int i = 0; i < index; i++) next = next->next();
@@ -129,17 +131,22 @@ T& LinkedList<T>::at(const size_t index) {
 
 template <class T>
 void LinkedList<T>::pop_back() {
-  Node<T> *next = this->front_;
-  Node<T> *prev = nullptr;
+  if (this->size_ == 0)
+    throw std::out_of_range("Nothing to pop");
 
-  if (next) {
-    while (next->next()) next = next->next();
-    next->set_data(nullptr);
-    next->set_next(nullptr);
-    delete next->next();
-    this->size_--;
-  } else throw std::out_of_range("Nothing to pop");
+  if (!this->front_->is_next()) {
+    delete this->front_;
+    this->front_ = nullptr;
 
+  } else if (this->front_) {
+    Node<T> *current = this->front_;
+
+    while (current->next()->next()) current = current->next();
+
+    delete current->next();
+    current->set_next(nullptr);
+  }
+  --this->size_;
 }
 
 template <class T>
@@ -153,18 +160,9 @@ bool LinkedList<T>::empty() const {
 }
 
 template <class T>
-void LinkedList<T>::clear() {
-  Node<T> *next = this->front_;
-  if (next)
-    while (next->next()) {
-      next->set_data(nullptr);
-      next = next->next();
-    }
-}
-
-template <class T>
 void LinkedList<T>::erase() {
-  for (int i = 0; i <= this->size_+1; i++)
+  int list_size = size_;
+  for (int i = 0; i < list_size; i++)
     this->pop_back();
 }
 
