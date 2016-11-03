@@ -118,14 +118,3 @@ TEST_F(DynamicArrayTest, DynamicArrayTest_Growth_Test) {
 
   EXPECT_EQ(dynamicArray->capacity(), 21);
 }
-
-
-
-
-
-
-
-
-
-
-

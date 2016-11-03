@@ -29,6 +29,9 @@
 
 namespace DStructs {
 
+/**
+ * \brief
+ * */
 template <class T>
 class Queue {
  public:

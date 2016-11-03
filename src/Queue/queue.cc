@@ -52,9 +52,11 @@ void Queue<T>::push(const T &data) {
 
 template <class T>
 void Queue<T>::pop() {
-  if (this->size_ >= 0) {
+  if (this->size_ > 0) {
     this->head_++;
     this->size_--;
+  } else {
+    throw std::out_of_range("Nothing to pop");
   }
 }
 

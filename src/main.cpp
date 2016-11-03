@@ -7,13 +7,11 @@ using namespace DStructs;
 
 int main() {
 
-  LinkedList<int> *linkedList = new LinkedList<int>();
+  Node<int> node;
 
-  linkedList->push_back(4);
-  linkedList->push_back(5);
-  linkedList->push_back(6);
+  std::cin >> node;
 
-  delete linkedList;
-//  std::cout << linkedList->front() << std::endl;
+//  std::cout << node;
+
   return 0;
 }

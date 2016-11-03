@@ -87,6 +87,24 @@ class Node {
    * \returns   bool
    * */
   bool is_next() const;
+  /**
+   * \brief     Use the input stream to store the data in the node. This is
+   * the overloaded >> operator.
+   *
+   * \param     std::istream, Node<T>&
+   *
+   * \returns   std::istream&
+   * */
+  friend std::istream& operator>>(std::istream &input, Node<T> &node);
+  /**
+   * \brief     Use the output stream print the data from the node. This is
+   * the over loaded << operator.
+   *
+   * \param     std::ostream, Node<T>&
+   *
+   * \returns   std::ostream&
+   * */
+  friend std::ostream& operator<<(std::ostream &output, Node<T> &node);
 
  private:
   Node<T> *next_;   //< A link to another node

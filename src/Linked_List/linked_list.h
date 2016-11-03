@@ -115,6 +115,7 @@ class LinkedList final {
    * \brief     Overlodaded script operator.
    *
    * \param     std::size_t
+   *
    * \returns   T&
    * */
   T& operator[](std::size_t index);

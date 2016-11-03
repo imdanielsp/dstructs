@@ -93,6 +93,18 @@ bool Node<T>::is_next() const {
   return this->next_ != nullptr;
 }
 
+template <class T>
+std::istream& operator>>(std::istream &input, Node<T> &node) {
+  input >> node.data_;
+  return input;
+}
+
+template <class T>
+std::ostream& operator<<(std::ostream& output, Node<T> &node) {
+  output << node.get_data();
+  return output;
+}
+
 /**
  *  \brief This is the implementation of BiNode class
  * */
