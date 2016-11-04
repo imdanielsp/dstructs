@@ -3,7 +3,7 @@ Is an ADT that comprises two basic operations: insert (put), and
 delete (get) the item that was least recently inserted (first in first out). 
 Queue is another fundamental ADT (Abstract Data Structure) that is similar 
 to the stack, but that uses the opposite rule to decide which element to 
-remove for delete. 
+remove for delete. This is a first in first out data structure.
 
 ### Deque
 A linear collection that supports element insertion and removal at both ends. 

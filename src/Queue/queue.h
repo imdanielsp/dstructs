@@ -30,23 +30,56 @@
 namespace DStructs {
 
 /**
- * \brief
+ * \brief       Queue is another fundamental ADT (Abstract Data Structure) that is similar
+ *  to the stack, but that uses the opposite rule to decide which element to
+ *  remove for delete. This is a first in first out data structure.
  * */
 template <class T>
 class Queue {
  public:
+  /**
+   * \brief     Default Constructor
+   * */
   Queue();
+  /**
+   * \brief     Deconstructor
+   * */
   ~Queue();
+  /**
+   * \brief     Returns the element in the fron of the queue.
+   *
+   * \returns   T&
+   * */
   virtual T& front() const;
+  /**
+   * \brief     Puts and element to the last position of the queue. This is
+   * also know as enqueue at tail.
+   *
+   * \param     const T&
+   * */
   virtual void push(const T& data);
+  /**
+   * \brief     Removes the element in the front of the queue.
+   * */
   virtual void pop();
+  /**
+   * \brief     Returns true is the queue have a size of 0, i.e., it has no
+   * elements.
+   *
+   * \returns   bool
+   * */
   bool empty() const;
+  /**
+   * \brief     Returns the current size of the queue.
+   *
+   * \returns   std::size_t
+   * */
   std::size_t size() const;
 
  protected:
-  DynamicArray<T> *buffer_;
-  std::size_t head_;
-  std::size_t size_;
+  DynamicArray<T> *buffer_;  //< the buffer
+  std::size_t head_;         //< position of the head of the queue
+  std::size_t size_;         //< current size of the queue
 
 };
 }
