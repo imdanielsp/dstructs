@@ -59,7 +59,8 @@ class Queue {
    * */
   virtual void push(const T& data);
   /**
-   * \brief     Removes the element in the front of the queue.
+   * \brief     Removes the element in the front of the queue. This is also
+   * know as dequeue from front.
    * */
   virtual void pop();
   /**
