@@ -19,6 +19,6 @@ set(SOURCE_FILES    #src/main.cpp
                     test/linked_list_test.cc
                     test/queue_test.cc
                     test/dynamic_array_test.cc
-                    test/deque_test.cc)
+                    test/deque_test.cc src/Binary_Search_Tree/binary_tree_node.cc src/Binary_Search_Tree/binary_tree_node.h src/Binary_Search_Tree/binary_search_tree.cc src/Binary_Search_Tree/binary_search_tree.h)
 
 add_executable(dstructs-test ${SOURCE_FILES})
