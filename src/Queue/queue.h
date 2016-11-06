@@ -79,11 +79,12 @@ class Queue {
 
  protected:
   DynamicArray<T> *buffer_;  //< the buffer
-  std::size_t head_;         //< position of the head of the queue
-  std::size_t size_;         //< current size of the queue
+  int             head_;         //< position of the head of the queue
+  std::size_t     size_;         //< current size of the queue
 
 };
 }
 
 #include "queue.cc"
+
 #endif //DSTRUCTS_QUEUE_H

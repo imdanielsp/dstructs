@@ -54,16 +54,22 @@ TEST_F(DynamicArrayTest, DynamicArrayTest_PushBack_Test) {
 
   EXPECT_EQ(dynamicArray->size(), 1);
   EXPECT_EQ(dynamicArray->capacity(), 4);
+  EXPECT_EQ(dynamicArray->at(0), 4);
 
   dynamicArray->push_back(5);
 
   EXPECT_EQ(dynamicArray->size(), 2);
   EXPECT_EQ(dynamicArray->capacity(), 4);
+  EXPECT_EQ(dynamicArray->at(0), 4);
+  EXPECT_EQ(dynamicArray->at(1), 5);
 
   dynamicArray->push_back(6);
 
   EXPECT_EQ(dynamicArray->size(), 3);
   EXPECT_EQ(dynamicArray->capacity(), 7);
+  EXPECT_EQ(dynamicArray->at(0), 4);
+  EXPECT_EQ(dynamicArray->at(1), 5);
+  EXPECT_EQ(dynamicArray->at(2), 6);
 
 }
 

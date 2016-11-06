@@ -28,16 +28,46 @@
 
 namespace DStructs {
 
+/**
+ * \brief   A linear collection that supports element insertion and removal at both ends.
+ *  The name deque is short for "double ended queue" and is usually pronounced
+ *  "deck". Most Deque implementations place no fixed limits on the number of
+ *  elements they may contain.
+ * */
 template <class T>
 class Deque : public Queue<T> {
  public:
+  /**
+   * \breif     Default constructor
+   * */
   Deque();
+  /**
+   * \breif     Returns the element at the end of the queue. (This is one
+   * difference between queue and dequeue.
+   * */
   T& back() const;
+  /**
+   * \breief    This method allows insertion of an element in the front of
+   * the queue.
+   * */
   void push_front(const T& data);
+  /**
+   * \breif     This method remove an element from the back of the queue.
+   * This is also know as deque from the back.
+   * */
   void pop_back();
+  /**
+   * \brief     This method remove an element from the front of the queue.
+   * This is implemented in the Queue<T> class, but this has a different
+   * minor behavoir.
+   * */
+  void pop();
+
+ protected:
+  int tail_;  //< holds index of the tail <=> size-1 iff size > 0
 };
 
 }  // NAMESPACE DSTRUCTS
 
-
+#include "deque.cc"
 #endif //DSTRUCTS_DEQUE_H

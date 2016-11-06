@@ -26,37 +26,65 @@
 namespace DStructs {
 
 template <class T>
-Deque<T>::Deque() : Queue<T>(){
+Deque<T>::Deque() : Queue<T>(), tail_(-1) {
 }
 
 template <class T>
 T& Deque<T>::back() const {
-  if (this->head_ != -1)
-    return this->buffer_->at(0);
+  if (this->tail_ >= this->head_)
+    return this->buffer_->at(this->tail_);
   else
-    throw std::out_of_range("Nothing in front");
+    throw std::out_of_range("Nothing in the back");
 }
 
 template <class T>
 void Deque<T>::push_front(const T& data) {
+  // TODO: Improve performance of this function. This is the problem of
+  // implementing a queue with an array. Pushing to front is O(n) because it
+  // necessary to copy the elements from the array to another in order to put
+  // the new element in the front.
   DynamicArray<T> *old_buffer = this->buffer_;
   this->buffer_ = new DynamicArray<T>();
 
   this->buffer_->push_back(data);  // Put new data in front
 
-  // Copy old buffer to new buffer
+  // Copy old buffer to new buffer (Need to improve this)
   for (int i = 0; i < old_buffer->size(); ++i) {
-    this->buffer_->push_back((*this->buffer_)[i]);
+    this->buffer_->push_back((*old_buffer)[i]);
   }
+
   delete old_buffer;  // Deallocate old buffer
 
   this->size_++;
-  this->head_--;
+  this->tail_++;
+}
+
+template <class T>
+void Deque<T>::pop() {
+  // The idea is that if the head and the tail cross each other, the queue is
+  // empty, there for we throw an exception.
+  // This if statement is the only differences between Queue::pop() and
+  // Deque::pop().
+  if (this->head_ <= this->tail_) {
+    // Super.pop
+    Queue<T>::pop();
+  } else {
+    throw std::out_of_range("Nothing to pop from the queue.");
+  }
 }
 
 template <class T>
 void Deque<T>::pop_back() {
-  this->size_--;
+  // Same idea as pop. If the head and the tail cross each other, the queue
+  // is empty, there for we throw an exception. Notice that the tail must
+  // always but grater or equal to the head in other to pop front the back or
+  // front.
+  if (this->tail_ >= this->head_) {
+    this->size_--;
+    this->tail_--;
+  } else {
+    throw std::out_of_range("Nothing to pop from the back.");
+  }
 }
 
 }

@@ -133,7 +133,6 @@ TEST_F(QueueTest, QueueTest_Empty_Test) {
 
 TEST_F(QueueTest, QueueTest_Size_Test) {
   EXPECT_EQ(this->queue.size(), 50);
-
   this->queue.pop();
 
   EXPECT_EQ(this->queue.size(), 49);

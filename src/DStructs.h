@@ -41,3 +41,8 @@
  *  Queue
  * */
 #include "Queue/queue.h"
+
+/**
+ * Deque
+ * */
+#include "Queue/deque.h"
