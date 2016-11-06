@@ -22,3 +22,23 @@
  * SOFTWARE.
  * */
 #include "binary_tree_node.h"
+
+namespace DStructs {
+
+template <class T>
+BinaryTreeNode<T>::BinaryTreeNode(const T &data) : left_(nullptr), data_(data),
+                                                   right_(nullptr) {
+}
+
+template <class T>
+BinaryTreeNode<T>::BinaryTreeNode(const BinaryTreeNode &left, const T &data,
+                                  const BinaryTreeNode &right) : left_(&left),
+                                  data_(data), right_(&right){
+}
+
+template <class T>
+T& BinaryTreeNode<T>::get_data() const {
+  return this->data_;
+}
+
+} // DSTRUCTS NAMESPACE
