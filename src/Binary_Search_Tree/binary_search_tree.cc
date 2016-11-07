@@ -146,9 +146,8 @@ BinaryTreeNode<T> * BST<T>::search_(BinaryTreeNode<T> *node, const T &key) const
     } else if (key > node->get_data()) { // Going right
       return this->search_(node->right_, key);
     }
-  } else {
-    throw BST::NoFound();
   }
+  throw BST::NoFound();
 }
 
 template <class T>
@@ -158,6 +157,8 @@ BinaryTreeNode<T>* BST<T>::find_min_(BinaryTreeNode<T> *node) const {
       return this->find_min_(node->left_);
     else
       return node;
+  } else {
+    throw BST<T>::EmptyTree();
   }
 }
 
@@ -174,8 +175,51 @@ BinaryTreeNode<T>* BST<T>::find_max_(BinaryTreeNode<T> *node) const {
 }
 
 template <class T>
-BinaryTreeNode<T> * BST<T>::remove_(BinaryTreeNode<T> *node, const T &key) {
+BinaryTreeNode<T>* BST<T>::remove_(BinaryTreeNode<T> *node, const T &key) {
+  BinaryTreeNode<T>* temp;
 
+  if (node == nullptr) {
+    throw BST<T>::NoFound();
+  } else {
+    if (node->data_ == key) {
+      if (node->right_ == nullptr && node->left_ == nullptr) {
+        delete node;
+        return nullptr;
+      } else if (node->right_ == nullptr || node->left_ == nullptr) {
+        if (node->right_ == nullptr) {
+          temp = node->left_;
+          delete node;
+          return temp;
+        } else {
+          temp = node->right_;
+          delete node;
+          return temp;
+        }
+      } else{
+        temp = findPred(node->left_);
+        node->data_ = temp->data_;
+        node->left_ = this->remove_(node->left_, node->data_);
+        return node;
+      }
+    } else if (node->data_ < key) {
+      node->right_ = this->remove_(node->right_, key);
+    } else if (node->data_ > key) {
+      node->left_ = this->remove_(node->left_, key);
+    }
+    return node;
+  }
+}
+
+template <class T>
+BinaryTreeNode<T>* BST<T>::findPred(BinaryTreeNode<T>* node) {
+  static BinaryTreeNode<T>* pred;
+
+  if (node == nullptr) {
+    return pred;
+  } else {
+    pred = node;
+    return findPred(node->right_);
+  }
 }
 
 template <class T>
@@ -186,6 +230,7 @@ void BST<T>::destroy_(BinaryTreeNode<T> *node) {
     delete node;
   }
 }
+
 
 }
 

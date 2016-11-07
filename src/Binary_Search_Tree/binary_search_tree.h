@@ -94,7 +94,6 @@ namespace DStructs {
      * \param       const T& key
      * */
     void remove(const T& key);
-
     /**
      * \brief       This is an helper exception that is thrown when the
      * BST can't find a key, i.e., the key doesn't exists.
@@ -179,6 +178,7 @@ namespace DStructs {
      * \param       BinaryTreeNode<T>* node
      * */
     void destroy_(BinaryTreeNode<T>* node);
+    BinaryTreeNode<T>* findPred(BinaryTreeNode<T>* node);
 
   }; // BST class
 
