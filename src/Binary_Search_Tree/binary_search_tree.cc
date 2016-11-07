@@ -21,4 +21,171 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  * */
+#include <iostream>
 #include "binary_search_tree.h"
+
+namespace DStructs {
+
+template <class T>
+BST<T>::BST() : root_(nullptr) {
+}
+
+template <class T>
+BST<T>::~BST() {
+  this->destroy_(this->root_);
+}
+
+template <class T>
+void BST<T>::insert_data(const T &data) {
+  this->insert_data_(&root_, data);
+}
+
+template <class T>
+void BST<T>::preorder() const {
+  this->preorder_(this->root_);
+}
+
+template <class T>
+void BST<T>::inorder() const {
+  this->inorder_(this->root_);
+}
+
+template <class T>
+void BST<T>::postorder() const {
+  this->postorder_(this->root_);
+}
+
+template <class T>
+void BST<T>::insert_data_(BinaryTreeNode<T> **node, const T &data) {
+  if (*node == nullptr) {
+    *node = new BinaryTreeNode<T>(data);
+  } else if ( data < (*(node))->get_data()) {
+    this->insert_data_(&((*node)->left_), data);
+  } else if (data > (*node)->get_data()) {
+    this->insert_data_(&((*node)->right_), data);
+  }
+}
+
+template <class T>
+void BST<T>::preorder_(BinaryTreeNode<T> *node) const {
+  if (node == nullptr) return;
+  else {
+    std::cout << node->get_data() << " ";
+    this->inorder_(node->left_);
+    this->inorder_(node->right_);
+  }
+}
+
+template <class T>
+void BST<T>::inorder_(BinaryTreeNode<T> *node) const {
+  if (node != nullptr) {
+    this->inorder_(node->left_);
+    std::cout << node->get_data() << " ";
+    this->inorder_(node->right_);
+  }
+}
+
+template <class T>
+void BST<T>::postorder_(BinaryTreeNode<T> *node) const {
+  if (node != nullptr) {
+    this->inorder_(node->left_);
+    this->inorder_(node->right_);
+    std::cout << node->get_data() << " ";
+  }
+}
+
+template <class T>
+const T & BST<T>::search(const T &key) const {
+  BinaryTreeNode<T>* rv = this->search_(this->root_, key);
+
+  if (rv != nullptr) return rv->get_data();
+  else
+    throw BST<T>::NoFound();
+}
+
+template <class T>
+const T & BST<T>::find_min() const {
+  if (this->root_ != nullptr)
+    return this->find_min_(this->root_)->data_;
+  else
+    throw BST<T>::EmptyTree();
+}
+
+template <class T>
+const T & BST<T>::find_max() const {
+  if (this->root_ != nullptr)
+    return this->find_max_(this->root_)->data_;
+  else
+    throw BST<T>::EmptyTree();
+}
+
+template <class T>
+void BST<T>::remove(const T &key) {
+  this->remove_(this->root_, key);
+}
+
+// Implementation of the NoFound exception.
+template <class T>
+const char* BST<T>::NoFound::what() const throw() {
+  return "The key doesn't exists in the tree.";
+}
+
+// Implementation of the EmptyTree exception.
+template <class T>
+const char* BST<T>::EmptyTree::what() const throw() {
+  return "The tree is empty.";
+}
+
+template <class T>
+BinaryTreeNode<T> * BST<T>::search_(BinaryTreeNode<T> *node, const T &key) const {
+  if (node != nullptr) {
+    if (node->get_data() == key) {
+      return node;
+    } else if (key < node->get_data()) { // Going left
+      return this->search_(node->left_, key);
+    } else if (key > node->get_data()) { // Going right
+      return this->search_(node->right_, key);
+    }
+  } else {
+    throw BST::NoFound();
+  }
+}
+
+template <class T>
+BinaryTreeNode<T>* BST<T>::find_min_(BinaryTreeNode<T> *node) const {
+  if (node != nullptr) {
+    if (node->left_ != nullptr)
+      return this->find_min_(node->left_);
+    else
+      return node;
+  }
+}
+
+template <class T>
+BinaryTreeNode<T>* BST<T>::find_max_(BinaryTreeNode<T> *node) const {
+  if (node != nullptr) {
+    if (node->right_ != nullptr)
+      return this->find_max_(node->right_);
+    else
+      return node;
+  }else {
+    throw BST<T>::NoFound();
+  }
+}
+
+template <class T>
+BinaryTreeNode<T> * BST<T>::remove_(BinaryTreeNode<T> *node, const T &key) {
+
+}
+
+template <class T>
+void BST<T>::destroy_(BinaryTreeNode<T> *node) {
+  if (node != nullptr) {
+    this->destroy_(node->left_);
+    this->destroy_(node->right_);
+    delete node;
+  }
+}
+
+}
+

@@ -22,37 +22,25 @@
  * SOFTWARE.
  * */
 
-/**
- *  Node
- * */
-#include "Linked_List/node.h"
+#include <gtest/gtest.h>
+#include "../src/Binary_Search_Tree/binary_tree_node.h"
 
-/**
- *  Linked List
- * */
-#include "Linked_List/linked_list.h"
 
-/**
- *  Dynamic Array
- * */
-#include "Dynamic_Array/dynamic_array.h"
+class BinaryTreeNodeTest : public testing::Test {
+ protected:
+  virtual void SetUp() override {
+    DStructs::BinaryTreeNode<int> left(1);
+    DStructs::BinaryTreeNode<int> right(3);
 
-/**
- *  Queue
- * */
-#include "Queue/queue.h"
+    binaryTreeNode = new DStructs::BinaryTreeNode<int>(left, 2, right);
+  }
 
-/**
- * Deque
- * */
-#include "Queue/deque.h"
+  virtual void TearDown() override {
+    delete binaryTreeNode;
+  }
+  DStructs::BinaryTreeNode<int>* binaryTreeNode;
+};
 
-/**
- * Binaery Tree Node
- * */
-#include "Binary_Search_Tree/binary_tree_node.h"
-
-/**
- * Binary Search Tree
- * */
-#include "Binary_Search_Tree/binary_search_tree.h"
+TEST_F(BinaryTreeNodeTest, BinaryTreeNodeTest_Consructor_Test) {
+  EXPECT_EQ(binaryTreeNode->get_data(), 2);
+}

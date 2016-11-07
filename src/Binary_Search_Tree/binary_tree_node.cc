@@ -31,13 +31,13 @@ BinaryTreeNode<T>::BinaryTreeNode(const T &data) : left_(nullptr), data_(data),
 }
 
 template <class T>
-BinaryTreeNode<T>::BinaryTreeNode(const BinaryTreeNode &left, const T &data,
-                                  const BinaryTreeNode &right) : left_(&left),
-                                  data_(data), right_(&right){
+BinaryTreeNode<T>::BinaryTreeNode(BinaryTreeNode &left, const T &data,
+                                  BinaryTreeNode &right) : left_(&left),
+                                                           data_(data), right_(&right){
 }
 
 template <class T>
-T& BinaryTreeNode<T>::get_data() const {
+T BinaryTreeNode<T>::get_data() const {
   return this->data_;
 }
 

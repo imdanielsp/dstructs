@@ -7,19 +7,20 @@ using namespace DStructs;
 
 int main() {
 
-  Deque<int> deque;
-  int foo;
-  deque.push(5);
-  deque.push(6);
-  deque.push(7);
+  BST<int> bst;
 
-  for (int i = 0; i < 5; i++) {
-    std::cout << "About to push to front" << std::endl;
-    deque.push_front(i);
-    std::cout << "Done pushing front" << std::endl;
-    std::cout << "Enter a number to proceed" << std::endl;
-    std::cin >> foo;
-  }
-  std::cout << std::endl;
+  bst.insert_data(27);
+  bst.insert_data(13);
+  bst.insert_data(6);
+  bst.insert_data(17);
+  bst.insert_data(42);
+  bst.insert_data(33);
+  bst.insert_data(48);
+  bst.insert_data(52);
+
+  int rv;
+  rv = bst.find_max();
+  std::cout << rv << std::endl;
+
   return 0;
 }

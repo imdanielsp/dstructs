@@ -31,7 +31,7 @@ template <class T> class BST;
 
 template <class T>
 class BinaryTreeNode {
-  friend class BST;
+  friend class BST<T>;
  public:
   /**
    * \brief     This an explicit constructor of the node.
@@ -45,15 +45,15 @@ class BinaryTreeNode {
    *
    * \param     const BinaryTreeNode&, const T&, const BinaryTreeNode&
    * */
-  BinaryTreeNode(const BinaryTreeNode& left,
-                 const T& data,
-                 const BinaryTreeNode& right);
+  BinaryTreeNode(BinaryTreeNode &left,
+                 const T &data,
+                 BinaryTreeNode &right);
   /**
    * \brief     Data getter
    *
    * \return    T&
    * */
-  T& get_data() const;
+  T get_data() const;
  private:
   BinaryTreeNode* left_;  //< Pointer to the left node
   T               data_;  //< Data in the node
