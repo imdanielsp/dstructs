@@ -181,11 +181,10 @@ BinaryTreeNode<T>* BST<T>::remove_(BinaryTreeNode<T> *node, const T &key) {
   if (node == nullptr) {
     throw BST<T>::NoFound();
   } else {
-
     if (node->data_ == key) { // Find the node to remove
       BinaryTreeNode<T>* temp;
 
-      // Node with no children
+         // Node with no children
       if (node->left_ == nullptr && node->right_ == nullptr) {
         delete node;
         node = nullptr;
@@ -197,19 +196,21 @@ BinaryTreeNode<T>* BST<T>::remove_(BinaryTreeNode<T> *node, const T &key) {
         delete node;
         node = nullptr;
         return temp;
+
         // Node with right child, but no left
       } else if (node->right_ != nullptr && node->left_ == nullptr) {
         temp = node->right_;
         delete node;
         node = nullptr;
         return temp;
+
         // Node with both, left and right children
       } else if (node->right_ != nullptr && node->left_ != nullptr) {
         temp = this->find_max_(node->left_);
         node->data_ = temp->data_;
         node->left_ = this->remove_(node->left_, node->data_);
       }
-    
+      
     // Move on because the current node is not the want to remove
     } else {
       if (node->data_ < key)
@@ -217,7 +218,6 @@ BinaryTreeNode<T>* BST<T>::remove_(BinaryTreeNode<T> *node, const T &key) {
       else if (node->data_ > key)
         node->left_ = this->remove_(node->left_, key);
     }
-
   }
   return node;
 }
