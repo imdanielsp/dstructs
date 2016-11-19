@@ -176,38 +176,37 @@ BinaryTreeNode<T>* BST<T>::find_max_(BinaryTreeNode<T> *node) const {
 
 template <class T>
 BinaryTreeNode<T>* BST<T>::remove_(BinaryTreeNode<T> *node, const T &key) {
-  BinaryTreeNode<T>* temp;
 
   if (node == nullptr) {
     throw BST<T>::NoFound();
   } else {
-    if (node->data_ == key) {
-      if (node->right_ == nullptr && node->left_ == nullptr) {
+
+    if (node->data_ == key) { // Find the node to remove
+
+      // Node with no children
+      if (node->left_ == nullptr && node->right_ == nullptr) {
+        std::cout << "Here" << std::endl;
         delete node;
         return nullptr;
-      } else if (node->right_ == nullptr || node->left_ == nullptr) {
-        if (node->right_ == nullptr) {
-          temp = node->left_;
-          delete node;
-          return temp;
-        } else {
-          temp = node->right_;
-          delete node;
-          return temp;
-        }
-      } else{
-        temp = findPred(node->left_);
-        node->data_ = temp->data_;
-        node->left_ = this->remove_(node->left_, node->data_);
-        return node;
+
+      // Node with left child, but no right
+      } else if (node->left_ != nullptr && node->right_ == nullptr) {
+
+      // Node with right child, but no left
+      } else if (node->right_ != nullptr && node->left_ == nullptr) {
+
+      // Node with both, left and right children
+      } else if (node->right_ != nullptr && node->left_ != nullptr) {
+
       }
-    } else if (node->data_ < key) {
-      node->right_ = this->remove_(node->right_, key);
-    } else if (node->data_ > key) {
-      node->left_ = this->remove_(node->left_, key);
+
+    } else {    // Move on because the current node is not the want to remove
+      node->data_ > key ?
+      this->remove_(node->left_, key) : this->remove_(node->right_, key);
     }
-    return node;
+
   }
+  return node;
 }
 
 template <class T>
