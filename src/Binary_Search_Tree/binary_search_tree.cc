@@ -98,8 +98,10 @@ template <class T>
 const T & BST<T>::search(const T &key) const {
   BinaryTreeNode<T>* rv = this->search_(this->root_, key);
 
-  if (rv != nullptr) return rv->get_data();
-  else
+  if (rv != nullptr) {
+    T val = rv->get_data();
+    return val;
+  } else
     throw BST<T>::NoFound();
 }
 
@@ -176,33 +178,44 @@ BinaryTreeNode<T>* BST<T>::find_max_(BinaryTreeNode<T> *node) const {
 
 template <class T>
 BinaryTreeNode<T>* BST<T>::remove_(BinaryTreeNode<T> *node, const T &key) {
-
   if (node == nullptr) {
     throw BST<T>::NoFound();
   } else {
 
     if (node->data_ == key) { // Find the node to remove
+      BinaryTreeNode<T>* temp;
 
       // Node with no children
       if (node->left_ == nullptr && node->right_ == nullptr) {
-        std::cout << "Here" << std::endl;
         delete node;
+        node = nullptr;
         return nullptr;
 
-      // Node with left child, but no right
+        // Node with left child, but no right
       } else if (node->left_ != nullptr && node->right_ == nullptr) {
-
-      // Node with right child, but no left
+        temp = node->left_;
+        delete node;
+        node = nullptr;
+        return temp;
+        // Node with right child, but no left
       } else if (node->right_ != nullptr && node->left_ == nullptr) {
-
-      // Node with both, left and right children
+        temp = node->right_;
+        delete node;
+        node = nullptr;
+        return temp;
+        // Node with both, left and right children
       } else if (node->right_ != nullptr && node->left_ != nullptr) {
-
+        temp = this->find_max_(node->left_);
+        node->data_ = temp->data_;
+        node->left_ = this->remove_(node->left_, node->data_);
       }
-
-    } else {    // Move on because the current node is not the want to remove
-      node->data_ > key ?
-      this->remove_(node->left_, key) : this->remove_(node->right_, key);
+    
+    // Move on because the current node is not the want to remove
+    } else {
+      if (node->data_ < key)
+        node->right_ = this->remove_(node->right_, key);
+      else if (node->data_ > key)
+        node->left_ = this->remove_(node->left_, key);
     }
 
   }
@@ -227,6 +240,7 @@ void BST<T>::destroy_(BinaryTreeNode<T> *node) {
     this->destroy_(node->left_);
     this->destroy_(node->right_);
     delete node;
+    node = nullptr;
   }
 }
 

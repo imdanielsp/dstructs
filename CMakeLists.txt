@@ -7,6 +7,8 @@ include_directories(/usr/local/include/)
 link_directories(/usr/local/lib/)
 link_libraries(gtest)
 
+set(CMAKE_BUILD_TYPE Debug)
+
 set(SOURCE_FILES    src/main.cpp
                     src/DStructs.h
                     src/Linked_List/node.h
@@ -17,10 +19,12 @@ set(SOURCE_FILES    src/main.cpp
                     src/Binary_Search_Tree/binary_tree_node.h
                     src/Binary_Search_Tree/binary_search_tree.h
 #                    test/test_main.cc
-                    test/node_test.cc
-                    test/linked_list_test.cc
-                    test/queue_test.cc
-                    test/dynamic_array_test.cc
-                    test/deque_test.cc test/binary_tree_node_test.cc)
+#                    test/node_test.cc
+#                    test/linked_list_test.cc
+#                    test/queue_test.cc
+#                    test/dynamic_array_test.cc
+#                    test/deque_test.cc
+#                    test/binary_tree_node_test.cc
+        )
 
-add_executable(dstructs-test ${SOURCE_FILES})
+add_executable(dstructs ${SOURCE_FILES})

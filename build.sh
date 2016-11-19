@@ -11,6 +11,14 @@ then
         ./build/dstructs-test
         result=$?
     fi
+    if [ $1 == "-build" ]
+    then
+	echo "Building main..."
+	cmake -B./build/ -H.
+	echo "Compiling..."
+	make -C ./build/
+	result=$?
+    fi
 else
     echo "No argument provided"
     exit 1

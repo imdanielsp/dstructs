@@ -22,17 +22,14 @@ int main() {
   bst.insert_data(70);
   bst.insert_data(60);
 
-  bst.remove(40);
+  bst.remove(50);
 
   int rv;
   try {
-    rv = bst.search(40);
+    rv = bst.search(50);
     std::cout << rv << std::endl;
   } catch (BST<int>::NoFound) {
     std::cout << "No found!" << std::endl;
   }
-
-
-
   return 0;
 }

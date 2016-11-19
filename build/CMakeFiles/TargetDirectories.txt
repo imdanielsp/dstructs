@@ -1,0 +1,3 @@
+/Users/dsantos/C++/DStructs/build/CMakeFiles/dstructs.dir
+/Users/dsantos/C++/DStructs/build/CMakeFiles/edit_cache.dir
+/Users/dsantos/C++/DStructs/build/CMakeFiles/rebuild_cache.dir
