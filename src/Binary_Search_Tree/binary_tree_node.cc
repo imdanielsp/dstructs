@@ -37,7 +37,7 @@ BinaryTreeNode<T>::BinaryTreeNode(BinaryTreeNode &left, const T &data,
 }
 
 template <class T>
-T BinaryTreeNode<T>::get_data() const {
+const T& BinaryTreeNode<T>::get_data() const {
   return this->data_;
 }
 
