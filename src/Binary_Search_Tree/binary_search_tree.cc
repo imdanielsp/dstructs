@@ -27,11 +27,12 @@
 namespace DStructs {
 
 template <class T>
-BST<T>::BST() : root_(nullptr) {
+BST<T>::BST() : root_(nullptr), buffer_(nullptr) {
 }
 
 template <class T>
 BST<T>::~BST() {
+  if (this->buffer_ != nullptr) delete this->buffer_;
   this->destroy_(this->root_);
 }
 
@@ -41,18 +42,24 @@ void BST<T>::insert_data(const T &data) {
 }
 
 template <class T>
-void BST<T>::preorder() const {
+DynamicArray<T>* BST<T>::preorder() {
+  this->reset_buffer_();
   this->preorder_(this->root_);
+  return this->buffer_;
 }
 
 template <class T>
-void BST<T>::inorder() const {
+DynamicArray <T> * BST<T>::inorder() {
+  this->reset_buffer_();
   this->inorder_(this->root_);
+  return this->buffer_;
 }
 
 template <class T>
-void BST<T>::postorder() const {
+DynamicArray<T>* BST<T>::postorder() {
+  this->reset_buffer_();
   this->postorder_(this->root_);
+  return this->buffer_;
 }
 
 template <class T>
@@ -67,58 +74,55 @@ void BST<T>::insert_data_(BinaryTreeNode<T> **node, const T &data) {
 }
 
 template <class T>
-void BST<T>::preorder_(BinaryTreeNode<T> *node) const {
+void BST<T>::reset_buffer_() {
+  if (this->buffer_ != nullptr) {
+    delete this->buffer_;
+    this->buffer_ = nullptr;
+  }
+  this->buffer_ = new DynamicArray<T>();
+}
+
+template <class T>
+void BST<T>::preorder_(BinaryTreeNode<T> *node) {
   if (node == nullptr) return;
   else {
-    std::cout << node->get_data() << " ";
-    this->inorder_(node->left_);
-    this->inorder_(node->right_);
+    this->buffer_->push_back(node->get_data());
+    this->preorder_(node->left_);
+    this->preorder_(node->right_);
   }
 }
 
 template <class T>
-void BST<T>::inorder_(BinaryTreeNode<T> *node) const {
+void BST<T>::inorder_(BinaryTreeNode<T> *node) {
   if (node != nullptr) {
     this->inorder_(node->left_);
-    std::cout << node->get_data() << " ";
+    this->buffer_->push_back(node->get_data());
     this->inorder_(node->right_);
   }
 }
 
 template <class T>
-void BST<T>::postorder_(BinaryTreeNode<T> *node) const {
+void BST<T>::postorder_(BinaryTreeNode<T> *node) {
   if (node != nullptr) {
-    this->inorder_(node->left_);
-    this->inorder_(node->right_);
-    std::cout << node->get_data() << " ";
+    this->postorder_(node->left_);
+    this->postorder_(node->right_);
+    this->buffer_->push_back(node->get_data());
   }
 }
 
 template <class T>
-const T & BST<T>::search(const T &key) const {
-  BinaryTreeNode<T>* rv = this->search_(this->root_, key);
-
-  if (rv != nullptr) {
-    T val = rv->get_data();
-    return val;
-  } else
-    throw BST<T>::NoFound();
+const T& BST<T>::search(const T &key) const {
+  return this->search_(this->root_, key)->get_data();
 }
 
 template <class T>
 const T & BST<T>::find_min() const {
-  if (this->root_ != nullptr)
-    return this->find_min_(this->root_)->data_;
-  else
-    throw BST<T>::EmptyTree();
+  return this->find_min_(this->root_)->data_;
 }
 
 template <class T>
 const T & BST<T>::find_max() const {
-  if (this->root_ != nullptr)
-    return this->find_max_(this->root_)->data_;
-  else
-    throw BST<T>::EmptyTree();
+  return this->find_max_(this->root_)->data_;
 }
 
 template <class T>
@@ -172,7 +176,7 @@ BinaryTreeNode<T>* BST<T>::find_max_(BinaryTreeNode<T> *node) const {
     else
       return node;
   }else {
-    throw BST<T>::NoFound();
+    throw BST<T>::EmptyTree();
   }
 }
 
@@ -210,7 +214,6 @@ BinaryTreeNode<T>* BST<T>::remove_(BinaryTreeNode<T> *node, const T &key) {
         node->data_ = temp->data_;
         node->left_ = this->remove_(node->left_, node->data_);
       }
-      
     // Move on because the current node is not the want to remove
     } else {
       if (node->data_ < key)
@@ -220,18 +223,6 @@ BinaryTreeNode<T>* BST<T>::remove_(BinaryTreeNode<T> *node, const T &key) {
     }
   }
   return node;
-}
-
-template <class T>
-BinaryTreeNode<T>* BST<T>::findPred(BinaryTreeNode<T>* node) {
-  static BinaryTreeNode<T>* pred;
-
-  if (node == nullptr) {
-    return pred;
-  } else {
-    pred = node;
-    return findPred(node->right_);
-  }
 }
 
 template <class T>

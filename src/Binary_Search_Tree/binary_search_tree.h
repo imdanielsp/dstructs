@@ -25,7 +25,9 @@
 #define DSTRUCTS_BINARY_SEARCH_TREE_H
 
 #include <cstdio>
+
 #include "binary_tree_node.h"
+#include "../Dynamic_Array/dynamic_array.h"
 
 namespace DStructs {
 
@@ -33,11 +35,11 @@ namespace DStructs {
   class BST {
    public:
     /**
-     * \brief   Default constructor of the BST.
+     * \brief       Default constructor of the BST.
      * */
     BST();
     /**
-     * \brief   Deconstructor destroies the tree recursevely.
+     * \brief       Deconstructor destroies the tree recursevely.
      * */
     ~BST();
     /**
@@ -50,24 +52,30 @@ namespace DStructs {
      * */
     void insert_data(const T& data);
     /**
-     * \brief       Prints the tree in pre-order traversal, i.e.,
+     * \brief       Returns the tree in pre-order traversal, i.e.,
      * it prints the data first, then it goes left and then right.
      * In other words, this visit the node first and then go to left.
+     *
+     * \returns     DStructs::DynamicArray<T>
      * */
-    void preorder() const;
+    DynamicArray<T> * preorder();
     /**
-     * \brief       Prints the tree in in-order traversal, i.e.,
+     * \brief       Returns the tree in in-order traversal, i.e.,
      * it first go to the left, then prints the data, and then
      * goes right. In other words, this visit the node before
      * moving right.
+     *
+     * \returns     DStructs::DynamicArray<T>
      * */
-    void inorder() const;
+    DynamicArray<T>* inorder();
     /**
-     * \brief       Prints the tree in post-order traversal, i.e.,
+     * \brief       Returns the tree in post-order traversal, i.e.,
      * it first go left, then it goes right and after print the
      * data. In other words, this visit the node last.
+     *
+     * \returns     DStructs::DynamicArray<T>
      * */
-    void postorder() const;
+    DynamicArray<T> * postorder();
     /**
      * \brief       Searches for a given key in the tree recursevely.
      *  This method average O(log N).
@@ -113,6 +121,7 @@ namespace DStructs {
     };
 
    private:
+    DynamicArray<T>*  buffer_;  //< Buffer temp for the traversal methods.
     BinaryTreeNode<T>* root_ ;  //< Root node of the BST
     /**
      * \brief       Helper method to insert data. This is the method that
@@ -127,19 +136,24 @@ namespace DStructs {
      *
      * \param       BinaryTreeNode<T>* node
      * */
-    void preorder_(BinaryTreeNode<T>* node) const;
+    void preorder_(BinaryTreeNode<T>* node);
     /**
      * \brief       Helper method to print the tree in in-order traversal.
      *
      * \param       BinaryTreeNode<T>* node
      * */
-    void inorder_(BinaryTreeNode<T>* node) const;
+    void inorder_(BinaryTreeNode<T>* node);
     /**
      * \brief       Helper method to print the tree in port-order traversal.
      *
      * \param       BinaryTreeNode<T>* node
      * */
-    void postorder_(BinaryTreeNode<T>* node) const;
+    void postorder_(BinaryTreeNode<T>* node);
+    /**
+     * \brief       This is a helper function that reset, deallocate and
+     * allocate, the temp buffer for the traversal methods.
+     * */
+    void reset_buffer_();
     /**
      * \brief       Helper method to search for a key in the tree recursevely.
      *
@@ -178,8 +192,6 @@ namespace DStructs {
      * \param       BinaryTreeNode<T>* node
      * */
     void destroy_(BinaryTreeNode<T>* node);
-    BinaryTreeNode<T>* findPred(BinaryTreeNode<T>* node);
-
   }; // BST class
 
 } // DSTRUCTS NAMESPACE

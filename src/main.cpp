@@ -1,7 +1,7 @@
 #include <iostream>
 #include "DStructs.h"
 
-#define DEBUG
+#define DSTRUCT_DEBUG true
 
 using namespace DStructs;
 
@@ -22,14 +22,10 @@ int main() {
   bst.insert_data(70);
   bst.insert_data(60);
 
-  bst.remove(50);
+  DynamicArray<int>* rv = bst.postorder();
 
-  int rv;
-  try {
-    rv = bst.search(50);
-    std::cout << rv << std::endl;
-  } catch (BST<int>::NoFound) {
-    std::cout << "No found!" << std::endl;
-  }
+  for (int i = 0; i < rv->size(); i++)
+    std::cout << (*rv)[i] << std::endl;
+
   return 0;
 }

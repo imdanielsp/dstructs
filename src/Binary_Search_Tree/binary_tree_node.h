@@ -53,7 +53,7 @@ class BinaryTreeNode {
    *
    * \return    T&
    * */
-  T get_data() const;
+  const T& get_data() const;
  private:
   BinaryTreeNode* left_;  //< Pointer to the left node
   T               data_;  //< Data in the node
