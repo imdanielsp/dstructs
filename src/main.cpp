@@ -26,6 +26,6 @@ int main() {
 
   for (int i = 0; i < rv->size(); i++)
     std::cout << (*rv)[i] << std::endl;
-
+    
   return 0;
 }
