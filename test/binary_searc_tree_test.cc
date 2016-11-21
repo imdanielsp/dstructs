@@ -144,28 +144,3 @@ TEST_F(BinarySearchTreeTest, BinarySearchTreeTest_PreOrder_Test) {
   EXPECT_EQ((*rv)[4], 60);
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -199,24 +199,3 @@ namespace DStructs {
 #include "binary_search_tree.cc"
 
 #endif //DSTRUCTS_BINARY_SEARCH_TREE_H
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
