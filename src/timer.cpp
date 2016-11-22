@@ -50,8 +50,6 @@ inline void runner() {
 /**
  * \brief       This functions returns the number of T the runner
  * function took to complete. Where T can be one of the following list:
- * - std::chrono::hours
- * - std::chrono::minutes
  * - std::chrono::seconds
  * - std::chrono::milliseconds
  * - std::chrono::microseconds
@@ -79,11 +77,19 @@ int main(int argc, char* argv[]) {
 
 template <typename T>
 long long int timer(void (*func)()) {
-  auto start_time =
-      std::chrono::high_resolution_clock::now();
+  const std::type_info& type = typeid(T);
+
+  if (type.hash_code() == typeid(std::chrono::hours).hash_code() ||
+      type.hash_code() == typeid(std::chrono::minutes).hash_code()) {
+
+    std::cerr << "Invalid type for the timer." << std::endl;
+    exit(1);
+  }
+
+  auto start_time = std::chrono::high_resolution_clock::now();
 
   // Run the function
-  (*func)();
+  (func)();
 
   auto stop_time = std::chrono::high_resolution_clock::now();
 
