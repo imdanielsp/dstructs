@@ -64,7 +64,7 @@ int main(int argc, char* argv[]) {
   // Random seed in case of usage of rand()
   srand((unsigned int) time(0));
 
-  long long int duration = timer<std::chrono::milliseconds>(&runner);
+  long long int duration = timer<std::chrono::milliseconds >(&runner);
 
   std::cout << "The time it took "
             << duration

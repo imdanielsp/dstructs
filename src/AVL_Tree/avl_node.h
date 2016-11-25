@@ -21,48 +21,47 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  * */
-#ifndef DSTRUCTS_TREE_NODE_H
-#define DSTRUCTS_TREE_NODE_H
+#ifndef DSTRUCTS_AVL_NODE_H
+#define DSTRUCTS_AVL_NODE_H
 
 namespace DStructs {
 
-// Forward declaration of the Binary Search Tree class.
-template <class T> class BST;
+// Forward declaration of the AVLTree class
+template<class T>
+class AVLTree;
 
-template <class T>
-class BinaryTreeNode {
-  friend class BST<T>;
+template<class T>
+class AVLNode {
+  friend class AVLTree<T>;
  public:
   /**
-   * \brief     This an explicit constructor of the node.
+   * \brief     This is an explicit constructor of the node that takes the data.
    *
    * \param     const T&
    * */
-  explicit BinaryTreeNode(const T& data);
+  explicit AVLNode(const T &data);
   /**
    * \brief     This constructor takes the left and the right node and also
    * the data that the node will contain.
    *
-   * \param     BinaryTreeNode&, const T&, BinaryTreeNode&
+   * \param     AVLNode&, const T&, AVLNode&
    * */
-  BinaryTreeNode(BinaryTreeNode &left,
-                 const T &data,
-                 BinaryTreeNode &right);
+  AVLNode(AVLNode &left, const T &data, AVLNode &right);
   /**
    * \brief     Data getter
    *
-   * \return    T&
+   * \return    const T&
    * */
-  const T& get_data() const;
+  const T &get_data() const;
  private:
-  BinaryTreeNode<T>* left_;  //< Pointer to the left node
-  T                  data_;  //< Data in the node
-  BinaryTreeNode<T>* right_; //< Pointer to the right node
-
+  unsigned char height_;
+  AVLNode<T> *left_;
+  T data_;
+  AVLNode<T> *right_;
 };
 
 } // DSTRUCTS NAMESPACE
 
-#include "binary_tree_node.cc"
+#include "avl_node.cc"
 
-#endif //DSTRUCTS_TREE_NODE_H
+#endif //DSTRUCTS_AVL_NODE_H
