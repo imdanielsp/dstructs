@@ -18,6 +18,7 @@ inline void insert_data_to_bst(int range) {
     bst.insert_data(val);
   }
 }
+
 int main() {
 
   srand((unsigned int) time(0));

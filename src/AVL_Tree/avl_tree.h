@@ -11,7 +11,7 @@
  * furnished to do so, subject to the following conditions:
  *
  * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
+ * copies or suAVLantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -32,7 +32,7 @@ template<class T>
 class AVLTree {
  public:
   /**
-   * \brief       Default constructor of the BST.
+   * \brief       Default constructor of the AVL Tree.
    * */
   AVLTree();
   /**
@@ -40,7 +40,7 @@ class AVLTree {
    * */
   ~AVLTree();
   /**
-   * \brief       Insert data in the BST recursevely where the
+   * \brief       Insert data in the AVL recursevely where the
    * data that is less than any given node goes to the left,
    * and the data that is greater than any given node goes to
    * the right.
@@ -57,24 +57,25 @@ class AVLTree {
    * */
   const T& search(const T& key) const;
   /**
-   * \brief       Find the min key in the BST.
+   * \brief       Find the min key in the AVL.
    *
    * \returns     const T&
    * */
   const T& find_min() const;
   /**
-   * \brief       Find the max key in the BST.
+   * \brief       Find the max key in the AVL.
    *
    * \returns     const T&
    * */
   const T& find_max() const;
   /**
-   * \brief       Removes a node with its key of the BST.
+   * \brief       Removes a node with its key of the AVL.
    *
    * \param       const T& key
    * */
   void remove(const T& key);
  private:
+  AVLNode<T>* root_;  //< Root of the tree
   /**
    * \brief       Helper method to insert data. This is the method that
    * produces the recursion.
@@ -141,6 +142,20 @@ class AVLTree {
    * \param     AVLNode<T>*
    * */
   void fix_height_(AVLNode<T>* node);
+  /**
+   * \brief     Right rotation method on the tree.
+   *
+   * \param     AVLNode<T>*
+   * \return    AVLNode<T>*
+   * */
+  AVLNode<T>* rotate_right_(AVLNode<T>* node);
+  /**
+   * \brief     Left rotation method on the tree.
+   *
+   * \param     AVLNode<T>*
+   * \return    AVLNode<T>*
+   * */
+  AVLNode<T>* rotate_left_(AVLNode<T>* node);
 };
 
 } // DSTRUCTS NAMESPACE
