@@ -9,8 +9,8 @@ link_libraries(gtest)
 
 set(CMAKE_BUILD_TYPE Debug)
 
-set(SOURCE_FILES    #src/main.cpp
-                    src/timer.cpp
+set(SOURCE_FILES    src/main.cpp
+                    #src/timer.cpp
                     src/DStructs.h
                     src/Linked_List/node.h
                     src/Linked_List/linked_list.h
@@ -23,6 +23,7 @@ set(SOURCE_FILES    #src/main.cpp
 #                    src/AVL_Tree/avl_node.h
 #                    src/AVL_Tree/avl_tree.cc
 #                    src/AVL_Tree/avl_tree.h
+                    src/Insertion_Sort/insertion_sort.h
 #                    test/test_main.cc
                     test/node_test.cc
                     test/linked_list_test.cc
@@ -31,6 +32,7 @@ set(SOURCE_FILES    #src/main.cpp
                     test/deque_test.cc
                     test/binary_tree_node_test.cc
                     test/binary_searc_tree_test.cc
-        )
+)
+
 
 add_executable(dstructs ${SOURCE_FILES})

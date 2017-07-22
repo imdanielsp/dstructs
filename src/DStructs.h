@@ -22,6 +22,12 @@
  * SOFTWARE.
  * */
 
+/** * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *
+ *                                Data Structures
+ *
+ ** * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
 /**
  *  Node
  * */
@@ -56,3 +62,15 @@
  * Binary Search Tree
  * */
 #include "Binary_Search_Tree/binary_search_tree.h"
+
+
+/** * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *
+ *                                Algorithms
+ *
+ ** * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+/**
+ * Insertion Sort
+ * */
+#include "Insertion_Sort/insertion_sort.h"
