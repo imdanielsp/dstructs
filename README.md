@@ -1,6 +1,6 @@
 <p align="center">
-    <img alt="DStructs" src="http://www.danielsantos
-    .us/images/projects/DStructs_Logo_Original.png">
+    <img alt="DStructs" src="http://www.danielsantos.us/images/projects/DStructs_Logo_Original.png" 
+    width="150">
 </p>
 <h1 align="center">
     DStructs
