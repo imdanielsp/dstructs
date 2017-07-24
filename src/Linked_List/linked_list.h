@@ -121,6 +121,7 @@ class LinkedList final {
   T& operator[](std::size_t index);
  private:
   Node<T>* front_;       //< front of the linked list
+  Node<T>* tail_;        //< tail of the linked list
   std::size_t size_;     //< size of the linked list
 };  // LinkedList
 

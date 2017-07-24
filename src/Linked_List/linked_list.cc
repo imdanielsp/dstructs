@@ -29,12 +29,12 @@
 namespace DStructs {
 
 template <class T>
-LinkedList<T>::LinkedList() : size_(0), front_(nullptr) {
-
+LinkedList<T>::LinkedList() : size_(0), front_(nullptr), tail_(nullptr) {
 }
 
 template <class T>
-LinkedList<T>::LinkedList(const size_t size, const T &data) : size_(0), front_(nullptr) {
+LinkedList<T>::LinkedList(const size_t size, const T &data)
+    : size_(0), front_(nullptr), tail_(nullptr) {
   for (int i = 0; i < size; i++) {
     this->put_front(data);
   }
@@ -66,8 +66,8 @@ T& LinkedList<T>::front() const {
 
 template <class T>
 T& LinkedList<T>::back() const {
-  if (this->size() > 0) {
-    return this->at(this->size()-1);
+  if (this->tail_) {
+    return this->tail_->get_data();
   } else {
     throw std::out_of_range("The is not back node");
   }
@@ -79,6 +79,7 @@ void LinkedList<T>::put_front(const T &data) {
   if (this->front_ == nullptr) {
     this->front_ = new_node;
     new_node->set_next(nullptr);
+    this->tail_ = this->front_;
   } else {
     new_node->set_next(this->front_);
     this->front_ = new_node;
@@ -91,13 +92,12 @@ void LinkedList<T>::push_back(const T &data) {
   Node<T> *new_node = new Node<T>(data);
   new_node->set_next(nullptr);
   if (this->front_ == nullptr) {
-    this->front_ = new_node;
+    this->put_front(data);
   } else {
-    Node<T> *next = this->front_;
-    while (next->is_next()) next = next->next();
-    next->set_next(new_node);
+    this->tail_->set_next(new_node);
+    this->tail_ = new_node;
+    this->size_++;
   }
-  this->size_++;
 }
 
 template <class T>
@@ -145,6 +145,7 @@ void LinkedList<T>::pop_back() {
 
     delete current->next();
     current->set_next(nullptr);
+    this->tail_ = current;
   }
   --this->size_;
 }
