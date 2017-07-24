@@ -58,6 +58,12 @@ class Stack {
    * */
   T& pop();
   /**
+   * \brief     Returns the top element in the stack in O(1) time.
+   *
+   * \returns   T&
+   * */
+  T& top() const;
+  /**
    * \brief     Returns the current size of the stack.
    *
    * \returns   size_t
