@@ -1,7 +1,7 @@
 /* *
  * MIT License
  *
- * Copyright (c) 2016 Daniel Santos
+ * Copyright (c) 2017 Daniel Santos
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,61 +21,4 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  * */
-
-/** * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- *
- *                                Data Structures
- *
- ** * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
-/**
- *  Node
- * */
-#include "Linked_List/node.h"
-
-/**
- *  Linked List
- * */
-#include "Linked_List/linked_list.h"
-
-/**
- *  Dynamic Array
- * */
-#include "Dynamic_Array/dynamic_array.h"
-
-/**
- *  Queue
- * */
-#include "Queue/queue.h"
-
-/**
- * Deque
- * */
-#include "Queue/deque.h"
-
-/**
- * Stack
- * */
-#include "Stack/stack.h"
-
-/**
- * Binaery Tree Node
- * */
-#include "Binary_Search_Tree/binary_tree_node.h"
-
-/**
- * Binary Search Tree
- * */
-#include "Binary_Search_Tree/binary_search_tree.h"
-
-
-/** * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- *
- *                                Algorithms
- *
- ** * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
-/**
- * Insertion Sort
- * */
-#include "Insertion_Sort/insertion_sort.h"
+#include "stack.h"

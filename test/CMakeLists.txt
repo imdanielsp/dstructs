@@ -14,6 +14,7 @@ set(TEST_FILES
         dynamic_array_test.cc
         linked_list_test.cc
         node_test.cc
-        queue_test.cc)
+        queue_test.cc
+        stack_test.cc)
 
 add_executable(dstructs-test ${TEST_FILES})

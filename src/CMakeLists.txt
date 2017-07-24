@@ -17,8 +17,8 @@ set(SOURCE_FILES
 #        src/AVL_Tree/avl_tree.cc
 #        src/AVL_Tree/avl_tree.h
         Insertion_Sort/insertion_sort.h
-        Hash_Table/hash_table.cc
-        Hash_Table/hash_table.h)
+        Hash_Table/hash_table.h
+        Stack/stack.h)
 
 
 add_executable(dstructs ${SOURCE_FILES})
