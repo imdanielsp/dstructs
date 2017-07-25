@@ -14,7 +14,7 @@
 </h1>
 
 A C++ library enriching the knowledge and awaking the  interest on data
-structure and algorithms. Data structures and algorithms are important and 
+structures and algorithms. Data structures and algorithms are important and 
 the basics, at most, should be known. 
 
 ## Implementation Philosophy
