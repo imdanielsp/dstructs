@@ -44,7 +44,7 @@ class LinkedList final {
    *
    * \param     std::size_t size, T& value
    * */
-  LinkedList<T>(const std::size_t size, const T &data);
+  LinkedList<T>(std::size_t size, const T& data);
   /**
    * \brief     Deconstructor
    * */
@@ -73,7 +73,7 @@ class LinkedList final {
    *
    * \param     T& data
    * */
-  void put_front(const T &data);
+  void put_front(const T& data);
   /**
    * \brief     Similar to put_front, push_back will insert the provided data,
    * but in this case, to the back of the list.
@@ -82,7 +82,7 @@ class LinkedList final {
    *
    * \param     const T& data
    * */
-  void push_back(const T &data);
+  void push_back(const T& data);
   /**
    * \brief     put_at will insert passed data to the index provided if the
    * following condition is met:
@@ -92,7 +92,7 @@ class LinkedList final {
    *
    * \param     const size_t, const T& data
    * */
-  void put_at(const std::size_t index, const T &data);
+  void put_at(std::size_t index, const T& data);
   /**
    * \brief     Return the data in the list at index position if the following
    * condition is met:
@@ -102,7 +102,7 @@ class LinkedList final {
    *
    * \param     std::size_t index
    * */
-  T& at(const std::size_t index) const;
+  T& at(std::size_t index) const;
   /**
    * \brief     Removes the data at the front of the list.
    *
