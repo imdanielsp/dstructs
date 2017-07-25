@@ -52,11 +52,15 @@ class LinkedList final {
   /**
    * \brief     Returns the front node of the list.
    *
+   * \note      O(1) time.
+   *
    * \returns   Node<T>*
    * */
   T& front() const;
   /**
    * \brief     Returns the last node of the list.
+   *
+   * \note      O(1) time.
    *
    * \returns   Node<T>*
    * */
@@ -65,12 +69,16 @@ class LinkedList final {
    * \brief     Put front will insert the provided data to the front of
    * the list by append the node to the front.
    *
+   * \note      O(1) time.
+   *
    * \param     T& data
    * */
   void put_front(const T &data);
   /**
    * \brief     Similar to put_front, push_back will insert the provided data,
    * but in this case, to the back of the list.
+   *
+   * \note      O(1) time.
    *
    * \param     const T& data
    * */
@@ -80,6 +88,8 @@ class LinkedList final {
    * following condition is met:
    *    index < size_ - 1
    *
+   * \note      Careful, this is worst-case O(n) time.
+   *
    * \param     const size_t, const T& data
    * */
   void put_at(const std::size_t index, const T &data);
@@ -88,11 +98,21 @@ class LinkedList final {
    * condition is met:
    *    index < size_ - 1
    *
+   * \note      Careful, this is worst-case O(n) time.
+   *
    * \param     std::size_t index
    * */
   T& at(const std::size_t index) const;
   /**
-   * \brief     Returns and delete the last value of the list.
+   * \brief     Removes the data at the front of the list.
+   *
+   * \note      O(1) time.
+   * */
+  void pop_front();
+  /**
+   * \brief     Removes the data at the end of the list.
+   *
+   * \note      Careful, this is constant O(n) time.
    * */
   void pop_back();
   /**
@@ -104,17 +124,23 @@ class LinkedList final {
   /**
    * \brief     Returns true if the size of the list is 0.
    *
+   * \note      Careful, this is constant O(n) time.
+   *
    * \returns   bool
    * */
   bool empty() const;
   /**
    * \brief     Destroy the list and its values.
+   *
+   * \note      Careful, this is constant O(n) time.
    * */
   void erase();
   /**
    * \brief     Overlodaded script operator.
    *
    * \param     std::size_t
+   *
+   * \note      Careful, this is worst-case O(n) time.
    *
    * \returns   T&
    * */

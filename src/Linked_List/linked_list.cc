@@ -124,7 +124,9 @@ template <class T>
 T& LinkedList<T>::at(const std::size_t index) const {
   if (index <= this->size_ - 1) {
     Node<T> *next = this->front_;
+
     for (int i = 0; i < index; i++) next = next->next();
+
     return next->get_data();
   } else throw std::out_of_range("This index is out of bound");
 }
@@ -148,6 +150,26 @@ void LinkedList<T>::pop_back() {
     this->tail_ = current;
   }
   --this->size_;
+}
+
+template <class T>
+void LinkedList<T>::pop_front() {
+  if (this->size() == 0)
+    throw std::out_of_range("Nothing to pop");
+
+  if (!this->front_->next()) {
+    delete this->front_;
+    this->front_ = nullptr;
+
+  } else if (this->front_) {
+    Node<T>* temp = this->front_;
+
+    this->front_ = temp->next();
+    delete temp;
+    temp = nullptr;
+  }
+
+  this->size_--;
 }
 
 template <class T>
