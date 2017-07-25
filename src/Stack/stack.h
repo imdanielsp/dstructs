@@ -48,17 +48,23 @@ class Stack {
   /**
    * \brief     This method inserts the data to the stack in O(1) time.
    *
+   * \note      Guarantee O(1) for all cases.
+   *
    * \param     T& data
    * */
   void push(const T& data);
   /**
    * \brief     This methods removes the data from the stack in O(1) time.
    *
+   * \note      Guarantee O(1) for all cases.
+   *
    * \returns   T&
    * */
   void pop();
   /**
    * \brief     Returns the top element in the stack in O(1) time.
+   *
+   * \note      Guarantee O(1) for all cases.
    *
    * \returns   T&
    * */
