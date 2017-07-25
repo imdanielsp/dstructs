@@ -190,6 +190,34 @@ void LinkedList<T>::erase() {
 }
 
 template <class T>
+bool LinkedList<T>::remove(const T& data) {
+  if (!this->front_) return false;
+
+  if (this->front_->get_data() == data) {
+    this->pop_front();
+    return true;
+  } else {
+    Node<T>* curr = this->front_;
+    bool didRemove = false;
+
+    while (curr && curr->next()) {
+      if (curr->next()->get_data() == data) {
+        Node<T>* temp = curr->next();
+
+        curr->set_next(temp->next());
+        delete temp;
+        temp = nullptr;
+        this->size_--;
+
+        didRemove = true;
+      }
+      curr = curr->next();
+    }
+    return didRemove;
+  }
+}
+
+template <class T>
 T& LinkedList<T>::operator[](std::size_t index) {
   Node<T> *next = this->front_;
   if (index <= this->size_ - 1 && next != nullptr)

@@ -260,6 +260,34 @@ TEST_F(LinkedListTest, LinkedListTest_Erase_Test) {
   EXPECT_THROW(linked_list->front(), std::out_of_range);
 }
 
+TEST_F(LinkedListTest, LinkedListTest_Remove_Test) {
+  EXPECT_EQ(linked_list->size(), 0);
+
+  linked_list->push_back(5);
+  linked_list->push_back(6);
+  linked_list->push_back(7);
+  linked_list->push_back(8);
+
+  EXPECT_EQ(linked_list->size(), 4);
+  EXPECT_FALSE(linked_list->remove(0));
+  EXPECT_EQ(linked_list->size(), 4);
+
+  EXPECT_TRUE(linked_list->remove(7));
+  EXPECT_EQ(linked_list->size(), 3);
+
+  EXPECT_TRUE(linked_list->remove(5));
+  EXPECT_EQ(linked_list->size(), 2);
+  EXPECT_EQ(linked_list->front(), 6);
+
+  EXPECT_TRUE(linked_list->remove(8));
+  EXPECT_EQ(linked_list->size(), 1);
+
+  EXPECT_TRUE(linked_list->remove(6));
+  EXPECT_EQ(linked_list->size(), 0);
+
+  EXPECT_FALSE(linked_list->remove(6));
+}
+
 TEST_F(LinkedListTest, LinkedListTest_SubscriptOperator_Test) {
   EXPECT_THROW((*linked_list)[0], std::out_of_range);
   EXPECT_THROW((*linked_list)[-1], std::out_of_range);

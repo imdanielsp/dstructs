@@ -46,7 +46,7 @@ class LinkedList final {
    * */
   LinkedList<T>(std::size_t size, const T& data);
   /**
-   * \brief     Deconstructor
+   * \brief     Destructor
    * */
   ~LinkedList<T>();
   /**
@@ -136,7 +136,17 @@ class LinkedList final {
    * */
   void erase();
   /**
-   * \brief     Overlodaded script operator.
+   * \brief     Remove any given data if in the linked list.
+   *
+   * \note      Careful, this is worst-case O(n).
+   *
+   * \param     T& data
+   *
+   * \returns   If the data is found and removed, returns true, otherwise false.
+   * */
+  bool remove(const T& data);
+  /**
+   * \brief     Overloaded script operator.
    *
    * \param     std::size_t
    *
