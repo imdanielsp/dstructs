@@ -1,18 +1,65 @@
 <p align="center">
-    <img alt="DStructs" src="http://www.danielsantos.us/images/projects/DStructs_Logo_Original.png" 
+    <img alt="DStructs" 
+    src="http://www.danielsantos.us/images/projects/DStructs_Logo_Original.png" 
     width="150">
 </p>
 <h1 align="center">
     DStructs
+    <p align="center">
+        <a href="https://travis-ci.org/dsantosp12/DStructs" target="_blank">
+            <img src="https://travis-ci.org/dsantosp12/DStructs.svg?branch=master">
+            </img>
+        </a>
+    </p>
 </h1>
 
-[![Build Status](https://travis-ci.org/dsantosp12/DStructs.svg?branch=master)](https://travis-ci.org/dsantosp12/DStructs)
+A C++ library of data structures. Enriching the knowledge and awaking the 
+interest on data structure and algorithms is the intention of this library. 
+Data structures and algorithms are important and the basics, at most, should 
+be known. 
 
-A C++ library of data structures. The purpose of this repository is to practice my C++ skills and review data structures in general.
+## Implementation Philosophy
+The focus of each implementation steps start as follow: first, we study the 
+concept of the data structure or algorithm, second we design and document a 
+clear and simple API, third we implement, and forth we analyze and refactor 
+the implementation. There most be a robust unit-test suite for each data 
+structure or algorithm that prove the reliability of the above. 
 
-This idea of this repository is to review and write data structures and algorithms in C++. First I will be focused in implementation.
-After implementing, I will come back and make a refactor focused on performace.
+## Current Implementations
 
-Any comments are welcome :) 
+- AVL Tree (progress)
+- Binary Search Tree
+    - Binary Tree Node
+- Dynamic Array
+- Deque
+- Insertion Sort
+- Linked List
+    - Singly Linked List
+    - Doubly Linked List (progress)
+- Queue
+- Stack
 
--Dan
+## Will Implement
+
+- Hash Table
+- Hash Function
+- Red Black Tree
+- B-Tree
+- Skip List
+- Merge Sort
+- Selection Sort
+- Quick Sort
+- Shell Sort
+- Ring Buffer
+- Heap Sort
+- Heap
+- Graph
+- Breadth-first Search
+- Depth-first Search
+
+## Contributions
+Everyone is welcome to contribute! Pick any of the "Will Implement" items 
+displayed above, move it to the "Current Implementation" and make a pull 
+request. We also suggest to follow the same naming convention of the current 
+implementation, for example the Linked List, and also read the 
+"Implementation Philosophy" displayed above. 
