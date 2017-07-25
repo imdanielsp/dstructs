@@ -177,6 +177,34 @@ TEST_F(LinkedListTest, LinkedListTest_PopBack_Test) {
   EXPECT_THROW(linked_list->front(), std::out_of_range);
 }
 
+TEST_F(LinkedListTest, LinkedListTest_PopFront_test) {
+  EXPECT_THROW(linked_list->pop_front(), std::out_of_range);
+
+  linked_list->put_front(5);
+  linked_list->put_front(9);
+  linked_list->put_front(1);
+  linked_list->put_front(53);
+
+  EXPECT_EQ(linked_list->front(), 53);
+  linked_list->pop_front();
+  EXPECT_EQ(linked_list->size(), 3);
+
+  EXPECT_EQ(linked_list->front(), 1);
+  linked_list->pop_front();
+  EXPECT_EQ(linked_list->size(), 2);
+
+  EXPECT_EQ(linked_list->front(), 9);
+  linked_list->pop_front();
+  EXPECT_EQ(linked_list->size(), 1);
+
+  EXPECT_EQ(linked_list->front(), 5);
+  linked_list->pop_front();
+  EXPECT_EQ(linked_list->size(), 0);
+
+  EXPECT_THROW(linked_list->pop_front(), std::out_of_range);
+
+}
+
 TEST_F(LinkedListTest, LinkedListTest_Size_Test) {
   EXPECT_EQ(linked_list->size(), 0);
 
