@@ -13,9 +13,9 @@
     </p>
 </h1>
 
-A C++ library of data structures. Enriching the knowledge and awaking the 
-interest on data structure and algorithms is the intention of this library. 
-Data structures and algorithms are important and the basics, at most, should 
+A C++ library of data structures enriching the knowledge and awaking the 
+interest on data structure and algorithms. Data structures and algorithms 
+are important and the basics, at most, should 
 be known. 
 
 ## Implementation Philosophy
@@ -61,5 +61,5 @@ structure or algorithm that prove the reliability of the above.
 Everyone is welcome to contribute! Pick any of the "Will Implement" items 
 displayed above, move it to the "Current Implementation" and make a pull 
 request. We also suggest to follow the same naming convention of the current 
-implementation, for example the Linked List, and also read the 
+implementations, for example the Linked List, and also read the 
 "Implementation Philosophy" displayed above. 
