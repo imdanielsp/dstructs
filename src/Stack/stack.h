@@ -56,7 +56,7 @@ class Stack {
    *
    * \returns   T&
    * */
-  T& pop();
+  void pop();
   /**
    * \brief     Returns the top element in the stack in O(1) time.
    *
@@ -68,7 +68,7 @@ class Stack {
    *
    * \returns   size_t
    * */
-  size_t size() const;
+  std::size_t size() const;
   /**
    * \brief     Returns true if the stack has no elements, otherwise returns
    * false.

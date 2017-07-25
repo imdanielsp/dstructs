@@ -22,3 +22,38 @@
  * SOFTWARE.
  * */
 #include "stack.h"
+
+namespace DStructs {
+
+template <class T>
+Stack<T>::Stack() {}
+
+template <class T>
+Stack<T>::~Stack() {}
+
+template <class T>
+void Stack<T>::push(const T &data) {
+  this->buffer_.put_front(data);
+}
+
+template <class T>
+void Stack<T>::pop() {
+  this->buffer_.pop_front();
+}
+
+template <class T>
+T& Stack<T>::top() const {
+  return this->buffer_.front();
+}
+
+template <class T>
+size_t Stack<T>::size() const {
+  return this->buffer_.size();
+}
+
+template <class T>
+bool Stack<T>::empty() const {
+  return this->size() == 0;
+}
+
+} // NAMESPACE DStructs
