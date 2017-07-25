@@ -13,10 +13,9 @@
     </p>
 </h1>
 
-A C++ library of data structures enriching the knowledge and awaking the 
-interest on data structure and algorithms. Data structures and algorithms 
-are important and the basics, at most, should 
-be known. 
+A C++ library enriching the knowledge and awaking the  interest on data
+structure and algorithms. Data structures and algorithms are important and 
+the basics, at most, should be known. 
 
 ## Implementation Philosophy
 The focus of each implementation steps start as follow: first, we study the 
