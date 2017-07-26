@@ -198,7 +198,6 @@ bool LinkedList<T>::remove(const T& data) {
     return true;
   } else {
     Node<T>* curr = this->front_;
-    bool didRemove = false;
 
     while (curr && curr->next()) {
       if (curr->next()->get_data() == data) {
@@ -209,11 +208,11 @@ bool LinkedList<T>::remove(const T& data) {
         temp = nullptr;
         this->size_--;
 
-        didRemove = true;
+        return true;
       }
       curr = curr->next();
     }
-    return didRemove;
+    return false;
   }
 }
 
