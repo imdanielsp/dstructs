@@ -119,34 +119,3 @@ TEST_F(NodeTest, IsNextTest) {
   EXPECT_FALSE(pNode->is_next());
   EXPECT_TRUE(pNode4->is_next());
 }
-
-class BiNodeTest : public testing::Test {
- protected:
-  virtual void SetUp() override {
-    this->biNode_1_ = new DStructs::BiNode<int>();
-    this->biNode_2_ = new DStructs::BiNode<int>(different_value_);
-    this->biNode_3_ = new DStructs::BiNode<int>(9, biNode_2_, nullptr);
-  }
-
-  int different_value_ = 9;
-  DStructs::BiNode<int> *biNode_1_;
-  DStructs::BiNode<int> *biNode_2_;
-  DStructs::BiNode<int> *biNode_3_;
-};
-
-TEST_F(BiNodeTest, Constructor) {
-  EXPECT_THROW(biNode_1_->previous(), std::out_of_range);
-  EXPECT_NO_THROW(biNode_3_->previous());
-  EXPECT_EQ(biNode_3_->previous()->get_data(), different_value_);
-}
-
-TEST_F(BiNodeTest, Previous) {
-  EXPECT_NO_THROW(this->biNode_3_->previous());
-  EXPECT_THROW(this->biNode_2_->previous(), std::out_of_range);
-  EXPECT_TRUE(this->biNode_3_->is_previous());
-  EXPECT_FALSE(this->biNode_1_->is_previous());
-
-  this->biNode_2_->set_previous(this->biNode_1_);
-  EXPECT_NO_THROW(this->biNode_2_->previous());
-  EXPECT_TRUE(this->biNode_2_->is_previous());
-}

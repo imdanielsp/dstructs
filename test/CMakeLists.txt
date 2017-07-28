@@ -12,6 +12,7 @@ set(TEST_FILES
         binary_tree_node_test.cc
         deque_test.cc
         dynamic_array_test.cc
+        doubly_linked_list_test.cc
         linked_list_test.cc
         node_test.cc
         queue_test.cc

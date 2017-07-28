@@ -35,7 +35,7 @@ class Node {
  public:
   /**
    * \brief     This is the default constructor of a Node. This constructor
-   * doesn't allocate the buffer, it is allocate through mutattors. And other
+   * doesn't allocate the buffer, it is allocate through mutators. And other
    * constructors. The buffer and next is set to nullptr.
    * */
   Node();
@@ -110,21 +110,6 @@ class Node {
   Node<T> *next_;   //< A link to another node
   T *data_;         //< Buffer
 };  // Node
-
-template <class T>
-class BiNode : public Node<T> {
- public:
-  BiNode();
-  explicit BiNode(const T &data);
-  BiNode(const T &data, Node<T> *previous, Node<T> *next);
-  virtual ~BiNode();
-  void set_previous(Node<T> *previous);
-  Node<T>* previous() const;
-  bool is_previous() const;
-
- private:
-  Node<T> *previous_;
-};  // BiNode
 }  // NAMESPACE DStructs
 
 #include "node.cc"
