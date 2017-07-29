@@ -38,7 +38,7 @@ class DNode {
    *
    * \param     DNode<T>&
    * */
-  DNode(const DNode<T>& o);
+  DNode(const DNode<T>& o) = delete;
   /**
    * \breif     Constructor that builds the node with the data.
    *
@@ -56,7 +56,7 @@ class DNode {
    *
    * \return    DNode<T>&
    * */
-  DNode<T>& operator=(const DNode<T>& o);
+  DNode<T>& operator=(const DNode<T>& o) = delete;
   /**
    * \brief     Sets the data in the node.
    *

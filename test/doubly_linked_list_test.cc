@@ -47,23 +47,65 @@ TEST_F(DNodeTest, DNodeTest_Default_Constructor_Test) {
   EXPECT_FALSE(this->dNode->is_next());
 }
 
+TEST_F(DNodeTest, DNodeTest_DataConstructor_Test) {
+  DStructs::DNode<int> node(4);
 
+  EXPECT_EQ(node.get_data(), 4);
+  EXPECT_EQ(node.next(), nullptr);
+  EXPECT_EQ(node.prev(), nullptr);
+}
 
+TEST_F(DNodeTest, DNodeTest_SetData_Test) {
+  EXPECT_THROW(this->dNode->get_data(), std::out_of_range);
 
+  this->dNode->set_data(6);
 
+  EXPECT_EQ(this->dNode->get_data(), 6);
+  EXPECT_EQ(this->dNode->get_data(), 6);
+}
 
+TEST_F(DNodeTest, DNodeTest_GetData_Test) {
+  EXPECT_THROW(this->dNode->get_data(), std::out_of_range);
 
+  this->dNode->set_data(0);
 
+  EXPECT_EQ(this->dNode->get_data(), 0);
+}
 
+TEST_F(DNodeTest, DNodeTest_SetNext_Test) {
+  EXPECT_EQ(this->dNode->next(), nullptr);
 
+  DStructs::DNode<int> node(4);
 
+  this->dNode->set_next(&node);
 
+  EXPECT_EQ(this->dNode->next()->get_data(), 4);
+}
 
+TEST_F(DNodeTest, DNodeTest_SetPrev_Test) {
+  EXPECT_EQ(this->dNode->prev(), nullptr);
 
+  DStructs::DNode<int> node(4);
 
+  this->dNode->set_prev(&node);
 
+  EXPECT_EQ(this->dNode->prev()->get_data(), 4);
+}
 
+TEST_F(DNodeTest, DNodeTest_IsNext_Test) {
+  EXPECT_FALSE(this->dNode->is_next());
 
+  DStructs::DNode<int> node(4);
+  this->dNode->set_next(&node);
 
+  EXPECT_TRUE(this->dNode->is_next());
+}
 
+TEST_F(DNodeTest, DNodeTest_IsPrev_Test) {
+  EXPECT_FALSE(this->dNode->is_prev());
 
+  DStructs::DNode<int> node(4);
+  this->dNode->set_prev(&node);
+
+  EXPECT_TRUE(this->dNode->is_prev());
+}

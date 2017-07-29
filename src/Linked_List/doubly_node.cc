@@ -32,35 +32,21 @@ DNode<T>::DNode() : data_(nullptr), next_(nullptr), prev_(nullptr) {
 template <class T>
 DNode<T>::DNode(const T& data) : next_(nullptr), prev_(nullptr) {
   this->data_ = new T;
-  this->data_ = data;
-}
-
-template <class T>
-DNode<T>::DNode(const DNode<T> &o) {
-  this->data_ = o.data_;
-  this->next_ = o.next_;
-  this->prev_ = o.prev_;
+  *this->data_ = data;
 }
 
 template <class T>
 DNode<T>::~DNode() {
   if (this->data_) delete  this->data_;
+
   this->next_ = nullptr;
   this->prev_ = nullptr;
 }
 
 template <class T>
-DNode<T>& DNode<T>::operator=(const DNode<T> &o) {
-  this->data_ = o.data_;
-  this->next_ = o.next_;
-  this->prev_ = o.prev_;
-  return *this;
-}
-
-template <class T>
 void DNode<T>::set_data(const T &data) {
   if (!this->data_) this->data_ = new T;
-  this->data_ = data;
+  *this->data_ = data;
 }
 
 template <class T>
