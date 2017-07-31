@@ -54,7 +54,7 @@ class LinkedList final {
    *
    * \note      O(1) time.
    *
-   * \returns   Node<T>*
+   * \returns   T&
    * */
   T& front() const;
   /**
@@ -62,7 +62,7 @@ class LinkedList final {
    *
    * \note      O(1) time.
    *
-   * \returns   Node<T>*
+   * \returns   T&
    * */
   T& back() const;
   /**
