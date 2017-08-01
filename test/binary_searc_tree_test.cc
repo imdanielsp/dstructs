@@ -144,3 +144,11 @@ TEST_F(BinarySearchTreeTest, BinarySearchTreeTest_PreOrder_Test) {
   EXPECT_EQ((*rv)[4], 60);
 
 }
+
+TEST_F(BinarySearchTreeTest, BinarySearchTreeTest_Heigh_Test) {
+  EXPECT_EQ(bst.height(), 3);
+
+  DStructs::BST<int> emptyBST;
+
+  EXPECT_EQ(emptyBST.height(), 0);
+}

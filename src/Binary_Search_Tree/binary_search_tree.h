@@ -39,11 +39,11 @@ namespace DStructs {
      * */
     BST();
     /**
-     * \brief       Deconstructor destroies the tree recursevely.
+     * \brief       Destructor destroys the tree recursively.
      * */
     ~BST();
     /**
-     * \brief       Insert data in the BST recursevely where the
+     * \brief       Insert data in the BST recursivel
      * data that is less than any given node goes to the left,
      * and the data that is greater than any given node goes to
      * the right.
@@ -77,7 +77,7 @@ namespace DStructs {
      * */
     DynamicArray<T> * postorder();
     /**
-     * \brief       Searches for a given key in the tree recursevely.
+     * \brief       Searches for a given key in the tree recursively.
      *  This method average O(log N).
      *
      * \param       const T& key
@@ -96,6 +96,12 @@ namespace DStructs {
      * \returns     const T&
      * */
     const T& find_max() const;
+    /**
+     * \brief       Calculate the height of the tree including the node.
+     *
+     * \returns     unsigned int
+     * */
+    unsigned int height() const;
     /**
      * \brief       Removes a node with its key of the BST.
      *
@@ -120,6 +126,17 @@ namespace DStructs {
       virtual const char* what() const throw();
     };
 
+    /**
+     * \brief       Make object non-copyable
+     * */
+    BST<T>(const BST<T>&) = delete;
+    BST<T>& operator=(const BST<T>&) = delete;
+
+    /**
+     * \brief       Make object non-movable
+     * */
+    BST<T>(const BST<T>&&) = delete;
+    BST<T> &operator=(const BST<T>&&) = delete;
    private:
     DynamicArray<T>*  buffer_;  //< Buffer temp for the traversal methods.
     BinaryTreeNode<T>* root_ ;  //< Root node of the BST
@@ -155,7 +172,7 @@ namespace DStructs {
      * */
     void reset_buffer_();
     /**
-     * \brief       Helper method to search for a key in the tree recursevely.
+     * \brief       Helper method to search for a key in the tree recursively.
      *
      * \param       BinaryTreeNode<T>* node, const T& key
      * \returns     BinaryTreeNode<T>*
@@ -177,6 +194,14 @@ namespace DStructs {
      * \returns     BinaryTreeNode<T>*
      * */
     BinaryTreeNode<T>* find_max_(BinaryTreeNode<T>* node) const;
+    /**
+     * \breif       Helper function to get the height of the tree. This
+     * method explores the tree and returns the height recursively.
+     *
+     * \param       BinaryTreeNode<T>*
+     * \returns     unsigned int
+     * */
+    unsigned int treeExplorer_(BinaryTreeNode<T>* node) const;
     /**
      * \brief       Helper method to remove a node of the tree and balance if
      * it is necessary..

@@ -126,6 +126,16 @@ const T & BST<T>::find_max() const {
 }
 
 template <class T>
+unsigned int BST<T>::height() const {
+  if (!this->root_) return 0;
+  unsigned int leftHeight = this->treeExplorer_(this->root_->left_) + 1;
+  unsigned int rightHeight = this->treeExplorer_(this->root_->right_) + 1;
+
+  if (leftHeight >= rightHeight) return leftHeight;
+  return rightHeight;
+}
+
+template <class T>
 void BST<T>::remove(const T &key) {
   this->remove_(this->root_, key);
 }
@@ -178,6 +188,12 @@ BinaryTreeNode<T>* BST<T>::find_max_(BinaryTreeNode<T> *node) const {
   }else {
     throw BST<T>::EmptyTree();
   }
+}
+
+template <class T>
+unsigned int BST<T>::treeExplorer_(BinaryTreeNode<T> *node) const {
+  if (!node) return 0;
+  return this->treeExplorer_(node->left_) + treeExplorer_(node->right_) + 1;
 }
 
 template <class T>
