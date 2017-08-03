@@ -23,7 +23,26 @@
  * */
 #include "doubly_linked_list.h"
 
+namespace DStructs {
 
+template<class T>
+DLinkedList::DLinkedList()
+    : front_(nullptr), tail_(nullptr), size_(0) {
+}
+
+template <class T>
+T& DLinkedList::front() const {
+  if (!this->front_) throw std::out_of_range("Nothing at the front");
+  return this->front_->get_data();
+}
+
+template <class T>
+T& DLinkedList::back() const {
+  if (!this->tail_) throw std::out_of_range("Nothing in the back");
+  return this->tail_->get_data();
+}
+
+}
 
 
 
