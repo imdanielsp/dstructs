@@ -32,13 +32,8 @@ namespace DStructs {
 template <class T>
 class DLinkedList {
  public:
-  /**
-   * \breif     Default constructor.
-   * */
   DLinkedList();
-  /**
-   * \breif     Destructor
-   * */
+
   ~DLinkedList();
   /**
    * \brief     Returns the data on front of the list. If the list is empty a
@@ -48,7 +43,7 @@ class DLinkedList {
    *
    * \note      O(1) time
    * */
-  T& front() const;
+  T& get_front() const;
   /**
    * \brief     Returns the data at the end of the list. If the list is empty
    * a std::out_of_range exception will be thrown.
@@ -57,7 +52,7 @@ class DLinkedList {
    *
    * \note      O(1) time.
    * */
-  T& back() const;
+  T& get_back() const;
   /**
    * \brief     Inserts the passed data, T&, to the list given the index iff
    * index < size_ - 1
@@ -77,7 +72,7 @@ class DLinkedList {
    *
    * \note      Careful, this is worst-time O(n) time.
    * */
-  T& at(std::size_t index) const;
+  T& get_at(std::size_t index) const;
   /**
    * \brief     Insert a T& data on front of the list.
    *
@@ -111,11 +106,11 @@ class DLinkedList {
   /**
    * \breif     Returns the size of the list.
    * */
-  std::size_t size() const noexcept;
+  std::size_t get_size() const noexcept;
   /**
    * \brief     Return true is the list is empty, otherwise false.
    * */
-  bool empty() const noexcept;
+  bool is_empty() const noexcept;
   /**
    * \brief     Remove all the nodes in the list.
    *
@@ -133,7 +128,11 @@ class DLinkedList {
   bool remove(const T& data);
 
  private:
-  DNode<T>* front_;       //< front node of the linked list
+  DNode<T>* get_node_at(std::size_t index) const;
+  bool is_out_of_index_(std::size_t index) const noexcept;
+
+ private:
+  DNode<T>* front_;       //< get_front node of the linked list
   DNode<T>* tail_;        //< tail node of the linked list
   unsigned int size_;     //< size of the linked list
 };

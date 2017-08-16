@@ -55,6 +55,16 @@ TEST_F(DNodeTest, DNodeTest_DataConstructor_Test) {
   EXPECT_EQ(node.prev(), nullptr);
 }
 
+TEST_F(DNodeTest, DNodeTest_FallConstructor_Test) {
+  DStructs::DNode<int> node(4);
+  DStructs::DNode<int> node1(3, &node, nullptr);
+
+  EXPECT_EQ(node1.get_data(), 3);
+  EXPECT_FALSE(node1.next() == nullptr);
+  EXPECT_EQ(node1.next()->get_data(), 4);
+  EXPECT_TRUE(node1.prev() == nullptr);
+}
+
 TEST_F(DNodeTest, DNodeTest_SetData_Test) {
   EXPECT_THROW(this->dNode->get_data(), std::out_of_range);
 

@@ -73,7 +73,7 @@ TEST_F(LinkedListTest, LinkedListTest_Front_Test) {
   EXPECT_EQ(linked_list->front(), 2);
   linked_list->pop_back();
   linked_list->pop_back();
-//  EXPECT_THROW(linked_list->front(), std::out_of_range);
+//  EXPECT_THROW(linked_list->get_front(), std::out_of_range);
 }
 
 TEST_F(LinkedListTest, BackTest) {

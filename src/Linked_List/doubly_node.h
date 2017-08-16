@@ -29,33 +29,18 @@ namespace DStructs {
 template<class T>
 class DNode {
  public:
-  /**
-   * \breif     Default constructor. This constructor doesn't allocate the data.
-   * */
   DNode();
+
+  explicit DNode(const T& data);
+
+  DNode(const T& data, DNode<T>* next, DNode<T>* prev);
+
+  ~DNode();
+
   /**
-   * \breif     Copy constructor.
-   *
-   * \param     DNode<T>&
+   * \breif     Make object non-copyable
    * */
   DNode(const DNode<T>& o) = delete;
-  /**
-   * \breif     Constructor that builds the node with the data.
-   *
-   * \param     const T&
-   * */
-  explicit DNode(const T& data);
-  /**
-   * \breif     Destructor.
-   * */
-  ~DNode();
-  /**
-   * \brief     Copy assignment Operator.
-   *
-   * \param     const DNode<T>& o
-   *
-   * \return    DNode<T>&
-   * */
   DNode<T>& operator=(const DNode<T>& o) = delete;
   /**
    * \brief     Sets the data in the node.

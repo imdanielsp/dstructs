@@ -36,6 +36,12 @@ DNode<T>::DNode(const T& data) : next_(nullptr), prev_(nullptr) {
 }
 
 template <class T>
+DNode<T>::DNode(const T &data, DNode<T> *next, DNode<T> *prev) : data_(new T),
+ next_(next), prev_(prev) {
+  *this->data_ = data;
+}
+
+template <class T>
 DNode<T>::~DNode() {
   if (this->data_) delete  this->data_;
 

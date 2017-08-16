@@ -31,15 +31,65 @@ DLinkedList::DLinkedList()
 }
 
 template <class T>
-T& DLinkedList::front() const {
+T& DLinkedList::get_front() const {
   if (!this->front_) throw std::out_of_range("Nothing at the front");
   return this->front_->get_data();
 }
 
 template <class T>
-T& DLinkedList::back() const {
+T& DLinkedList::get_back() const {
   if (!this->tail_) throw std::out_of_range("Nothing in the back");
   return this->tail_->get_data();
+}
+
+template <class T>
+void DLinkedList::put_at(std::size_t index, const T &data) {
+  auto node = this->get_node_at(index);
+
+  auto new_node = new DNode(data, node->next(), node);
+  node->set_next(new_node);
+
+  if (new_node->is_next()) {
+    auto new_next = new_node->next();
+    new_next->set_prev(new_node);
+  }
+}
+
+template <class T>
+T& DLinkedList::get_at(std::size_t index) const {
+  auto node = this->get_node_at(index);
+  return node->get_data();
+}
+
+template <class T>
+DNode<T> * DLinkedList::get_node_at(std::size_t index) const {
+  if (this->is_out_of_index_(index))
+    throw std::out_of_range("Index out of range");
+
+  DNode<T> *curr = this->front_;
+  for (int i = 0; i < index; i++, curr = curr->next());
+
+  return curr;
+}
+
+template <class T>
+bool DLinkedList::is_out_of_index_(std::size_t index) const {
+  return index < 0 && index >= this->size_;
+}
+
+void DLinkedList::put_front(const T &data) {
+  auto new_node = new DNode(data);
+
+  if (!this->front_) {
+    this->front_ = new_node;
+    this->tail_ = this->front_;
+  } else {
+    this->front_->set_prev(new_node);
+    new_node->set_next(this->front_);
+    this->front_ = new_node;
+  }
+
+  this->size_++;
 }
 
 }
