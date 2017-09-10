@@ -25,6 +25,7 @@
 #include <gtest/gtest.h>
 
 #include "../src/Linked_List/doubly_node.h"
+#include "../src/Linked_List/doubly_linked_list.h"
 
 class DNodeTest : public testing::Test {
  protected:
@@ -37,6 +38,19 @@ class DNodeTest : public testing::Test {
   }
 
   DStructs::DNode<int>* dNode;
+};
+
+class DLinkedListTest : public testing::Test {
+ protected:
+  virtual void SetUp() override {
+    this->dLinkedList = new DStructs::DLinkedList<int>();
+  }
+
+  virtual void TearDown() override  {
+    delete this->dLinkedList;
+  }
+
+  DStructs::DLinkedList<int>* dLinkedList;
 };
 
 TEST_F(DNodeTest, DNodeTest_Default_Constructor_Test) {
@@ -118,4 +132,10 @@ TEST_F(DNodeTest, DNodeTest_IsPrev_Test) {
   this->dNode->set_prev(&node);
 
   EXPECT_TRUE(this->dNode->is_prev());
+}
+
+TEST_F(DLinkedListTest, DLinkedListTest_Constructor_Test) {
+  EXPECT_THROW(this->dLinkedList->get_front(), std::out_of_range);
+  EXPECT_THROW(this->dLinkedList->get_back(), std::out_of_range);
+  EXPECT_EQ(this->dLinkedList->get_size(), 0);
 }
