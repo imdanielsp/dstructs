@@ -1,5 +1,5 @@
-cmake_minimum_required(VERSION 2.8.7)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+cmake_minimum_required(VERSION 3.10.3)
+set(CMAKE_CXX_STANDARD 17)
 
 set(SOURCE_FILES
         main.cpp
@@ -12,13 +12,17 @@ set(SOURCE_FILES
         Queue/deque.h
         Binary_Search_Tree/binary_tree_node.h
         Binary_Search_Tree/binary_search_tree.h
-#        src/AVL_Tree/avl_node.h
+#       src/AVL_Tree/avl_node.h
 #        src/AVL_Tree/avl_tree.h
         Insertion_Sort/insertion_sort.h
-        Hash_Table/hash_table.h
+#       Hash_Table/hash_table.h
         Stack/stack.h
-        Linked_List/doubly_linked_list.h
-        Linked_List/doubly_node.h)
+#        Linked_List/doubly_linked_list.h
+#        Linked_List/doubly_node.h
+        Functional/functional.h
+        Heap/heap.h
+
+)
 
 
 add_executable(dstructs ${SOURCE_FILES})

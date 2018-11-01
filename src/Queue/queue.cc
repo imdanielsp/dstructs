@@ -37,7 +37,7 @@ Queue<T>::~Queue() {
 }
 
 template <class T>
-T& Queue<T>::front() const {
+const T& Queue<T>::front() const {
   if (this->size_ > 0 && this->head_ >= 0)
     return this->buffer_->at(this->head_);
   else

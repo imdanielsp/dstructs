@@ -62,7 +62,7 @@ class DynamicArray final {
    * \param     std::size_t
    * \returns   T&
    * */
-  T& at(std::size_t idx) const;
+  const T& at(std::size_t idx) const;
   /**
    * \brief     Returns the current size of the array.
    *
@@ -75,6 +75,12 @@ class DynamicArray final {
    * \returns   std::size_t
    * */
   std::size_t capacity() const;
+  /**
+   * \brief     Removes element at pos.
+   *
+   * \param     std::size_t position
+   * */
+  void remove(std::size_t pos);
   /**
    * \brief     This is the subscript operator that overloaded returns an
    * element of the array in constant time.

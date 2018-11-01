@@ -50,7 +50,7 @@ class Queue {
    *
    * \returns   T&
    * */
-  virtual T& front() const;
+  virtual const T& front() const;
   /**
    * \brief     Puts and element to the last position of the queue. This is
    * also know as enqueue at tail.

@@ -1,41 +1,29 @@
 #include <iostream>
 #include <cstdlib>
 #include <chrono>
-
+#include <functional>
+#include <string>
+#include <vector>
 #include "DStructs.h"
 
 #define DSTRUCT_DEBUG true
 
 using namespace DStructs;
 
-inline void insert_data_to_bst(int range) {
-  BST<int> bst;
-
-  int val;
-
-  srand(time(NULL));
-
-//  for (int i = 0; i < range; i++) {
-//    val = rand() % range;
-//    bst.insert_data(val);
-//  }
-
-  bst.insert_data(7);
-  bst.insert_data(3);
-  bst.insert_data(5);
-  bst.insert_data(2);
-  bst.insert_data(1);
-  bst.insert_data(4);
-  bst.insert_data(6);
-  bst.insert_data(7);
-
-  std::cout << bst.height() << std::endl;
-
-}
-
 int main() {
+  MaxHeap<int> v;
+  v.insert(9);
+  v.insert(2);
+  v.insert(4);
+  v.insert(10);
+  v.insert(1);
+  v.insert(1);
+  v.insert(2);
+  v.insert(31);
 
-  insert_data_to_bst(100);
+  v.forEach([](const auto item) {
+    std::cout << item << std::endl;
+  });
 
   return 0;
 }

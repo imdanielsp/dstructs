@@ -45,7 +45,7 @@ class Deque : public Queue<T> {
    * \breif     Returns the element at the end of the queue. (This is one
    * difference between queue and dequeue.
    * */
-  T& back() const;
+  const T& back() const;
   /**
    * \breief    This method allows insertion of an element in the front of
    * the queue.

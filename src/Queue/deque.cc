@@ -30,7 +30,7 @@ Deque<T>::Deque() : Queue<T>(), tail_(-1) {
 }
 
 template <class T>
-T& Deque<T>::back() const {
+const T& Deque<T>::back() const {
   if (this->tail_ >= this->head_)
     return this->buffer_->at(this->tail_);
   else

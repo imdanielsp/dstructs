@@ -129,7 +129,7 @@ namespace DStructs {
     /**
      * \brief       Make object non-copyable
      * */
-    BST<T>(const BST<T>&) = delete;
+//    BST<T>(const BST<T>&) = delete;
     BST<T>& operator=(const BST<T>&) = delete;
 
     /**

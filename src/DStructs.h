@@ -68,6 +68,10 @@
  * */
 #include "Binary_Search_Tree/binary_search_tree.h"
 
+/**
+ * Heap
+ * */
+#include "Heap/heap.h"
 
 /** * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *

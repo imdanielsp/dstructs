@@ -21,7 +21,9 @@
 #ifndef DSTRUCTS_LINKED_LIST_H
 #define DSTRUCTS_LINKED_LIST_H
 
+#include <functional>
 #include "node.h"
+#include "../Functional/functional.h"
 
 namespace DStructs {
 
@@ -32,7 +34,7 @@ namespace DStructs {
  * deletion and traversal.
  * */
 template <class T>
-class LinkedList final {
+class LinkedList final : public Functional<LinkedList<T>, T> {
  public:
   /**
    * \brief     Default constructor.
@@ -146,6 +148,12 @@ class LinkedList final {
    * */
   bool remove(const T& data);
   /**
+   * \brief     Copy the current container.
+   *
+   * \return    LinkedList<T>
+   * */
+  LinkedList<T> copy() const;
+  /**
    * \brief     Overloaded script operator.
    *
    * \param     std::size_t
@@ -155,6 +163,54 @@ class LinkedList final {
    * \returns   T&
    * */
   T& operator[](std::size_t index);
+  /**
+  * \brief     Calls f on every item in the list.
+  *
+  * \param     std::function<void(const T&)>
+  *
+  * \note      This function always run on O(n) time and it will
+  * return a copy of the current container.
+  *
+  * \return    LinkedList<T>
+  * */
+  void forEach(std::function<void(const T&)> f) const;
+  /**
+   * \breif     Uses t to map T to K for every item in the list.
+   * 
+   * \param     std::function<K(const T&)>
+   *
+   * \note      This function always run on O(n) time.
+   *
+   * \return    LinkedList<K>
+   */
+//  template <class K>
+//  LinkedList<K> map(std::function<K(const T&)> t) const;
+//  /**
+//   * \breif     Uses pred to filter out the item from the container.
+//   *
+//   * \param     std::function<bool(const T&)>
+//   *
+//   * \note      This function always run on O(n) time.
+//   *
+//   * \return    LinkedList<T>
+//   * */
+//  LinkedList<T> filter(std::function<bool(const T&)> pred) const;
+//  /**
+//   * \brief     It folds the list left to right using the initial value.
+//   *
+//   * \param     K& initialValue, std::function<K&(const T&)> acc
+//   *
+//   * \note      This function always run on O(n) time.
+//   *
+//   * \return    K
+//   * */
+  template <class K>
+  K fold(const K& initialValue, std::function<K(const K&, const T&)> op);
+
+  protected:
+    void insert(LinkedList<T>& cont, const T& it) {
+      cont.push_back(it);
+    }
  private:
   Node<T>* front_;       //< get_front of the linked list
   Node<T>* tail_;        //< tail of the linked list

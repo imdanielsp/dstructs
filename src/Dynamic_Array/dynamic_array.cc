@@ -28,26 +28,26 @@ namespace DStructs {
 const unsigned int INITIAL_CAPACITY = 4;
 const float GROWTH_RATE = 1.7;
 
-template <class T>
+template<class T>
 DynamicArray<T>::DynamicArray() : capacity_(INITIAL_CAPACITY),
                                   size_(0) {
   this->buffer_ = new T[this->capacity_];
 }
 
-template <class T>
+template<class T>
 DynamicArray<T>::~DynamicArray() {
-  delete [] this->buffer_;
+  delete[] this->buffer_;
 }
 
-template <class T>
-void DynamicArray<T>::push_back(const T &data) {
+template<class T>
+void DynamicArray<T>::push_back(const T& data) {
   this->size_++;
   if (this->size_ > this->capacity_/2)
-    this->increase_capacity(this->capacity_ * GROWTH_RATE + 1);
-  this->buffer_[this->size_-1] = data;
+    this->increase_capacity(this->capacity_*GROWTH_RATE + 1);
+  this->buffer_[this->size_ - 1] = data;
 }
 
-template <class T>
+template<class T>
 void DynamicArray<T>::increase_capacity(std::size_t new_capacity) {
   T* new_buffer = new T[new_capacity];
 
@@ -55,33 +55,44 @@ void DynamicArray<T>::increase_capacity(std::size_t new_capacity) {
     new_buffer[i] = this->buffer_[i];
 
   if (this->buffer_)
-    delete [] this->buffer_;
+    delete[] this->buffer_;
 
   this->buffer_ = new_buffer;
   this->capacity_ = new_capacity;
 }
 
-template <class T>
-T & DynamicArray<T>::at(std::size_t idx) const {
+template<class T>
+const T& DynamicArray<T>::at(std::size_t idx) const {
   if (idx < this->size_)
     return this->buffer_[idx];
   else throw std::out_of_range("The given index is out of range");
 }
 
-template <class T>
+template<class T>
 T& DynamicArray<T>::operator[](std::size_t idx) {
   if (idx < this->size_)
     return this->buffer_[idx];
   else throw std::out_of_range("The given index is out of range");
 }
 
-template <class T>
+template<class T>
 std::size_t DynamicArray<T>::size() const {
   return this->size_;
 }
 
-template <class T>
+template<class T>
 std::size_t DynamicArray<T>::capacity() const {
   return this->capacity_;
 }
+
+template <class T>
+void DynamicArray<T>::remove(std::size_t pos) {
+  if (pos >= size_) throw std::out_of_range("Position is out of bound!");
+
+  for (std::size_t i = pos; i < size_; i++) {
+    buffer_[i] = buffer_[i+1];
+  }
+  --size_;
+}
+
 }
