@@ -15,7 +15,7 @@ set(SOURCE_FILES
 #       src/AVL_Tree/avl_node.h
 #        src/AVL_Tree/avl_tree.h
         Insertion_Sort/insertion_sort.h
-#       Hash_Table/hash_table.h
+        Hash_Table/hash_table.h
         Stack/stack.h
 #        Linked_List/doubly_linked_list.h
 #        Linked_List/doubly_node.h

@@ -31,12 +31,10 @@ class HeapTest : public  testing::Test {
 
   }
 
-  DStructs::MaxHeap<int> maxHeap{10, 20, 30};
-  DStructs::MinHeap<int> minHeap{30, 20, 10};
+  DStructs::MaxHeap<int> maxHeap{10, 20, 30, 45};
 };
 
 TEST_F(HeapTest,HeapTest_InsertData_Test) {
- EXPECT_EQ(maxHeap.top(), 30);
+ EXPECT_EQ(maxHeap.top(), 45);
 
- EXPECT_EQ(minHeap.top(), 10);
 }

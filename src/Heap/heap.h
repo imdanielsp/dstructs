@@ -30,6 +30,7 @@
 #include <cmath>
 #include <exception>
 #include <initializer_list>
+#include <mutex>
 
 #include "../Dynamic_Array/dynamic_array.h"
 #include "../Functional/functional.h"
@@ -62,31 +63,38 @@ template <typename T, typename Comp>
 class _Heap : public Functional<_Heap<T, Comp>, T>
 {
 public:
-  _Heap<T, Comp>() : _heapSize(0) {}
-
-  _Heap<T, Comp>(std::initializer_list<T> list) : _heapSize(0)
+  _Heap<T, Comp>()
+      : _heapSize(0),
+        _bufferMutex(std::make_unique<std::mutex>())
   {
-    for (const auto item : list)
-    {
-      _buffer.push_back(item);
-    }
+  }
 
-    auto mid = static_cast<std::size_t>(std::floor(_buffer.size() / 2));
-    for (std::size_t i = mid; i > 0; i--)
-      _heapify(i);
+  _Heap<T, Comp>(std::initializer_list<T> list)
+      : _heapSize(list.size()),
+        _buffer(list),
+        _bufferMutex(std::make_unique<std::mutex>())
+  {
+    _buildHeap();
   }
 
   ~_Heap<T, Comp>() = default;
 
+  // Non-copyable non-movable
+  _Heap(_Heap &&) = delete;
+  _Heap(const _Heap &) = delete;
+  _Heap &operator=(_Heap &&) = delete;
+  _Heap &operator=(const _Heap &) = delete;
+
   const T &top() const
   {
+    std::scoped_lock lock(*_bufferMutex);
     return _buffer.at(0);
   }
 
   void insert(const T &item)
   {
+    std::scoped_lock lock(*_bufferMutex);
     _buffer.push_back(item);
-    _heapify();
   }
 
   void pop()
@@ -94,16 +102,13 @@ public:
     if (_buffer.size() == 0)
       throw std::out_of_range("Root is empty!");
 
-    if (_buffer.size() > 1)
-    {
-      _buffer = _buffer.at(1);
-    }
-
-    _heapify();
+    std::scoped_lock lock(*_bufferMutex);
+    _buffer.pop_back();
   }
 
   void forEach(std::function<void(const T &)> f) const override
   {
+    std::scoped_lock lock(*_bufferMutex);
     for (std::size_t i = 0; i < _buffer.size(); i++)
       f(_buffer.at(i));
   }
@@ -111,53 +116,68 @@ public:
 protected:
   void insert(_Heap<T, Comp> &cont, const T &it) override
   {
+    std::scoped_lock lock(*_bufferMutex);
     cont.insert(it);
   }
 
 private:
-  const T &_parent(std::size_t idx) const
+  const std::size_t _parent(std::size_t idx) const
   {
-    return _buffer.at(idx / 2);
+    return std::floor(idx / 2);
   }
 
-  const T &_left(std::size_t idx) const
+  const std::size_t _left(std::size_t idx) const
   {
-    return _buffer.at(2 * idx + 1);
+    return 2 * idx + 1;
   }
 
-  const T &_right(std::size_t idx) const
+  const std::size_t _right(std::size_t idx) const
   {
-    return _buffer.at(2 * idx + 2);
+    return 2 * idx + 2;
   }
 
-  void _heapify(std::size_t curr = 0)
+  void _buildHeap()
   {
-    std::sort(_buffer.begin(), _buffer.end());
-
-    for (std::size_t i = 0; i < _buffer.size(); i++)
+    auto half = std::floor(_buffer.size() / 2);
+    for (int i = half; i >= 0; i--)
     {
-      std::size_t left = 2 * i + 1;
-      std::size_t right = 2 * i + 2;
+      _heapify(i);
+    }
+  }
 
-      auto t = _buffer[i];
-      if (left < _buffer.size())
-      {
-        _buffer[i] = _buffer[left];
-        _buffer[left] = t;
-      }
+  void _heapify(std::size_t curr)
+  {
+    auto left = _left(curr);
+    auto right = _right(curr);
+    std::size_t largest;
+    if (left < _heapSize &&
+        _comp(_buffer[left], _buffer[curr]))
+    {
+      largest = left;
+    }
+    else
+    {
+      largest = curr;
+    }
 
-      if (right < _buffer.size())
-      {
-        _buffer[i] = _buffer[right];
-        _buffer[right] = t;
-      }
+    if (right < _heapSize &&
+        _comp(_buffer[right], _buffer[curr]))
+    {
+      largest = right;
+    }
+
+    if (largest != curr)
+    {
+      std::swap(_buffer[curr], _buffer[largest]);
+      _heapify(largest);
     }
   }
 
 private:
   Comp _comp;
+  std::unique_ptr<std::mutex> _bufferMutex;
   std::vector<T> _buffer;
-  std::size_t _heapSize;
+  std::atomic<std::size_t> _heapSize;
 };
 
 template <typename T>

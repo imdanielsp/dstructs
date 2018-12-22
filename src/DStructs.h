@@ -73,6 +73,11 @@
  * */
 #include "Heap/heap.h"
 
+/**
+ * Hash Table
+ * */
+#include "Hash_Table/hash_table.h"
+
 /** * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *
  *                                Algorithms
