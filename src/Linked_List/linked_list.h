@@ -1,32 +1,12 @@
-/*
- * Copyright (c) 2016 Daniel Santos
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to
- * deal in the Software without restriction, including without limitation
- * the rights to use, copy, modify, merge, publish, distribute, sublicense,
- * and/or sell furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- * */
 #ifndef DSTRUCTS_LINKED_LIST_H
 #define DSTRUCTS_LINKED_LIST_H
 
 #include <functional>
+#include <initializer_list>
 #include "node.h"
 #include "../Functional/functional.h"
 
 namespace DStructs {
-
 /**
  * \brief       Singly linked lists contain nodes which have a data field as
  * well as a 'next' field, which points to the next node in line of nodes.
@@ -40,6 +20,13 @@ class LinkedList final : public Functional<LinkedList<T>, T> {
    * \brief     Default constructor.
    * */
   LinkedList<T>();
+  /**
+   * \brief     Constructor Using Standard List Initializer
+   *
+   * \param     std::initializer_list
+   * \note      O(k), for k = init_list.size()
+   * */
+  LinkedList<T>(std::initializer_list<T> init_list);
   /**
    * \brief     Initialize the LinkedList with length = size
    * and assign the values of T to the each of the nodes.
