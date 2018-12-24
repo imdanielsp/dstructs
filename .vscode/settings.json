@@ -18,6 +18,51 @@
     "functional": "cpp",
     "tuple": "cpp",
     "utility": "cpp",
-    "string": "cpp"
-  }
+    "string": "cpp",
+    "*.tcc": "cpp",
+    "cctype": "cpp",
+    "clocale": "cpp",
+    "cmath": "cpp",
+    "cstdarg": "cpp",
+    "cstdio": "cpp",
+    "cstdlib": "cpp",
+    "cstring": "cpp",
+    "ctime": "cpp",
+    "cwchar": "cpp",
+    "cwctype": "cpp",
+    "iosfwd": "cpp",
+    "iostream": "cpp",
+    "istream": "cpp",
+    "limits": "cpp",
+    "memory": "cpp",
+    "ostream": "cpp",
+    "streambuf": "cpp",
+    "cstdint": "cpp"
+  },
+  "editor.tokenColorCustomizations": {
+    "textMateRules": [
+      {
+        "scope": "googletest.failed",
+        "settings": {
+          "foreground": "#f00"
+        }
+      },
+      {
+        "scope": "googletest.passed",
+        "settings": {
+          "foreground": "#0f0"
+        }
+      },
+      {
+        "scope": "googletest.run",
+        "settings": {
+          "foreground": "#0f0"
+        }
+      }
+    ]
+  },
+  "gtest-adapter.clearRunOutput": true,
+  "gtest-adapter.debugConfig": "Debug",
+  "gtest-adapter.supportLocation": false,
+  "C_Cpp.intelliSenseEngineFallback": "Disabled"
 }
