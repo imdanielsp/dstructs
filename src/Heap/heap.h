@@ -60,7 +60,7 @@ struct Min
 } // namespace Heap
 
 template <typename T, typename Comp>
-class _Heap : public Functional<_Heap<T, Comp>, T>
+class _Heap
 {
 public:
   _Heap<T, Comp>()
@@ -106,18 +106,11 @@ public:
     _buffer.pop_back();
   }
 
-  void forEach(std::function<void(const T &)> f) const override
+  void forEach(std::function<void(const T &)> f) const
   {
     std::scoped_lock lock(*_bufferMutex);
     for (std::size_t i = 0; i < _buffer.size(); i++)
       f(_buffer.at(i));
-  }
-
-protected:
-  void insert(_Heap<T, Comp> &cont, const T &it) override
-  {
-    std::scoped_lock lock(*_bufferMutex);
-    cont.insert(it);
   }
 
 private:
