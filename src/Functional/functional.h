@@ -11,31 +11,19 @@ template <class C, class T>
 class Functional {
 public:
   Functional() = default;
-//  virtual ~Functional() = default;
+
+ virtual ~Functional() = default;
 
   virtual void forEach(std::function<void(const T&)> f) const = 0;
 
-//  template <class S>
-//  C<S> map(std::function<S(const T&)> t) {
-//    C container;
-//    forEach([&container, &t, this] (auto it) {
-//      this->insert(container, t(it));
-//    });
-//    return container;
-//  }
+  template <class S>
+  C map(std::function<S(const T&)> t);
 
-  C filter(std::function<bool(const T&)> pred) {
-    C container;
-    forEach([&container, &pred, this] (auto it) {
-      if (pred(it)) {
-        this->insert(container, it);
-      }
-    });
-    return container;
-  }
+  virtual C filter(std::function<bool(const T&)> pred) const = 0;
 
-protected:
-  virtual void insert(C& cont, const T& it) = 0;
+  template <class S>
+  S fold(const S&, const T&, std::function<S(const S&, const T&)>);
+
 };
 
 #endif //DSTRUCTS_FUNCTIONAL_H

@@ -1,31 +1,57 @@
-/*
- * Copyright (c) 2016 Daniel Santos
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to
- * deal in the Software without restriction, including without limitation
- * the rights to use, copy, modify, merge, publish, distribute, sublicense,
- * and/or sell furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- * */
 #ifndef DSTRUCTS_LINKED_LIST_H
 #define DSTRUCTS_LINKED_LIST_H
 
 #include <functional>
-#include "node.h"
+#include <initializer_list>
+#include <memory>
+#include <mutex>
+#include <shared_mutex>
+
 #include "../Functional/functional.h"
 
 namespace DStructs {
+
+// Forward struct ListNode declaration
+template <class T>
+struct ListNode;
+
+template <class T>
+using ListNodePtr = std::shared_ptr<ListNode<T>>;
+
+/* Makes a ListNodePtr */
+template <class T>
+inline ListNodePtr<T> make_node(const T& value, ListNodePtr<T> next = nullptr) {
+  return std::make_shared<ListNode<T>>(value, next);
+}
+
+/**
+ * \brief   Represents the know of the Linked List.
+ * */
+template <class T>
+struct ListNode {
+  ListNode<T>() : _next(nullptr)
+  {}
+
+  explicit ListNode<T>(const T& val) : _value(val), _next(nullptr)
+  {}
+
+  ListNode<T>(const T& val, ListNodePtr<T> next) : _value(val),
+    _next(std::move(next))
+  {}
+
+  ~ListNode<T>() = default;
+
+  /* Delete Copy and Move Constructor and Copy assigment operator */
+  ListNode<T>(const ListNode<T>&) = delete;
+
+  ListNode<T>(const ListNode<T>&&) = delete;
+
+  ListNode<T>& operator=(const ListNode<T>&) = delete;
+
+  /* Attributes */
+  T _value;
+  ListNodePtr<T> _next;
+};
 
 /**
  * \brief       Singly linked lists contain nodes which have a data field as
@@ -35,11 +61,23 @@ namespace DStructs {
  * */
 template <class T>
 class LinkedList final : public Functional<LinkedList<T>, T> {
+  /* Mutex and Locks aliases */
+  using Mutex = std::shared_timed_mutex;
+  using ReadLock = std::shared_lock<Mutex>;
+  using WriteLock = std::unique_lock<Mutex>;
+
  public:
   /**
    * \brief     Default constructor.
    * */
   LinkedList<T>();
+  /**
+   * \brief     Constructor Using Standard List Initializer
+   *
+   * \param     std::initializer_list
+   * \note      O(k), for k = init_list.size()
+   * */
+  LinkedList<T>(std::initializer_list<T> init_list);
   /**
    * \brief     Initialize the LinkedList with length = size
    * and assign the values of T to the each of the nodes.
@@ -47,6 +85,10 @@ class LinkedList final : public Functional<LinkedList<T>, T> {
    * \param     std::size_t size, T& value
    * */
   LinkedList<T>(std::size_t size, const T& data);
+  /**
+   * \brief     Copy constructor.
+   * */
+  LinkedList<T>(const LinkedList<T>&);
   /**
    * \brief     Destructor
    * */
@@ -85,16 +127,6 @@ class LinkedList final : public Functional<LinkedList<T>, T> {
    * \param     const T& data
    * */
   void push_back(const T& data);
-  /**
-   * \brief     put_at will insert passed data to the index provided if the
-   * following condition is met:
-   *    index < size_ - 1
-   *
-   * \note      Careful, this is worst-case O(n) time.
-   *
-   * \param     const size_t, const T& data
-   * */
-  void put_at(std::size_t index, const T& data);
   /**
    * \brief     Return the data in the list at index position if the following
    * condition is met:
@@ -173,7 +205,7 @@ class LinkedList final : public Functional<LinkedList<T>, T> {
   *
   * \return    LinkedList<T>
   * */
-  void forEach(std::function<void(const T&)> f) const;
+  void forEach(std::function<void(const T&)> f) const override;
   /**
    * \breif     Uses t to map T to K for every item in the list.
    * 
@@ -183,38 +215,35 @@ class LinkedList final : public Functional<LinkedList<T>, T> {
    *
    * \return    LinkedList<K>
    */
-//  template <class K>
-//  LinkedList<K> map(std::function<K(const T&)> t) const;
-//  /**
-//   * \breif     Uses pred to filter out the item from the container.
-//   *
-//   * \param     std::function<bool(const T&)>
-//   *
-//   * \note      This function always run on O(n) time.
-//   *
-//   * \return    LinkedList<T>
-//   * */
-//  LinkedList<T> filter(std::function<bool(const T&)> pred) const;
-//  /**
-//   * \brief     It folds the list left to right using the initial value.
-//   *
-//   * \param     K& initialValue, std::function<K&(const T&)> acc
-//   *
-//   * \note      This function always run on O(n) time.
-//   *
-//   * \return    K
-//   * */
   template <class K>
-  K fold(const K& initialValue, std::function<K(const K&, const T&)> op);
+  LinkedList<K> map(std::function<K(const T&)> t) const;
+ /**
+  * \breif     Uses pred to filter out the item from the container.
+  *
+  * \param     std::function<bool(const T&)>
+  *
+  * \note      This function always run on O(n) time.
+  *
+  * \return    LinkedList<T>
+  * */
+  LinkedList<T> filter(std::function<bool(const T&)> pred) const override;
+ /**
+  * \brief     It folds the list left to right using the initial value.
+  *
+  * \param     K& initialValue, std::function<K&(const T&)> acc
+  *
+  * \note      This function always run on O(n) time.
+  *
+  * \return    K
+  * */
+  template <class K>
+  K fold(const K& initialValue, std::function<K(const K&, const T&)> op) const;
 
-  protected:
-    void insert(LinkedList<T>& cont, const T& it) {
-      cont.push_back(it);
-    }
  private:
-  Node<T>* front_;       //< get_front of the linked list
-  Node<T>* tail_;        //< tail of the linked list
-  std::size_t size_;     //< size of the linked list
+  ListNodePtr<T> _front;       //< get_front of the linked list
+  ListNodePtr<T> _tail;        //< tail of the linked list
+  std::size_t _size;           //< size of the linked list
+  mutable Mutex _mtx;          //< provides mutal exclusion to the list
 };  // LinkedList
 
 } // NAMESPACE DStructs
