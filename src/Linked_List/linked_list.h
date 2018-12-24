@@ -3,10 +3,49 @@
 
 #include <functional>
 #include <initializer_list>
+#include <memory>
 #include "node.h"
 #include "../Functional/functional.h"
 
 namespace DStructs {
+
+// Forward struct ListNode declaration
+template <class T>
+struct ListNode;
+
+template <class T>
+using ListNodePtr = std::unique_ptr<ListNode<T>>;
+
+/**
+ * \brief   Represents the know of the Linked List.
+ * */
+template <class T>
+struct ListNode {
+  ListNode<T>() : _next(nullptr)
+  {}
+
+  explicit ListNode<T>(const T& val) : _value(val), _next(nullptr)
+  {}
+
+  ListNode<T>(const T& val, ListNodePtr<T> next) : _value(val),
+    _next(std::move(next))
+  {}
+
+  ~ListNode<T>() = default;
+
+  /* Delete Copy and Move Constructor and Copy assigment operator */
+  ListNode<T>(const ListNode<T>&) = delete;
+
+  ListNode<T>(const ListNode<T>&&) = delete;
+
+  ListNode<T>& operator=(const ListNode<T>&) = delete;
+
+  /* Attributes */
+  T _value;
+
+  ListNodePtr<T> _next;
+};
+
 /**
  * \brief       Singly linked lists contain nodes which have a data field as
  * well as a 'next' field, which points to the next node in line of nodes.
