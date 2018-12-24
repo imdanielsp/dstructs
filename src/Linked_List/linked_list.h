@@ -4,6 +4,8 @@
 #include <functional>
 #include <initializer_list>
 #include <memory>
+#include <mutex>
+#include <shared_mutex>
 
 #include "../Functional/functional.h"
 
@@ -59,6 +61,11 @@ struct ListNode {
  * */
 template <class T>
 class LinkedList final : public Functional<LinkedList<T>, T> {
+  /* Mutex and Locks aliases */
+  using Mutex = std::shared_timed_mutex;
+  using ReadLock = std::shared_lock<Mutex>;
+  using WriteLock = std::unique_lock<Mutex>;
+
  public:
   /**
    * \brief     Default constructor.
@@ -78,6 +85,10 @@ class LinkedList final : public Functional<LinkedList<T>, T> {
    * \param     std::size_t size, T& value
    * */
   LinkedList<T>(std::size_t size, const T& data);
+  /**
+   * \brief     Copy constructor.
+   * */
+  LinkedList<T>(const LinkedList<T>&);
   /**
    * \brief     Destructor
    * */
@@ -232,6 +243,7 @@ class LinkedList final : public Functional<LinkedList<T>, T> {
   ListNodePtr<T> _front;       //< get_front of the linked list
   ListNodePtr<T> _tail;        //< tail of the linked list
   std::size_t _size;           //< size of the linked list
+  mutable Mutex _mtx;          //< provides mutal exclusion to the list
 };  // LinkedList
 
 } // NAMESPACE DStructs

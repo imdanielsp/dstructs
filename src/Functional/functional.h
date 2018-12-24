@@ -11,7 +11,8 @@ template <class C, class T>
 class Functional {
 public:
   Functional() = default;
-//  virtual ~Functional() = default;
+
+ virtual ~Functional() = default;
 
   virtual void forEach(std::function<void(const T&)> f) const = 0;
 

@@ -18,13 +18,23 @@ namespace DStructs {
   template <class T>
   LinkedList<T>::LinkedList(std::initializer_list<T> init_list)
     : _size(0), _front(nullptr), _tail(nullptr) {
-
     for (const auto& it : init_list)
       this->push_back(it);
   }
 
   template <class T>
+  LinkedList<T>::LinkedList(const LinkedList<T>& other) {
+    ReadLock lock(other._mtx);
+
+    other.forEach([this](const auto& it) {
+      this->push_back(it);
+    });
+  }
+
+  template <class T>
   LinkedList<T>::~LinkedList() {
+    WriteLock lock(this->_mtx);
+
     auto curr = std::move(this->_front);
     while (curr) {
       auto temp = std::move(curr->_next);
@@ -37,6 +47,8 @@ namespace DStructs {
 
   template <class T>
   T& LinkedList<T>::front() const {
+    ReadLock lock(_mtx);
+
     if (this->_front)
       return this->_front->_value;
     else throw std::out_of_range("There is not front data");
@@ -44,6 +56,8 @@ namespace DStructs {
 
   template <class T>
   T& LinkedList<T>::back() const {
+    ReadLock lock(_mtx);
+
     if (this->_tail)
       return this->_tail->_value;
     else throw std::out_of_range("The is not back node");
@@ -51,6 +65,8 @@ namespace DStructs {
 
   template <class T>
   void LinkedList<T>::put_front(const T &data) {
+    WriteLock lock(this->_mtx);
+
     if (!this->_front) {
       this->_front = make_node<T>(data);
       this->_tail = this->_front;
@@ -65,6 +81,8 @@ namespace DStructs {
     if (!this->_front) {
       this->put_front(data);
     } else {
+      WriteLock lock(this->_mtx);
+
       this->_tail->_next = make_node<T>(data);
       this->_tail = this->_tail->_next;
       this->_size++;
@@ -73,6 +91,8 @@ namespace DStructs {
 
   template <class T>
   T& LinkedList<T>::at(const std::size_t index) const {
+    ReadLock lock(this->_mtx);
+
     if (index < 0 || index >= this->_size)
       throw std::out_of_range("out of bound index");
 
@@ -84,6 +104,8 @@ namespace DStructs {
 
   template <class T>
   void LinkedList<T>::pop_back() {
+    WriteLock lock(this->_mtx);
+
     if (this->_size == 0)
       throw std::out_of_range("list is empty");
 
@@ -110,6 +132,8 @@ namespace DStructs {
     if (this->_front == this->_tail) {
       this->pop_back();
     } else {
+      WriteLock lock(this->_mtx);
+
       auto temp = std::move(this->_front->_next);
       this->_front.reset();
       this->_front = std::move(temp);
@@ -119,11 +143,15 @@ namespace DStructs {
 
   template <class T>
   std::size_t LinkedList<T>::size() const {
+    ReadLock lock(this->_mtx);
+
     return this->_size;
   }
 
   template <class T>
   bool LinkedList<T>::empty() const {
+    ReadLock lock(this->_mtx);
+
     return this->_size == 0;
   }
 
@@ -168,7 +196,7 @@ namespace DStructs {
   template <class T>
   template <class K>
   K LinkedList<T>::fold(const K& initialValue,
-    std::function<K(const K&, const T&)> op) const {
+      std::function<K(const K&, const T&)> op) const {
     K acc = initialValue;
     this->forEach([&acc, &op](const auto& item) {
       acc = op(acc, item);
