@@ -29,11 +29,6 @@
  ** * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 /**
- *  Node
- * */
-#include "Linked_List/node.h"
-
-/**
  *  Linked List
  * */
 #include "Linked_List/linked_list.h"

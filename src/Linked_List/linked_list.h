@@ -4,7 +4,7 @@
 #include <functional>
 #include <initializer_list>
 #include <memory>
-#include "node.h"
+
 #include "../Functional/functional.h"
 
 namespace DStructs {
@@ -14,7 +14,13 @@ template <class T>
 struct ListNode;
 
 template <class T>
-using ListNodePtr = std::unique_ptr<ListNode<T>>;
+using ListNodePtr = std::shared_ptr<ListNode<T>>;
+
+/* Makes a ListNodePtr */
+template <class T>
+inline ListNodePtr<T> make_node(const T& value, ListNodePtr<T> next = nullptr) {
+  return std::make_shared<ListNode<T>>(value, next);
+}
 
 /**
  * \brief   Represents the know of the Linked List.
@@ -42,7 +48,6 @@ struct ListNode {
 
   /* Attributes */
   T _value;
-
   ListNodePtr<T> _next;
 };
 
@@ -111,16 +116,6 @@ class LinkedList final : public Functional<LinkedList<T>, T> {
    * \param     const T& data
    * */
   void push_back(const T& data);
-  /**
-   * \brief     put_at will insert passed data to the index provided if the
-   * following condition is met:
-   *    index < size_ - 1
-   *
-   * \note      Careful, this is worst-case O(n) time.
-   *
-   * \param     const size_t, const T& data
-   * */
-  void put_at(std::size_t index, const T& data);
   /**
    * \brief     Return the data in the list at index position if the following
    * condition is met:
@@ -199,7 +194,7 @@ class LinkedList final : public Functional<LinkedList<T>, T> {
   *
   * \return    LinkedList<T>
   * */
-  void forEach(std::function<void(const T&)> f) const;
+  void forEach(std::function<void(const T&)> f) const override;
   /**
    * \breif     Uses t to map T to K for every item in the list.
    * 
@@ -209,38 +204,34 @@ class LinkedList final : public Functional<LinkedList<T>, T> {
    *
    * \return    LinkedList<K>
    */
-//  template <class K>
-//  LinkedList<K> map(std::function<K(const T&)> t) const;
-//  /**
-//   * \breif     Uses pred to filter out the item from the container.
-//   *
-//   * \param     std::function<bool(const T&)>
-//   *
-//   * \note      This function always run on O(n) time.
-//   *
-//   * \return    LinkedList<T>
-//   * */
-//  LinkedList<T> filter(std::function<bool(const T&)> pred) const;
-//  /**
-//   * \brief     It folds the list left to right using the initial value.
-//   *
-//   * \param     K& initialValue, std::function<K&(const T&)> acc
-//   *
-//   * \note      This function always run on O(n) time.
-//   *
-//   * \return    K
-//   * */
   template <class K>
-  K fold(const K& initialValue, std::function<K(const K&, const T&)> op);
+  LinkedList<K> map(std::function<K(const T&)> t) const;
+ /**
+  * \breif     Uses pred to filter out the item from the container.
+  *
+  * \param     std::function<bool(const T&)>
+  *
+  * \note      This function always run on O(n) time.
+  *
+  * \return    LinkedList<T>
+  * */
+  LinkedList<T> filter(std::function<bool(const T&)> pred) const override;
+ /**
+  * \brief     It folds the list left to right using the initial value.
+  *
+  * \param     K& initialValue, std::function<K&(const T&)> acc
+  *
+  * \note      This function always run on O(n) time.
+  *
+  * \return    K
+  * */
+  template <class K>
+  K fold(const K& initialValue, std::function<K(const K&, const T&)> op) const;
 
-  protected:
-    void insert(LinkedList<T>& cont, const T& it) {
-      cont.push_back(it);
-    }
  private:
-  Node<T>* front_;       //< get_front of the linked list
-  Node<T>* tail_;        //< tail of the linked list
-  std::size_t size_;     //< size of the linked list
+  ListNodePtr<T> _front;       //< get_front of the linked list
+  ListNodePtr<T> _tail;        //< tail of the linked list
+  std::size_t _size;           //< size of the linked list
 };  // LinkedList
 
 } // NAMESPACE DStructs

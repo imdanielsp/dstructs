@@ -5,7 +5,6 @@ set(SOURCE_FILES
         main.cpp
         #src/timer.cpp
         DStructs.h
-        Linked_List/node.h
         Linked_List/linked_list.h
         Dynamic_Array/dynamic_array.h
         Queue/queue.h
