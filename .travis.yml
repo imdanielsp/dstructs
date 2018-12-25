@@ -9,5 +9,8 @@ language:
 script:
   - sh build.sh run-tests
 
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+
 notifications:
   email: true

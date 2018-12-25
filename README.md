@@ -1,3 +1,5 @@
+[![codecov](https://codecov.io/gh/imdanielsp/DStructs/branch/master/graph/badge.svg)](https://codecov.io/gh/imdanielsp/DStructs)
+
 <p align="center">
     <img alt="DStructs" 
     src="http://www.danielsantos.us/images/projects/DStructs_Logo_Original.png" 
