@@ -9,7 +9,7 @@ then
         cmake -B./build/ -H.
         echo "Compiling tests..."
         make -C ./build/
-        ./build/dstructs-test
+        ./build/src/dstructs-test
         result=$?
     fi
     if [ $1 == "build" ]
