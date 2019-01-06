@@ -8,8 +8,8 @@
 <h1 align="center">
     DStructs
     <p align="center">
-        <a href="https://travis-ci.org/dsantosp12/DStructs" target="_blank">
-            <img src="https://travis-ci.org/dsantosp12/DStructs.svg?branch=master">
+        <a href="https://travis-ci.org/imdanielsp/DStructs" target="_blank">
+            <img src="https://travis-ci.org/imdanielsp/DStructs.svg?branch=master">
             </img>
         </a>
     </p>
