@@ -20,7 +20,7 @@ set(SOURCE_FILES
 #        Linked_List/doubly_node.h
         Functional/functional.h
         Heap/heap.h
-
+        Smart_Pointer/shared_ptr.h
 )
 
 

@@ -83,3 +83,14 @@
  * Insertion Sort
  * */
 #include "Insertion_Sort/insertion_sort.h"
+
+/** * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *
+ *                                Memory
+ *
+ ** * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+/**
+ * Shared Pointer
+ * */
+#include "Smart_Pointer/shared_ptr.h"
