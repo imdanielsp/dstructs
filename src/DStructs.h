@@ -73,6 +73,11 @@
  * */
 #include "Hash_Table/hash_table.h"
 
+/**
+ * Graph
+ * */
+#include "Graph/graph.h"
+
 /** * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *
  *                                Algorithms

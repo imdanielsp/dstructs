@@ -21,6 +21,7 @@ set(SOURCE_FILES
         Functional/functional.h
         Heap/heap.h
         Smart_Pointer/shared_ptr.h
+        Graph/graph.h
 )
 
 

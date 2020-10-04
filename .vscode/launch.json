@@ -20,12 +20,12 @@
       "name": "Executable",
       "type": "cppdbg",
       "request": "launch",
-      "program": "${workspaceFolder}/build/src/dstructs",
+      "program": "${workspaceFolder}/src/a.out",
       "args": [],
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
       "environment": [],
-      "externalConsole": true,
+      "externalConsole": false,
       "MIMode": "lldb"
     }
   ]
