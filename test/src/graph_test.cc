@@ -2,21 +2,16 @@
 
 #include "Graph/graph.h"
 
-using namespace DStructs;
+using namespace DStructs::graph;
 
-class GraphTest : public testing::Test {
+class GraphTest : public testing::Test
+{
 protected:
-  virtual void SetUp() override {
+    virtual void SetUp() override {}
 
-  }
+    virtual void TearDown() override {}
 
-  virtual void TearDown() override {
-
-  }
-
-  Graph<int> graph;
+    graph<int> graph;
 };
 
-TEST_F(GraphTest, Constructor_Test) {
-
-}
+TEST_F(GraphTest, Constructor_Test) {}
